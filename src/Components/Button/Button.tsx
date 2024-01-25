@@ -1,20 +1,30 @@
-import React, { FC, ReactNode } from 'react';
-
+import React from 'react';
 import './Button.scss'
 
 type ButtonType = {
     text?: string,
     onClick: () => void,
-    icon?: ReactNode
+    icon?: string,
+    textColor?: string,
+    disabled: number,
+    color: string
 };
 
-export const Button: FC<ButtonType> = ({ onClick, icon, text }) => {
+
+
+export const Button = ({ onClick, icon, text, textColor, disabled, color }: ButtonType) => {
+    if (!text && !icon) {
+        throw new Error('Пустое значение для text или icon')
+    }
     return (
-        <div className="ButtonNext">
-            <button className='button' onClick={onClick}>
-                {text && <span className='text'>{text}</span>}
-                {icon && icon}
-            </button>
-        </div>
+        <button className='button' onClick={onClick}
+            style={{
+                backgroundColor: color,
+                opacity: disabled,
+            }}>
+            {text && <span className='text' style={{ color: textColor }}>{text}</span>}
+            {icon && <img className='icon' src={icon} alt="Icon" />}
+        </button>
+
     )
 }
