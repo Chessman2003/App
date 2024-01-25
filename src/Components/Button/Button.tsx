@@ -15,7 +15,12 @@ type ButtonType = {
 export const Button = ({ onClick, icon, text, textColor, disabled, color }: ButtonType) => {
     if (!text && !icon) {
         throw new Error('Пустое значение для text или icon')
-    }
+    };
+
+    if (text && icon) {
+        throw new Error('Выберите либо text либо icon')
+    };
+
     return (
         <button className='button' onClick={onClick}
             style={{

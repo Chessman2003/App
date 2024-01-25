@@ -9,7 +9,7 @@ import './App.scss';
 export const App = () => {
     return (
         <div>
-            <Button onClick={() => console.log('Button is ckicked')} color="red" disabled={1} icon={icon} />
+            <Button onClick={() => console.log('Button is ckicked')} color="red" disabled={1} text="Клик!" textColor="yellow" />
         </div>
     );
 }
