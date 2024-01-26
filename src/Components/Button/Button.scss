@@ -1,20 +1,24 @@
-.button {
+.cp_button {
     width: 100px;
     height: 55px;
     border: none;
     border-radius: 5px;
     text-align: center;
-}
 
-.text {
-    font-size: 20px;
-}
+    &.disabled {
+        opacity: 0.1;
+    }
 
-.button:hover {
-    cursor: pointer;
-}
+    .text {
+        font-size: 20px;
+    }
 
-.icon {
-    width: 25px;
-    height: 25px;
+    &:hover {
+        cursor: pointer;
+    }
+
+    .icon {
+        width: 25px;
+        height: 25px;
+    }
 }

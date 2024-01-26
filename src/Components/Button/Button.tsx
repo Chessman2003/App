@@ -1,35 +1,71 @@
 import React from 'react';
+import {ButtonType} from '../../types/buttonType';
 import './Button.scss'
 
-type ButtonType = {
+type ButtonProps = {
     text?: string,
     onClick: () => void,
     icon?: string,
-    textColor?: string,
-    disabled: number,
-    color: string
+    colorText?: string,
+    disabled: boolean,
+    colorBackground: string,
+    type: ButtonType
 };
 
+export const Button = ({ 
+    onClick, 
+    icon, 
+    text, 
+    colorText, 
+    disabled, 
+    colorBackground,
+    type
+}: ButtonProps) => {
+    let className = 'cp_button';
+    if (disabled) {
+        className += ' disabled';
+    }
 
+    const handleClick = () => {
+        if (!disabled) {
+            onClick();
+        }
+    }
 
-export const Button = ({ onClick, icon, text, textColor, disabled, color }: ButtonType) => {
-    if (!text && !icon) {
-        throw new Error('Пустое значение для text или icon')
-    };
+    const buttonStyle: React.CSSProperties = {
+        backgroundColor: colorBackground,
+    }
+    if (type == ButtonType.Text) {
+        if (!text) {
+            throw new Error('Пустое значение для text')
+        };
+        const buttonTextStyle: React.CSSProperties = {
+            color: colorText
+        }
+        return (
+            <button 
+                className={className} 
+                onClick={handleClick}
+                style={buttonStyle}>
+                <span className='text' style={buttonTextStyle}>{text}</span>
+            </button>
+        );
+    } else if (type == ButtonType.Icon) {
+        if (!icon) {
+            throw new Error('Пустое значение для icon')
+        };
 
-    if (text && icon) {
-        throw new Error('Выберите либо text либо icon')
-    };
+        return (
+            <button 
+                className={className} 
+                onClick={onClick}
+                style={buttonStyle}>
+                <img className='icon' src={icon} alt="Icon" />
+            </button>
+    
+        )
+    }
 
-    return (
-        <button className='button' onClick={onClick}
-            style={{
-                backgroundColor: color,
-                opacity: disabled,
-            }}>
-            {text && <span className='text' style={{ color: textColor }}>{text}</span>}
-            {icon && <img className='icon' src={icon} alt="Icon" />}
-        </button>
-
-    )
+    console.error('Unknown button type')
+    return null;
 }

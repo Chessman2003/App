@@ -1,0 +1,1 @@
+export * as Icon1 from './icon1.png';
