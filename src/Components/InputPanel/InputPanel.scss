@@ -48,6 +48,8 @@ input:hover {
     outline: 2px solid blue;
 }
 
+
+
 .blue-input {
     border: none;
     border-radius: 0px;
@@ -89,15 +91,6 @@ input:hover {
     height: 16px;
 }
 
-
-.warning-input {
-    border: 2px solid yellow;
-    background-image: url(../icons/icon1.png);
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 16px 16px;
-}
-
 .warning-input:focus {
     outline: 2px solid yellow;
 }
@@ -118,12 +111,14 @@ input:hover {
     border-color: lightgreen;
 }
 
-.input-icon {
-    width: 20px;
-    height: 20px;
+.input-state {
+    position: relative;
 }
 
-.icon-container {
-    width: 20px;
-    height: 20px;
+.input-icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    transform: translate(-30px, 35%);
+    pointer-events: none;
 }
