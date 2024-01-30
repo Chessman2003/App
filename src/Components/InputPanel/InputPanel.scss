@@ -4,7 +4,6 @@
     align-items: center;
     gap: 20px;
     margin-top: 30px;
-
 }
 
 
@@ -12,8 +11,11 @@ input {
     height: 40px;
     width: 140px;
     border-radius: 5px;
-    border-color: lightgray;
     padding-left: 10px;
+}
+
+input:focus {
+    outline: 2px solid blue;
 }
 
 input:hover {
@@ -28,14 +30,35 @@ input:hover {
     gap: 20px;
 }
 
-
-.blue-input {
-    border: 2px solid rgb(111, 200, 230);
+.active-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid blue;
+    height: 40px;
+    width: 140px;
+    border-radius: 5px;
 }
 
-.blue-input::before {
-    content: "• ";
-    color: blue
+.active-input:hover {
+    border-color: blue;
+}
+
+.active-input:focus {
+    outline: 2px solid blue;
+}
+
+.blue-input {
+    border: none;
+    border-radius: 0px;
+    height: 15px;
+    width: 100px;
+    border-left: 1px solid blue;
+    font-size: 13.5px;
+}
+
+.blue-input:focus {
+    outline: none;
 }
 
 
@@ -45,6 +68,14 @@ input:hover {
 
 .error-input {
     border: 2px solid red
+}
+
+.error-input:focus {
+    outline: 2px solid red;
+}
+
+.error-input:hover {
+    border-color: red
 }
 
 
@@ -67,7 +98,32 @@ input:hover {
     background-size: 16px 16px;
 }
 
+.warning-input:focus {
+    outline: 2px solid yellow;
+}
+
+.warning-input:hover {
+    border-color: yellow;
+}
 
 .success-input {
     border: 2px solid lightgreen;
+}
+
+.success-input:focus {
+    outline: 2px solid lightgreen;
+}
+
+.success-input:hover {
+    border-color: lightgreen;
+}
+
+.input-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-container {
+    width: 20px;
+    height: 20px;
 }
