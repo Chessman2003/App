@@ -39,6 +39,7 @@ export const InputPanel = () => {
             setIconWarning1('')
         } else {
             if (!containUpperCaseLatin && !containCyrillic) {
+                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
                 setIconWarning1(warningIcon);
             } else {
@@ -78,6 +79,7 @@ export const InputPanel = () => {
             setIconWarning2('')
         } else {
             if (!containUpperCaseLatin && !containCyrillic) {
+                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
                 setIconWarning2(warningIcon);
             } else {
@@ -117,6 +119,7 @@ export const InputPanel = () => {
             setIconWarning3('');
         } else {
             if (!containUpperCaseLatin && !containCyrillic) {
+                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
                 setIconWarning3(warningIcon);
             } else {
@@ -135,37 +138,41 @@ export const InputPanel = () => {
     }
     return (
         <div className="input-container">
-            <div className="row">
-                <input type="text" className="gray-input" placeholder="Введите текст" />
-                <div className="active-input">
-                    <input type="text" className="blue-input" placeholder="Введите текст" />
+            <div className="input-wrapper">
+                <div className="row">
+                    <input type="text" className="gray-input" placeholder="Введите текст" />
+                    <div className="active-input">
+                        <input type="text" className="blue-input" placeholder="Введите текст" />
+                    </div>
+                    <input type="text" className="disabled-input" placeholder="Введите текст" disabled />
                 </div>
-                <input type="text" className="disabled-input" placeholder="Введите текст" disabled />
+                <div className="row">
+                    <div className="input-state">
+                        <input type="text" placeholder="Введите текст" onChange={checkInput1} />
+                        {iconError1 && <img src={iconError1} className='input-icon' alt="Error icon" />}
+                        {iconWarning1 && <img src={iconWarning1} className='input-icon' alt="Warning icon" />}
+                        {iconSuccess1 && <img src={iconSuccess1} className='input-icon' alt="Success icon" />}
+
+                    </div>
+                    <div className="input-state">
+                        <input type="text" placeholder="Введите текст" onChange={checkInput2} />
+                        {iconError2 && <img src={iconError2} className='input-icon' alt="Error icon" />}
+                        {iconWarning2 && <img src={iconWarning2} className='input-icon' alt="Warning icon" />}
+                        {iconSuccess2 && <img src={iconSuccess2} className='input-icon' alt="Success icon" />}
+                    </div>
+                    <div className="input-state">
+                        <input type="text" placeholder="Введите текст" onChange={checkInput3} />
+                        {iconError3 && <img src={iconError3} className='input-icon' alt="Error icon" />}
+                        {iconWarning3 && <img src={iconWarning3} className='input-icon' alt="Warning icon" />}
+                        {iconSuccess3 && <img src={iconSuccess3} className='input-icon' alt="Success icon" />}
+                    </div>
+                </div>
             </div>
-            <div className="row">
-                <div className="input-state">
-                    <input type="text" placeholder="Введите текст" onChange={checkInput1} />
-                    {iconError1 && <img src={iconError1} className='input-icon' alt="Error icon" />}
-                    {iconWarning1 && <img src={iconWarning1} className='input-icon' alt="Warning icon" />}
-                    {iconSuccess1 && <img src={iconSuccess1} className='input-icon' alt="Success icon" />}
-
-                </div>
-                <div className="input-state">
-                    <input type="text" placeholder="Введите текст" onChange={checkInput2} />
-                    {iconError2 && <img src={iconError2} className='input-icon' alt="Error icon" />}
-                    {iconWarning2 && <img src={iconWarning2} className='input-icon' alt="Warning icon" />}
-                    {iconSuccess2 && <img src={iconSuccess2} className='input-icon' alt="Success icon" />}
-
-                </div>
-                <div className="input-state">
-                    <input type="text" placeholder="Введите текст" onChange={checkInput3} />
-                    {iconError3 && <img src={iconError3} className='input-icon' alt="Error icon" />}
-                    {iconWarning3 && <img src={iconWarning3} className='input-icon' alt="Warning icon" />}
-                    {iconSuccess3 && <img src={iconSuccess3} className='input-icon' alt="Success icon" />}
-
-                </div>
+            <div className="error-message">
+                <p>{errorMessage}</p>
             </div>
         </div>
+
     );
 };
 
