@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import './InputPanel.scss';
-import errorIcon from "../icons/error.png";
-import successIcon from '../icons/success.png';
-import warningIcon from '../icons/warning.png';
+import {IconError, IconSuccess, IconWarning} from "../icons/icons";
 
 export const InputPanel = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
+    
     const [iconError1, setIconError1] = useState<string>('');
-    const [iconError2, setIconError2] = useState<string>('');
-    const [iconError3, setIconError3] = useState<string>('');
     const [iconWarning1, setIconWarning1] = useState<string>('');
-    const [iconWarning2, setIconWarning2] = useState<string>('');
-    const [iconWarning3, setIconWarning3] = useState<string>('');
     const [iconSuccess1, setIconSuccess1] = useState<string>('');
+    
+    const [iconError2, setIconError2] = useState<string>('');
+    const [iconWarning2, setIconWarning2] = useState<string>('');
     const [iconSuccess2, setIconSuccess2] = useState<string>('');
+    
+    const [iconError3, setIconError3] = useState<string>('');
+    const [iconWarning3, setIconWarning3] = useState<string>('');
     const [iconSuccess3, setIconSuccess3] = useState<string>('');
 
 
@@ -27,7 +28,7 @@ export const InputPanel = () => {
         if (containCyrillic) {
             setErrorMessage('Необходимо вводить только латинские символы!');
             (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError1(errorIcon);
+            setIconError1(IconError.default);
         } else {
             setErrorMessage('');
             (event.target as HTMLInputElement).classList.remove('error-input');
@@ -41,7 +42,7 @@ export const InputPanel = () => {
             if (!containUpperCaseLatin && !containCyrillic) {
                 setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning1(warningIcon);
+                setIconWarning1(IconWarning.default);
             } else {
                 (event.target as HTMLInputElement).classList.remove('warning-input');
                 setIconWarning1('');
@@ -50,7 +51,7 @@ export const InputPanel = () => {
 
         if (!containCyrillic && containUpperCaseLatin) {
             (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess1(successIcon);
+            setIconSuccess1(IconSuccess.default);
         } else {
             (event.target as HTMLInputElement).classList.remove('success-input');
             setIconSuccess1('');
@@ -67,7 +68,7 @@ export const InputPanel = () => {
         if (containCyrillic) {
             setErrorMessage('Необходимо вводить только латинские символы!');
             (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError2(errorIcon);
+            setIconError2(IconError.default);
         } else {
             setErrorMessage('');
             (event.target as HTMLInputElement).classList.remove('error-input');
@@ -81,7 +82,7 @@ export const InputPanel = () => {
             if (!containUpperCaseLatin && !containCyrillic) {
                 setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning2(warningIcon);
+                setIconWarning2(IconWarning.default);
             } else {
                 (event.target as HTMLInputElement).classList.remove('warning-input');
                 setIconWarning2('');
@@ -90,7 +91,7 @@ export const InputPanel = () => {
 
         if (!containCyrillic && containUpperCaseLatin) {
             (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess2(successIcon);
+            setIconSuccess2(IconSuccess.default);
         } else {
             (event.target as HTMLInputElement).classList.remove('success-input');
             setIconSuccess2('');
@@ -107,7 +108,7 @@ export const InputPanel = () => {
         if (containCyrillic) {
             setErrorMessage('Необходимо вводить только латинские символы!');
             (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError3(errorIcon);
+            setIconError3(IconError.default);
         } else {
             setErrorMessage('');
             (event.target as HTMLInputElement).classList.remove('error-input');
@@ -121,7 +122,7 @@ export const InputPanel = () => {
             if (!containUpperCaseLatin && !containCyrillic) {
                 setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
                 (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning3(warningIcon);
+                setIconWarning3(IconWarning.default);
             } else {
                 (event.target as HTMLInputElement).classList.remove('warning-input');
                 setIconWarning3('');
@@ -130,7 +131,7 @@ export const InputPanel = () => {
 
         if (!containCyrillic && containUpperCaseLatin) {
             (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess3(successIcon);
+            setIconSuccess3(IconSuccess.default);
         } else {
             (event.target as HTMLInputElement).classList.remove('success-input');
             setIconSuccess3('');
