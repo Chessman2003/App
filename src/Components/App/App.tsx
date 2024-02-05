@@ -21,16 +21,29 @@ export const App = () => {
     const [errorStatus3, setErrorStatus3] = useState<boolean>(false);
     const [successStatus3, setSuccessStatus3] = useState<boolean>(false);
 
+    const [activeStatus1, setActiveStatus1] = useState<boolean>(false);
+    const [activeStatus2, setActiveStatus2] = useState<boolean>(false);
+    const [activeStatus3, setActiveStatus3] = useState<boolean>(false);
+
+
     useEffect(() => {
         if (text1.trim().length === 0) {
-            setWarningStatus1(false)
-            setSuccessStatus1(false)
+            setWarningStatus1(false);
+            setSuccessStatus1(false);
+            setErrorStatus1(false);
+            setActiveStatus1(true);
+        } else if (text1.trim().length > 1 && text1.trim().length < 5) {
+            setWarningStatus1(false);
+            setSuccessStatus1(false);
             setErrorStatus1(true);
-        } else if (text1.trim().length > 1 && text1.trim().length < 10) {
+            setActiveStatus1(false);
+        } else if (text1.trim().length >= 5 && text1.trim().length < 10) {
+            setActiveStatus1(false)
             setErrorStatus1(false);
             setSuccessStatus1(false);
             setWarningStatus1(true);
         } else if (text1.trim().length >= 10) {
+            setActiveStatus1(false)
             setErrorStatus1(false)
             setWarningStatus1(false);
             setSuccessStatus1(true);
@@ -41,13 +54,21 @@ export const App = () => {
         if (text2.trim().length === 0) {
             setWarningStatus2(false);
             setSuccessStatus2(false);
+            setErrorStatus2(false);
+            setActiveStatus2(true);
+        } else if (text2.trim().length > 1 && text2.trim().length < 5) {
+            setWarningStatus2(false);
+            setSuccessStatus2(false);
             setErrorStatus2(true);
-        } else if (text2.trim().length > 1 && text2.trim().length < 10) {
+            setActiveStatus2(false);
+        } else if (text2.trim().length >= 5 && text2.trim().length < 10) {
+            setActiveStatus2(false)
             setErrorStatus2(false);
             setSuccessStatus2(false);
             setWarningStatus2(true);
         } else if (text2.trim().length >= 10) {
-            setErrorStatus2(false);
+            setActiveStatus2(false)
+            setErrorStatus2(false)
             setWarningStatus2(false);
             setSuccessStatus2(true);
         }
@@ -55,14 +76,22 @@ export const App = () => {
 
     useEffect(() => {
         if (text3.trim().length === 0) {
-            setWarningStatus3(false)
-            setSuccessStatus3(false)
+            setWarningStatus3(false);
+            setSuccessStatus3(false);
+            setErrorStatus3(false);
+            setActiveStatus3(true);
+        } else if (text3.trim().length > 1 && text3.trim().length < 5) {
+            setWarningStatus3(false);
+            setSuccessStatus3(false);
             setErrorStatus3(true);
-        } else if (text3.trim().length > 1 && text3.trim().length < 10) {
+            setActiveStatus3(false);
+        } else if (text3.trim().length >= 5 && text3.trim().length < 10) {
+            setActiveStatus3(false)
             setErrorStatus3(false);
             setSuccessStatus3(false);
             setWarningStatus3(true);
         } else if (text3.trim().length >= 10) {
+            setActiveStatus3(false)
             setErrorStatus3(false)
             setWarningStatus3(false);
             setSuccessStatus3(true);
@@ -89,7 +118,7 @@ export const App = () => {
                             hint="ACTIVE"
                             icon={InputIconsTypes.None}
                             disabled={false}
-                            className=""
+                            className="active-input"
                         />
                     </div>
                     <div className="third-input">
@@ -105,7 +134,7 @@ export const App = () => {
                 <div className="row">
                     <div className="forth-input">
                         <Input
-                            text="rrrrrrrrr"
+                            text=""
                             hint={
                                 errorStatus1
                                     ? 'Error!'
@@ -127,13 +156,13 @@ export const App = () => {
                             disabled={false}
                             onChange={(text1) => setText1(text1)}
                             className={
-                                errorStatus1 ? "error-input" : warningStatus1 ? "warning-input" : successStatus1 ? "success-input" : ""
+                                activeStatus1 ? 'active-input' : errorStatus1 ? "error-input" : warningStatus1 ? "warning-input" : successStatus1 ? "success-input" : ""
                             }
                         />
                     </div>
                     <div className="fifth-input">
                         <Input
-                            text="sfes"
+                            text="sfesавыаыаываывыва"
                             hint={
                                 errorStatus2
                                     ? 'Error!'
@@ -155,7 +184,7 @@ export const App = () => {
                             disabled={false}
                             onChange={(text2) => setText2(text2)}
                             className={
-                                errorStatus2 ? "error-input" : warningStatus2 ? "warning-input" : successStatus2 ? "success-input" : ""
+                                activeStatus2 ? 'active-input' : errorStatus2 ? "error-input" : warningStatus2 ? "warning-input" : successStatus2 ? "success-input" : ""
                             }
                         />
                     </div>
@@ -183,7 +212,7 @@ export const App = () => {
                             disabled={false}
                             onChange={(text3) => setText3(text3)}
                             className={
-                                errorStatus3 ? "error-input" : warningStatus3 ? "warning-input" : successStatus3 ? "success-input" : ""
+                                activeStatus3 ? 'active-input' : errorStatus3 ? "error-input" : warningStatus3 ? "warning-input" : successStatus3 ? "success-input" : ""
                             }
                         />
                     </div>

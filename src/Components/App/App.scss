@@ -75,3 +75,33 @@ input {
     margin-bottom: 50px;
     font-size: 20px;
 }
+
+.active-input {
+    border: 2px solid blue;
+}
+
+.active-input:focus {
+    outline: 2px solid blue
+}
+
+.sixth-input {
+    position: relative;
+}
+
+.sixth-input .active-input::before {
+    content: "|";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: rgb(247, 6, 6);
+}
+
+.second-input {
+    position: relative;
+}
+
+.second-input .hint {
+    display: flex;
+    position: absolute;
+    transform: translateY(-60px);
+}

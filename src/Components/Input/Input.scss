@@ -1,16 +1,14 @@
-.input-component {
+.cp-input {
     position: relative;
 }
 
 
 
-.active-input::before {
+.active::before {
     content: "";
     position: absolute;
-    top: 50%;
     left: 10px;
-    /* Отступ от левого края инпута */
-    transform: translate(-50%, -6px);
+    transform: translate(-2px, 15px);
     height: 13px;
     width: 2px;
     background-color: blue;
