@@ -1,0 +1,25 @@
+.input-component {
+    position: relative;
+}
+
+
+
+.active-input::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    /* Отступ от левого края инпута */
+    transform: translate(-50%, -6px);
+    height: 13px;
+    width: 2px;
+    background-color: blue;
+}
+
+.input-icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    transform: translate(-30px, 35%);
+    pointer-events: none;
+}
