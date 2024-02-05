@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../Input/Input";
 import './App.scss';
 import { InputIconsTypes } from "../../types/inputType";
-
+import {TypeIcon} from '../Input/Input'
 
 
 export const App = () => {
@@ -98,6 +98,26 @@ export const App = () => {
         }
     }, [text3]);
 
+    const [inputText1, setInputText1] = useState('');
+    const [hintText1, setHintText1] = useState('');
+    const [iconType1, setIconType1] = useState(TypeIcon.None);
+
+    useEffect(()=>{
+        if ((inputText1.length > 3) && (inputText1.length <= 5)) {
+            setIconType1(TypeIcon.Success);
+            setHintText1('Success');
+        } else if ((inputText1.length > 5) && (inputText1.length <= 7)) {
+            setIconType1(TypeIcon.Warning);
+            setHintText1('Warning');
+        } else if ((inputText1.length > 7) && (inputText1.length <= 10)) {
+            setIconType1(TypeIcon.Error);
+            setHintText1('Error');
+        } else {
+            setIconType1(TypeIcon.None);
+            setHintText1('');
+        }
+    }, [inputText1])
+
     return (
         <div className="input-wrapper">
             <div className="header">Input fields</div>
@@ -105,115 +125,13 @@ export const App = () => {
                 <div className="row">
                     <div className="first-input">
                         <Input
-                            text=""
-                            hint="REGULAR"
-                            icon={InputIconsTypes.None}
+                            text={inputText1}
+                            hint={hintText1}
+                            type={iconType1}
                             disabled={false}
-                            className=""
-                        />
-                    </div>
-                    <div className="second-input">
-                        <Input
-                            text=""
-                            hint="ACTIVE"
-                            icon={InputIconsTypes.None}
-                            disabled={false}
-                            className="active-input"
-                        />
-                    </div>
-                    <div className="third-input">
-                        <Input
-                            text=""
-                            hint="DISABLED"
-                            icon={InputIconsTypes.None}
-                            disabled={true}
-                            className=""
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="forth-input">
-                        <Input
-                            text=""
-                            hint={
-                                errorStatus1
-                                    ? 'Error!'
-                                    : warningStatus1
-                                        ? 'Warning!'
-                                        : successStatus1
-                                            ? 'Success!'
-                                            : ''
-                            }
-                            icon={
-                                errorStatus1
-                                    ? InputIconsTypes.Error
-                                    : warningStatus1
-                                        ? InputIconsTypes.Warning
-                                        : successStatus1
-                                            ? InputIconsTypes.Success
-                                            : InputIconsTypes.None
-                            }
-                            disabled={false}
-                            onChange={(text1) => setText1(text1)}
-                            className={
-                                activeStatus1 ? 'active-input' : errorStatus1 ? "error-input" : warningStatus1 ? "warning-input" : successStatus1 ? "success-input" : ""
-                            }
-                        />
-                    </div>
-                    <div className="fifth-input">
-                        <Input
-                            text="sfesавыаыаываывыва"
-                            hint={
-                                errorStatus2
-                                    ? 'Error!'
-                                    : warningStatus2
-                                        ? 'Warning!'
-                                        : successStatus2
-                                            ? 'Success!'
-                                            : ''
-                            }
-                            icon={
-                                errorStatus2
-                                    ? InputIconsTypes.Error
-                                    : warningStatus2
-                                        ? InputIconsTypes.Warning
-                                        : successStatus2
-                                            ? InputIconsTypes.Success
-                                            : InputIconsTypes.None
-                            }
-                            disabled={false}
-                            onChange={(text2) => setText2(text2)}
-                            className={
-                                activeStatus2 ? 'active-input' : errorStatus2 ? "error-input" : warningStatus2 ? "warning-input" : successStatus2 ? "success-input" : ""
-                            }
-                        />
-                    </div>
-                    <div className="sixth-input">
-                        <Input
-                            text=""
-                            hint={
-                                errorStatus3
-                                    ? 'Error!'
-                                    : warningStatus3
-                                        ? 'Warning!'
-                                        : successStatus3
-                                            ? 'Success!'
-                                            : ''
-                            }
-                            icon={
-                                errorStatus3
-                                    ? InputIconsTypes.Error
-                                    : warningStatus3
-                                        ? InputIconsTypes.Warning
-                                        : successStatus3
-                                            ? InputIconsTypes.Success
-                                            : InputIconsTypes.None
-                            }
-                            disabled={false}
-                            onChange={(text3) => setText3(text3)}
-                            className={
-                                activeStatus3 ? 'active-input' : errorStatus3 ? "error-input" : warningStatus3 ? "warning-input" : successStatus3 ? "success-input" : ""
-                            }
+                            onChange={(text)=>{
+                                setInputText1(text);
+                            }}
                         />
                     </div>
                 </div>

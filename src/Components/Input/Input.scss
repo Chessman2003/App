@@ -1,3 +1,57 @@
+.inputBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .inputWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+
+        .inputLine {
+            border-right: 1px solid green;
+            width: 8px;
+            align-self: center;
+            height: 20px;
+        }
+
+        .inputField {
+            input {
+                border: none;
+                background: transparent;
+                border: none;
+                
+                &:focus {
+                    background: transparent;
+                    border: none;
+                    outline-width: 0;
+                }
+
+                &:hover {
+                    border: none;
+                    background: transparent;
+                    border: none;
+                }
+            }
+        }
+
+        .inputIcon {
+            align-self: center;
+            padding-right: 10px;
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        
+    }
+    .inputHint {
+        text-align: left;
+    }
+}
+
+
 .cp-input {
     position: relative;
 }
