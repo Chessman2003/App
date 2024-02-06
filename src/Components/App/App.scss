@@ -6,60 +6,32 @@
 input {
     height: 40px;
     width: 140px;
-    border-radius: 5px;
     padding-left: 10px;
-    padding-right: 40px;
+    padding-right: 20px;
 }
 
-.row {
+.row1 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    gap: 20px;
+    height: 48.6px;
+
+    .inputHint {
+        position: absolute;
+        top: 95px;
+        font-size: 10px;
+        color: grey
+    }
+}
+
+.row2 {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
     gap: 20px;
 }
 
-.error-input {
-    border: 2px solid red
-}
-
-.error-input:focus {
-    outline: 2px solid red;
-}
-
-.error-input:hover {
-    border-color: red
-}
-
-
-.warning-input:focus {
-    outline: 2px solid yellow;
-}
-
-.warning-input:hover {
-    border-color: yellow;
-}
-
-.warning-input {
-    border: 2px solid yellow;
-}
-
-.success-input {
-    border: 2px solid lightgreen;
-}
-
-.success-input:focus {
-    outline: 2px solid lightgreen;
-}
-
-.success-input:hover {
-    border-color: lightgreen;
-}
-
-.hint {
-    position: absolute;
-    transform: translateY(-60px);
-    font-size: 10px;
-}
 
 .input-wrapper {
     display: flex;
@@ -68,6 +40,7 @@ input {
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 .header {
@@ -76,32 +49,23 @@ input {
     font-size: 20px;
 }
 
-.active-input {
-    border: 2px solid blue;
+
+.first-input .inputLine {
+    display: none;
 }
 
-.active-input:focus {
-    outline: 2px solid blue
+.first-input {
+    width: 194.4px;
 }
 
-.sixth-input {
-    position: relative;
+.third-input .inputLine {
+    display: none
 }
 
-.sixth-input .active-input::before {
-    content: "|";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    color: rgb(247, 6, 6);
+.second-input .inputHint {
+    color: red
 }
 
-.second-input {
-    position: relative;
-}
-
-.second-input .hint {
-    display: flex;
-    position: absolute;
-    transform: translateY(-60px);
+.third-input {
+    width: 194px;
 }

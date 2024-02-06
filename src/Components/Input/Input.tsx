@@ -1,5 +1,4 @@
 import React, { useEffect, useState, CSSProperties } from "react";
-import { InputIconsTypes } from "../../types/inputType";
 import { IconWarning, IconError, IconSuccess } from "../icons/icons";
 
 import './Input.scss';
@@ -16,29 +15,27 @@ type InputProps = {
     hint: string,
     disabled: boolean,
     type?: TypeIcon,
+    active: boolean,
     onChange?: (text: string) => void,
 };
 
 
-export const Input = ({ 
-    text,  
-    hint, 
-    disabled,  
+export const Input = ({
+    text,
+    hint,
+    disabled,
     onChange,
+    active,
     type = TypeIcon.None
-}: InputProps) => {
-    let className = '';
-    let classForInputDiv = 'cp_input';
-    if (className === 'active-input') {
-        classForInputDiv += ' active';
-    }
 
+}: InputProps) => {
     const [activeColor, setActiveColor] = useState<string>('gray');
-    const [icon, setIcon] = useState<string|null>(null);
+    const [icon, setIcon] = useState<string | null>(null);
+
 
     useEffect(() => {
         if (type == TypeIcon.None) {
-            setActiveColor('gray');
+            setActiveColor((active && text.length === 0) ? 'blue' : 'gray');
             setIcon(null);
         } else if (type == TypeIcon.Warning) {
             setActiveColor('yellow');
@@ -49,24 +46,27 @@ export const Input = ({
         } else if (type == TypeIcon.Success) {
             setActiveColor('green');
             setIcon(IconSuccess.default);
-        } else {
-            setActiveColor('transparent');
-            setIcon(null);
         }
-    }, [type]);
+    }, [type, active, text]);
 
     const wrapperBoxStyle: CSSProperties = {
     }
     const wrapperStyle: CSSProperties = {
-        border: '1px solid '+ activeColor,
+        border: '1px solid ' + activeColor,
         borderRadius: '5px'
     }
 
-    const inputHintStyle: CSSProperties = {
-        color: activeColor
+    let inputHintStyle: CSSProperties = {
+        color: activeColor,
     }
 
-    
+    if (active && text.length === 0) {
+        inputHintStyle = {
+            color: 'gray'
+        }
+    }
+
+
     const inputLineStyle: CSSProperties = {
         borderColor: activeColor
     }
@@ -76,9 +76,9 @@ export const Input = ({
             <div className="inputWrapper" style={wrapperStyle}>
                 <div className="inputLine" style={inputLineStyle} />
                 <div className="inputField">
-                    <input 
-                        type="text" 
-                        value={text} 
+                    <input
+                        type="text"
+                        value={text}
                         onChange={(e) => onChange && onChange(e.target.value)}
                         disabled={disabled}
                         placeholder="Введите текст"
@@ -93,33 +93,4 @@ export const Input = ({
             </div>
         </div>
     );
-
-    return (
-        <div className={classForInputDiv}>
-            <input
-                type="text"
-                value={text}
-                onChange={(e) => onChange && onChange(e.target.value)}
-                disabled={disabled}
-                placeholder="Введите текст"
-                className={className}
-            />
-
-            {/*icon === InputIconsTypes.Error && <img className="input-icon" src={IconError.default} />*/}
-            {/*icon === InputIconsTypes.Warning && <img className="input-icon" src={IconWarning.default} />*/}
-            {/*icon === InputIconsTypes.Success && <img className="input-icon" src={IconSuccess.default} />*/}
-
-            <span className={className + 'hint'} style={{
-                display: className !== 'active-input' ? 'block' : '',
-                position: className === 'active-input' ? 'absolute' : 'static', // добавлено условие
-                top: className === 'active-input' ? '-15px' : 'auto',
-                left: className === 'active-input' ? '0px' : 'auto',
-                fontSize: className === 'active-input' ? '10px' : '',
-                color: className === 'error-input' ? 'red'
-                    : className === 'warning-input' ? 'yellow'
-                        : className === 'success-input' ? 'green'
-                            : ''
-            }}>{hint}</span>
-        </div >
-    )
 }

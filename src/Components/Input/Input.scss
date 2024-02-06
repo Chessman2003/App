@@ -7,6 +7,7 @@
         display: flex;
         flex-direction: row;
         gap: 2px;
+        position: relative;
 
         .inputLine {
             border-right: 1px solid green;
@@ -20,7 +21,7 @@
                 border: none;
                 background: transparent;
                 border: none;
-                
+
                 &:focus {
                     background: transparent;
                     border: none;
@@ -38,40 +39,18 @@
         .inputIcon {
             align-self: center;
             padding-right: 10px;
+
             img {
                 width: 20px;
                 height: 20px;
             }
         }
 
-        
+
     }
+
     .inputHint {
         text-align: left;
+        top: 100%;
     }
-}
-
-
-.cp-input {
-    position: relative;
-}
-
-
-
-.active::before {
-    content: "";
-    position: absolute;
-    left: 10px;
-    transform: translate(-2px, 15px);
-    height: 13px;
-    width: 2px;
-    background-color: blue;
-}
-
-.input-icon {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    transform: translate(-30px, 35%);
-    pointer-events: none;
 }
