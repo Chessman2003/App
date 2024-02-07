@@ -14,6 +14,10 @@
             width: 8px;
             align-self: center;
             height: 20px;
+
+            &.active {
+                border-right: 1px solid blue;
+            }
         }
 
         .inputField {
@@ -46,11 +50,26 @@
             }
         }
 
-
+        &.blueBorder {
+            border: 2px solid blue;
+        }
     }
 
     .inputHint {
         text-align: left;
         top: 100%;
     }
+
+}
+
+.inputWrapper.active {
+    outline: 1px solid blue;
+}
+
+.inputLine.active {
+    border-right: 1px solid blue;
+}
+
+.inputWrapper.blueBorder {
+    border: 1px solid blue;
 }

@@ -15,7 +15,6 @@ type InputProps = {
     hint: string,
     disabled: boolean,
     type?: TypeIcon,
-    active: boolean,
     onChange?: (text: string) => void,
 };
 
@@ -25,17 +24,26 @@ export const Input = ({
     hint,
     disabled,
     onChange,
-    active,
     type = TypeIcon.None
 
 }: InputProps) => {
     const [activeColor, setActiveColor] = useState<string>('gray');
     const [icon, setIcon] = useState<string | null>(null);
+    const [isActive, setIsActive] = useState<boolean>(true);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [blueBorder, setBlueBorder] = useState<boolean>(false);
+    
 
 
     useEffect(() => {
+        if (hint == 'ACTIVE') {
+            setBlueBorder(true)
+        }
+    }, [hint])
+
+    useEffect(() => {
         if (type == TypeIcon.None) {
-            setActiveColor((active && text.length === 0) ? 'blue' : 'gray');
+            setActiveColor('gray');
             setIcon(null);
         } else if (type == TypeIcon.Warning) {
             setActiveColor('yellow');
@@ -46,8 +54,15 @@ export const Input = ({
         } else if (type == TypeIcon.Success) {
             setActiveColor('green');
             setIcon(IconSuccess.default);
+        } else if (type === TypeIcon.None && blueBorder) {
+            setActiveColor('blue');
         }
-    }, [type, active, text]);
+    }, [type, blueBorder]);
+
+
+    useEffect(() => {
+        setIsActive(isFocused && type !== TypeIcon.Warning && type !== TypeIcon.Error && type !== TypeIcon.Success);
+    }, [type, isFocused]);
 
     const wrapperBoxStyle: CSSProperties = {
     }
@@ -60,21 +75,16 @@ export const Input = ({
         color: activeColor,
     }
 
-    if (active && text.length === 0) {
-        inputHintStyle = {
-            color: 'gray'
-        }
-    }
-
 
     const inputLineStyle: CSSProperties = {
         borderColor: activeColor
     }
 
+
     return (
         <div className="inputBoxWrapper" style={wrapperBoxStyle}>
-            <div className="inputWrapper" style={wrapperStyle}>
-                <div className="inputLine" style={inputLineStyle} />
+            <div className={`inputWrapper ${isActive ? 'active' :  ''}`} style={wrapperStyle}>
+                <div className={`inputLine ${isActive ? 'active' : ''}`} style={inputLineStyle} />
                 <div className="inputField">
                     <input
                         type="text"
@@ -82,6 +92,8 @@ export const Input = ({
                         onChange={(e) => onChange && onChange(e.target.value)}
                         disabled={disabled}
                         placeholder="Введите текст"
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                     />
                 </div>
                 <div className="inputIcon">

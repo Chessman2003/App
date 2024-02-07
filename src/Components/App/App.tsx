@@ -80,7 +80,7 @@ export const App = () => {
                             text=''
                             hint="REGULAR"
                             disabled={false}
-                            active={false}
+                            
                         />
                     </div>
                     <div className="second-input">
@@ -88,7 +88,7 @@ export const App = () => {
                             text=""
                             hint="ACTIVE"
                             disabled={false}
-                            active={true}
+                            
                         />
                     </div>
                     <div className="third-input">
@@ -96,7 +96,7 @@ export const App = () => {
                             text=""
                             hint="DISABLED"
                             disabled={true}
-                            active={false}
+                            
                         />
                     </div>
                 </div>
@@ -107,7 +107,7 @@ export const App = () => {
                             hint={hintText1}
                             type={iconType1}
                             disabled={false}
-                            active={true}
+                            
                             onChange={(text) => {
                                 setInputText1(text);
                             }}
@@ -119,7 +119,7 @@ export const App = () => {
                             hint={hintText2}
                             type={iconType2}
                             disabled={false}
-                            active={true}
+                          
                             onChange={(text) => {
                                 setInputText2(text);
                             }}
@@ -131,7 +131,7 @@ export const App = () => {
                             hint={hintText3}
                             type={iconType3}
                             disabled={false}
-                            active={true}
+                          
                             onChange={(text) => {
                                 setInputText3(text);
                             }}

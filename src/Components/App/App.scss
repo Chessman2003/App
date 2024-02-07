@@ -62,10 +62,10 @@ input {
     display: none
 }
 
-.second-input .inputHint {
-    color: red
-}
-
 .third-input {
     width: 194px;
+}
+
+.second-input .inputWrapper {
+    border: 1px solid blue
 }
