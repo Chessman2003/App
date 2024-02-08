@@ -27,59 +27,64 @@ export const Input = ({
     type = TypeIcon.None
 
 }: InputProps) => {
-    const [activeColor, setActiveColor] = useState<string>('gray');
+    const [currentColor, setCurrentColor] = useState<string>('grey');
     const [icon, setIcon] = useState<string | null>(null);
-    const [isActive, setIsActive] = useState<boolean>(true);
+
+    const [showLine, setShowLine] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(false);
     const [isFocused, setIsFocused] = useState<boolean>(false);
-    const [blueBorder, setBlueBorder] = useState<boolean>(false);
-    
 
-
-    useEffect(() => {
-        if (hint == 'ACTIVE') {
-            setBlueBorder(true)
-        }
-    }, [hint])
-
-    useEffect(() => {
-        if (type == TypeIcon.None) {
-            setActiveColor('gray');
+    useEffect(()=>{
+        if (isFocused) {
+            setCurrentColor('blue');
+            setShowLine(true);
             setIcon(null);
-        } else if (type == TypeIcon.Warning) {
-            setActiveColor('yellow');
-            setIcon(IconWarning.default);
-        } else if (type == TypeIcon.Error) {
-            setActiveColor('red');
-            setIcon(IconError.default);
-        } else if (type == TypeIcon.Success) {
-            setActiveColor('green');
-            setIcon(IconSuccess.default);
-        } else if (type === TypeIcon.None && blueBorder) {
-            setActiveColor('blue');
+        } else {
+            if (type == TypeIcon.None) {
+                setCurrentColor('gray');
+                setIcon(null);
+            } else if (type == TypeIcon.Warning) {
+                setCurrentColor('yellow');
+                setIcon(IconWarning.default);
+            } else if (type == TypeIcon.Error) {
+                setCurrentColor('red');
+                setIcon(IconError.default);
+            } else if (type == TypeIcon.Success) {
+                setCurrentColor('green');
+                setIcon(IconSuccess.default);
+            }
+            setShowLine(false);
         }
-    }, [type, blueBorder]);
-
-
-    useEffect(() => {
-        setIsActive(isFocused && type !== TypeIcon.Warning && type !== TypeIcon.Error && type !== TypeIcon.Success);
     }, [type, isFocused]);
 
     const wrapperBoxStyle: CSSProperties = {
     }
     const wrapperStyle: CSSProperties = {
-        border: '1px solid ' + activeColor,
-        borderRadius: '5px'
+        border: '1px solid ' + currentColor,
+        borderRadius: '5px',
+        background: 'white'
     }
 
     let inputHintStyle: CSSProperties = {
-        color: activeColor,
+        color: currentColor,
     }
 
-
+    const colorLine = (showLine ? currentColor : 'transparent');
     const inputLineStyle: CSSProperties = {
-        borderColor: activeColor
+        borderRight: '1px solid ' + colorLine,
     }
 
+    const handleFocus = () => {
+        setIsFocused(true)
+    }
+
+    const handleBlur = () => {
+        setIsFocused(false)
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(e.target.value)
+    }
 
     return (
         <div className="inputBoxWrapper" style={wrapperBoxStyle}>
@@ -89,11 +94,11 @@ export const Input = ({
                     <input
                         type="text"
                         value={text}
-                        onChange={(e) => onChange && onChange(e.target.value)}
+                        onChange={handleChange}
                         disabled={disabled}
                         placeholder="Введите текст"
-                        onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
                     />
                 </div>
                 <div className="inputIcon">
@@ -101,7 +106,7 @@ export const Input = ({
                 </div>
             </div>
             <div className="inputHint" style={inputHintStyle}>
-                {hint}
+                {!isFocused && hint}
             </div>
         </div>
     );
