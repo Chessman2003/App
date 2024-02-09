@@ -1,0 +1,32 @@
+#myCheckbox {
+    width:18px;
+    height: 18px;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid black;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#myCheckbox:checked {
+    appearance: auto;
+    clip-path: circle(50% at 50% 50%);
+    background-color: blue;
+}
+
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+}
+
+.checkboxWrapper {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 8px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 20px;
+}
