@@ -61,3 +61,26 @@
     border: none;
     cursor: pointer;
 }
+
+.optionsClassName {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+
+    &:hover {
+        background-color: lightblue;
+    }
+}
+
+.dropdown {
+    max-height: 200px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: gray;
+    }
+}

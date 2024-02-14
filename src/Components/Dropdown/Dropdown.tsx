@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { IconArrowDown, IconArrowUp, IconClear } from '../icons/icons';
 import './Dropdown.scss'
 
-
-export interface Option {
+interface Option {
     label: string;
     value: string;
+    disabled?: boolean;
 }
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 export const Dropdown: React.FC<Props> = ({ options }) => {
     const [inputValue, setInputValue] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
+    const [selectedOption, setSelectedOption] = useState<Option | null>(null);
     const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,21 +31,37 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     const handleClearClick = () => {
         setInputValue('');
         setFilteredOptions(options);
+        setSelectedOption(null);
     };
 
     const handleDropdownClick = () => {
-        setShowDropdown(!showDropdown)
-    }
+        setShowDropdown(!showDropdown);
+    };
+
+
+    const handleOptionClick = (option: Option) => {
+        if (option.disabled) {
+            return;
+        };
+        setSelectedOption(option);
+        setInputValue(option.label);
+        setShowDropdown(false);
+    };
 
     let className = ''
     if (showDropdown) {
         className = 'showDropdown'
     }
 
+    const optionsStyles: React.CSSProperties = {
+        maxHeight: '90px',
+        overflow: 'auto',
+        scrollbarWidth: 'thin'
+    }
+
     return (
         <div className='dropdownWrapper'>
             <div className="dropdownInput">
-
                 <input
                     type="text"
                     value={inputValue}
@@ -52,39 +69,36 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
                 />
 
                 {inputValue && (
-                    <button
-                        className='clearButton'
-                        onClick={handleClearClick}>
-                        <img className='clearIcon'
-                            src={IconClear.default}
-                        />
-
+                    <button className='clearButton' onClick={handleClearClick}>
+                        <img className='clearIcon' src={IconClear.default} />
                     </button>
                 )}
 
-                <button
-                    className='dropdownButton'
-                    onClick={handleDropdownClick}>
-                    <img className='iconArrow' src={
-                        showDropdown ? IconArrowUp.default : IconArrowDown.default
-                    } alt='Dropdown' />
-
+                <button className='dropdownButton' onClick={handleDropdownClick}>
+                    <img
+                        className='iconArrow'
+                        src={showDropdown ? IconArrowUp.default : IconArrowDown.default}
+                        alt='Dropdown'
+                    />
                 </button>
             </div>
-            <div className={className}>
-                {
-                    showDropdown && (
-                        <ul>
-                            {filteredOptions.map(option => (
-                                <li key={option.value}>{option.label}</li>
-                            ))}
-                        </ul>
-                    )
 
-                }
+            <div className={`dropdown ${className}`}>
+                {showDropdown && (
+                    <>
+                        {filteredOptions.map(option => (
+                            <div className='optionsClassName'
+                                key={option.value}
+                                onClick={() => handleOptionClick(option)}
+                                style={{ opacity: option.disabled ? 0.5 : 1 }}
+
+                            >
+                                {option.label}
+                            </div>
+                        ))}
+                    </>
+                )}
             </div>
-        </div >
+        </div>
     );
 };
-
-
