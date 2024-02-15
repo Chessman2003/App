@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 import { IconArrowDown, IconArrowUp, IconClear } from '../icons/icons';
 import './Dropdown.scss'
 
@@ -45,7 +45,7 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
         };
         setSelectedOption(option);
         setInputValue(option.label);
-        setShowDropdown(false);
+
     };
 
     let className = ''
@@ -53,11 +53,7 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
         className = 'showDropdown'
     }
 
-    const optionsStyles: React.CSSProperties = {
-        maxHeight: '90px',
-        overflow: 'auto',
-        scrollbarWidth: 'thin'
-    }
+
 
     return (
         <div className='dropdownWrapper'>
@@ -87,7 +83,8 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
                 {showDropdown && (
                     <>
                         {filteredOptions.map(option => (
-                            <div className='optionsClassName'
+                            <div
+                                className={`optionsClassName ${(selectedOption?.value === option.value && inputValue === selectedOption?.label) ? 'selectedOption' : ''}`}
                                 key={option.value}
                                 onClick={() => handleOptionClick(option)}
                                 style={{ opacity: option.disabled ? 0.5 : 1 }}
