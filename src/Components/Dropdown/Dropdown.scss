@@ -10,7 +10,8 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    height: 20px;
+    height: 25px;
+
 }
 
 .showDropdown {
@@ -29,6 +30,7 @@
 .dropdownInput input {
     border: none;
     flex: 1;
+    font-size: 17px;
 }
 
 
@@ -69,6 +71,10 @@
 
     &:hover {
         background-color: lightblue;
+    }
+
+    &.selectedOption {
+        background-color: #00CED1;
     }
 }
 
