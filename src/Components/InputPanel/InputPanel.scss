@@ -1,126 +1,71 @@
 .input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 20px;
     margin-top: 30px;
 }
 
-
 input {
     height: 40px;
     width: 140px;
-    border-radius: 5px;
     padding-left: 10px;
-    padding-right: 40px;
+    padding-right: 20px;
 }
 
-input:focus {
-    outline: 2px solid blue;
+.row1 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    gap: 20px;
+    height: 48.6px;
+
+    .inputHint {
+        position: absolute;
+        top: 95px;
+        font-size: 10px;
+        color: grey
+    }
 }
 
-input:hover {
-    border-color: blue;
-}
-
-
-.row {
+.row2 {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
     gap: 20px;
 }
 
-.active-input {
+
+.input-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: 2px solid blue;
-    height: 40px;
-    width: 189px;
-    border-radius: 5px;
+    align-items: baseline;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
-.active-input:hover {
-    border-color: blue;
-}
-
-.active-input:focus {
-    outline: 2px solid blue;
-}
-
-
-
-.blue-input {
-    border: none;
-    border-radius: 0px;
-    height: 15px;
-    width: 100px;
-    border-left: 1px solid blue;
-    font-size: 13.5px;
-}
-
-.blue-input:focus {
-    outline: none;
+.header {
+    display: flex;
+    margin-bottom: 50px;
+    font-size: 20px;
 }
 
 
-.disabled-input {
-    opacity: 0.5;
+.first-input .inputLine {
+    display: none;
 }
 
-.error-input {
-    border: 2px solid red
+.first-input {
+    width: 194.4px;
 }
 
-.error-input:focus {
-    outline: 2px solid red;
+.third-input .inputLine {
+    display: none
 }
 
-.error-input:hover {
-    border-color: red
+.third-input {
+    width: 194px;
 }
 
-
-.error-input::after {
-    content: "";
-    background-image: url(../icons/icon1.png);
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 16px 16px;
-    width: 16px;
-    height: 16px;
-}
-
-.warning-input:focus {
-    outline: 2px solid yellow;
-}
-
-.warning-input:hover {
-    border-color: yellow;
-}
-
-.success-input {
-    border: 2px solid lightgreen;
-}
-
-.success-input:focus {
-    outline: 2px solid lightgreen;
-}
-
-.success-input:hover {
-    border-color: lightgreen;
-}
-
-.input-state {
-    position: relative;
-}
-
-.input-icon {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    transform: translate(-30px, 35%);
-    pointer-events: none;
+.second-input .inputWrapper {
+    border: 1px solid blue
 }

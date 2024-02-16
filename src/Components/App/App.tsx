@@ -23,7 +23,6 @@ export const App = () => {
                     { label: 'Опция 10 ', value: 'option10', disabled: true },
                     { label: 'Опция 11', value: 'option11' },
                     { label: 'Опция 12', value: 'option12' },
-                    { label: 'Опция 13', value: 'option13' },
                 ]
             } />
         </div>
