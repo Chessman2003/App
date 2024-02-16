@@ -1,179 +1,144 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Input } from "../InputTextComponent/InputTextComponent";
 import './InputPanel.scss';
-import {IconError, IconSuccess, IconWarning} from "../icons/icons";
+import { TypeIcon } from '../InputTextComponent/InputTextComponent';
+
 
 export const InputPanel = () => {
-    const [errorMessage, setErrorMessage] = useState<string>('');
-    
-    const [iconError1, setIconError1] = useState<string>('');
-    const [iconWarning1, setIconWarning1] = useState<string>('');
-    const [iconSuccess1, setIconSuccess1] = useState<string>('');
-    
-    const [iconError2, setIconError2] = useState<string>('');
-    const [iconWarning2, setIconWarning2] = useState<string>('');
-    const [iconSuccess2, setIconSuccess2] = useState<string>('');
-    
-    const [iconError3, setIconError3] = useState<string>('');
-    const [iconWarning3, setIconWarning3] = useState<string>('');
-    const [iconSuccess3, setIconSuccess3] = useState<string>('');
+    const [inputText1, setInputText1] = useState('');
+    const [hintText1, setHintText1] = useState('');
+    const [iconType1, setIconType1] = useState(TypeIcon.None);
+
+    const [inputText2, setInputText2] = useState('');
+    const [hintText2, setHintText2] = useState('');
+    const [iconType2, setIconType2] = useState(TypeIcon.None);
+
+    const [inputText3, setInputText3] = useState('');
+    const [hintText3, setHintText3] = useState('');
+    const [iconType3, setIconType3] = useState(TypeIcon.None);
 
 
-    const checkInput1 = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const regex: RegExp = /[а-яА-Я]/;
-        const latinRegex: RegExp = /[A-Z]/;
 
-        const containCyrillic: boolean = regex.test((event.target as HTMLInputElement).value);
-        const containUpperCaseLatin: boolean = latinRegex.test((event.target as HTMLInputElement).value);
 
-        if (containCyrillic) {
-            setErrorMessage('Необходимо вводить только латинские символы!');
-            (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError1(IconError.default);
+
+
+    useEffect(() => {
+        if ((inputText1.length > 3) && (inputText1.length <= 5)) {
+            setIconType1(TypeIcon.Success);
+            setHintText1('Success');
+        } else if ((inputText1.length > 5) && (inputText1.length <= 7)) {
+            setIconType1(TypeIcon.Warning);
+            setHintText1('Warning');
+        } else if ((inputText1.length > 7) && (inputText1.length <= 10)) {
+            setIconType1(TypeIcon.Error);
+            setHintText1('Error');
         } else {
-            setErrorMessage('');
-            (event.target as HTMLInputElement).classList.remove('error-input');
-            setIconError1('');
+            setIconType1(TypeIcon.None);
+            setHintText1('');
         }
+    }, [inputText1]);
 
-        if (event.target.value === '') {
-            (event.target as HTMLInputElement).classList.remove('warning-input');
-            setIconWarning1('')
+    useEffect(() => {
+        if ((inputText2.length > 3) && (inputText2.length <= 5)) {
+            setIconType2(TypeIcon.Success);
+            setHintText2('Success');
+        } else if ((inputText2.length > 5) && (inputText2.length <= 7)) {
+            setIconType2(TypeIcon.Warning);
+            setHintText2('Warning');
+        } else if ((inputText2.length > 7) && (inputText2.length <= 10)) {
+            setIconType2(TypeIcon.Error);
+            setHintText2('Error');
         } else {
-            if (!containUpperCaseLatin && !containCyrillic) {
-                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
-                (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning1(IconWarning.default);
-            } else {
-                (event.target as HTMLInputElement).classList.remove('warning-input');
-                setIconWarning1('');
-            }
+            setIconType2(TypeIcon.None);
+            setHintText2('');
         }
+    }, [inputText2]);
 
-        if (!containCyrillic && containUpperCaseLatin) {
-            (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess1(IconSuccess.default);
+    useEffect(() => {
+        if ((inputText3.length > 3) && (inputText3.length <= 5)) {
+            setIconType3(TypeIcon.Success);
+            setHintText3('Success');
+        } else if ((inputText3.length > 5) && (inputText3.length <= 7)) {
+            setIconType3(TypeIcon.Warning);
+            setHintText3('Warning');
+        } else if ((inputText3.length > 7) && (inputText3.length <= 10)) {
+            setIconType3(TypeIcon.Error);
+            setHintText3('Error');
         } else {
-            (event.target as HTMLInputElement).classList.remove('success-input');
-            setIconSuccess1('');
+            setIconType3(TypeIcon.None);
+            setHintText3('');
         }
-    }
+    }, [inputText3])
 
-    const checkInput2 = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const regex: RegExp = /[а-яА-Я]/;
-        const latinRegex: RegExp = /[A-Z]/;
-
-        const containCyrillic: boolean = regex.test((event.target as HTMLInputElement).value);
-        const containUpperCaseLatin: boolean = latinRegex.test((event.target as HTMLInputElement).value);
-
-        if (containCyrillic) {
-            setErrorMessage('Необходимо вводить только латинские символы!');
-            (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError2(IconError.default);
-        } else {
-            setErrorMessage('');
-            (event.target as HTMLInputElement).classList.remove('error-input');
-            setIconError2('');
-        }
-
-        if (event.target.value === '') {
-            (event.target as HTMLInputElement).classList.remove('warning-input');
-            setIconWarning2('')
-        } else {
-            if (!containUpperCaseLatin && !containCyrillic) {
-                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
-                (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning2(IconWarning.default);
-            } else {
-                (event.target as HTMLInputElement).classList.remove('warning-input');
-                setIconWarning2('');
-            }
-        }
-
-        if (!containCyrillic && containUpperCaseLatin) {
-            (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess2(IconSuccess.default);
-        } else {
-            (event.target as HTMLInputElement).classList.remove('success-input');
-            setIconSuccess2('');
-        }
-    }
-
-    const checkInput3 = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const regex: RegExp = /[а-яА-Я]/;
-        const latinRegex: RegExp = /[A-Z]/;
-
-        const containCyrillic: boolean = regex.test((event.target as HTMLInputElement).value);
-        const containUpperCaseLatin: boolean = latinRegex.test((event.target as HTMLInputElement).value);
-
-        if (containCyrillic) {
-            setErrorMessage('Необходимо вводить только латинские символы!');
-            (event.target as HTMLInputElement).classList.add('error-input');
-            setIconError3(IconError.default);
-        } else {
-            setErrorMessage('');
-            (event.target as HTMLInputElement).classList.remove('error-input');
-            setIconError3('');
-        }
-
-        if (event.target.value === '') {
-            (event.target as HTMLInputElement).classList.remove('warning-input');
-            setIconWarning3('');
-        } else {
-            if (!containUpperCaseLatin && !containCyrillic) {
-                setErrorMessage('Необходимо чтобы была хотя бы одна заглавная буква!');
-                (event.target as HTMLInputElement).classList.add('warning-input');
-                setIconWarning3(IconWarning.default);
-            } else {
-                (event.target as HTMLInputElement).classList.remove('warning-input');
-                setIconWarning3('');
-            }
-        }
-
-        if (!containCyrillic && containUpperCaseLatin) {
-            (event.target as HTMLInputElement).classList.add('success-input');
-            setIconSuccess3(IconSuccess.default);
-        } else {
-            (event.target as HTMLInputElement).classList.remove('success-input');
-            setIconSuccess3('');
-        }
-    }
     return (
-        <div className="input-container">
-            <div className="input-wrapper">
-                <div className="row">
-                    <input type="text" className="gray-input" placeholder="Введите текст" />
-                    <div className="active-input">
-                        <input type="text" className="blue-input" placeholder="Введите текст" />
+        <div className="input-wrapper">
+            <div className="header">Input fields</div>
+            <div className="input-container">
+                <div className="row1">
+                    <div className="first-input">
+                        <Input
+                            text=''
+                            hint="REGULAR"
+                            disabled={false}
+                            
+                        />
                     </div>
-                    <input type="text" className="disabled-input" placeholder="Введите текст" disabled />
+                    <div className="second-input">
+                        <Input
+                            text=""
+                            hint="ACTIVE"
+                            disabled={false}
+                            
+                        />
+                    </div>
+                    <div className="third-input">
+                        <Input
+                            text=""
+                            hint="DISABLED"
+                            disabled={true}
+                            
+                        />
+                    </div>
                 </div>
-                <div className="row">
-                    <div className="input-state">
-                        <input type="text" placeholder="Введите текст" onChange={checkInput1} />
-                        {iconError1 && <img src={iconError1} className='input-icon' alt="Error icon" />}
-                        {iconWarning1 && <img src={iconWarning1} className='input-icon' alt="Warning icon" />}
-                        {iconSuccess1 && <img src={iconSuccess1} className='input-icon' alt="Success icon" />}
-
+                <div className="row2">
+                    <div className="forth-input">
+                        <Input
+                            text={inputText1}
+                            hint={hintText1}
+                            type={iconType1}
+                            disabled={false}
+                            
+                            onChange={(text) => {
+                                setInputText1(text);
+                            }}
+                        />
                     </div>
-                    <div className="input-state">
-                        <input type="text" placeholder="Введите текст" onChange={checkInput2} />
-                        {iconError2 && <img src={iconError2} className='input-icon' alt="Error icon" />}
-                        {iconWarning2 && <img src={iconWarning2} className='input-icon' alt="Warning icon" />}
-                        {iconSuccess2 && <img src={iconSuccess2} className='input-icon' alt="Success icon" />}
+                    <div className="fifth-input">
+                        <Input
+                            text={inputText2}
+                            hint={hintText2}
+                            type={iconType2}
+                            disabled={false}
+                          
+                            onChange={(text) => {
+                                setInputText2(text);
+                            }}
+                        />
                     </div>
-                    <div className="input-state">
-                        <input type="text" placeholder="Введите текст" onChange={checkInput3} />
-                        {iconError3 && <img src={iconError3} className='input-icon' alt="Error icon" />}
-                        {iconWarning3 && <img src={iconWarning3} className='input-icon' alt="Warning icon" />}
-                        {iconSuccess3 && <img src={iconSuccess3} className='input-icon' alt="Success icon" />}
+                    <div className="sixth-input">
+                        <Input
+                            text={inputText3}
+                            hint={hintText3}
+                            type={iconType3}
+                            disabled={false}
+                          
+                            onChange={(text) => {
+                                setInputText3(text);
+                            }}
+                        />
                     </div>
                 </div>
-            </div>
-            <div className="error-message">
-                <p>{errorMessage}</p>
             </div>
         </div>
-
     );
 };
-
