@@ -17,6 +17,9 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<Option | null>(null);
     const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+    const [noMatches, setNoMatches] = useState<boolean>(false);
+    const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
+    const [selectedOptionClassName, setSelectedOptionClassName] = useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -26,6 +29,12 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
             option.label.toLowerCase().includes(value.toLowerCase())
         );
         setFilteredOptions(filtered);
+
+        if (filtered.length === 0) {
+            setNoMatches(true)
+        } else {
+            setNoMatches(false)
+        }
     };
 
     const handleClearClick = () => {
@@ -39,13 +48,38 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     };
 
 
-    const handleOptionClick = (option: Option) => {
+    const handleOptionClick = (option: Option, index: number) => {
         if (option.disabled) {
             return;
         };
         setSelectedOption(option);
         setInputValue(option.label);
+        setShowDropdown(false);
+        setSelectedOptionIndex(index);
+    };
 
+    const handleKeyboard = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            setSelectedOptionClassName('selectedOption');
+            setSelectedOptionIndex(prevIndex =>
+                Math.min(prevIndex + 1, filteredOptions.length - 1)
+            );
+        } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            setSelectedOptionClassName('selectedOption');
+            setSelectedOptionIndex(prevIndex =>
+                Math.max(prevIndex - 1, 0)
+            );
+        } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
+            setShowDropdown(false)
+            handleOptionClick(filteredOptions[selectedOptionIndex], selectedOptionIndex);
+        }
+    };
+
+
+    const handleOptionHover = (index: number) => {
+        setSelectedOptionIndex(index);
     };
 
     let className = ''
@@ -53,10 +87,14 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
         className = 'showDropdown'
     }
 
+    let lineClassName = '';
+    if (inputValue !== '') {
+        lineClassName = 'line'
+    }
 
 
     return (
-        <div className='dropdownWrapper'>
+        <div className='dropdownWrapper' onKeyDown={handleKeyboard}>
             <div className="dropdownInput">
                 <input
                     type="text"
@@ -70,7 +108,7 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
                     </button>
                 )}
 
-                <button className='dropdownButton' onClick={handleDropdownClick}>
+                <button className={`dropdownButton ${lineClassName}`} onClick={handleDropdownClick}>
                     <img
                         className='iconArrow'
                         src={showDropdown ? IconArrowUp.default : IconArrowDown.default}
@@ -82,17 +120,23 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
             <div className={`dropdown ${className}`}>
                 {showDropdown && (
                     <>
-                        {filteredOptions.map(option => (
-                            <div
-                                className={`optionsClassName ${(selectedOption?.value === option.value && inputValue === selectedOption?.label) ? 'selectedOption' : ''}`}
-                                key={option.value}
-                                onClick={() => handleOptionClick(option)}
-                                style={{ opacity: option.disabled ? 0.5 : 1 }}
-
-                            >
-                                {option.label}
+                        {filteredOptions.length > 0 ? (
+                            filteredOptions.map((option, index) => (
+                                <div
+                                    className={`optionsClassName ${index === selectedOptionIndex ? 'selectedOption' : ''}`}
+                                    key={option.value}
+                                    onClick={() => handleOptionClick(option, index)}
+                                    onMouseEnter={() => handleOptionHover(index)}
+                                    style={{ opacity: option.disabled ? 0.5 : 1 }}
+                                >
+                                    {option.label}
+                                </div>
+                            ))
+                        ) : (
+                            <div className='noMatchesText'>
+                                Совпадений не найдено
                             </div>
-                        ))}
+                        )}
                     </>
                 )}
             </div>
