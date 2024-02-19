@@ -3,26 +3,30 @@ import { IconArrowDown, IconArrowUp, IconClear } from '../icons/icons';
 import './Dropdown.scss'
 
 interface Option {
+    id: string;
     label: string;
-    value: string;
     disabled?: boolean;
 }
 
-interface Props {
-    options: Option[];
+type Props = {
+    options: Option[]
+    textValue?: string
+    value?: string
+    onChangeValue: (value: string) => void
 }
 
-export const Dropdown: React.FC<Props> = ({ options }) => {
-    const [inputValue, setInputValue] = useState<string>('');
-    const [showDropdown, setShowDropdown] = useState<boolean>(false);
-    const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-    const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
-    const [noMatches, setNoMatches] = useState<boolean>(false);
-    const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
-    const [selectedOptionClassName, setSelectedOptionClassName] = useState<string>('');
-    const [selectedOptionEnter, setSelectedOptionEnter] = useState<boolean>(false);
-
-
+export const Dropdown = ({
+    options,
+    textValue,
+    value,
+    onChangeValue
+}: Props) => {
+    const [inputValue, setInputValue] = useState<string>(textValue || '');
+    const [showed, setShowed] = useState<boolean>(false);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [filteredOptions, setFilteredOptions] = useState<string[]>(options.map(o => o.id));
+    const [empty, setEmpty] = useState<boolean>(false);
+    const [hoveredOption, setHoveredOption] = useState<string | null>(null);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -31,34 +35,27 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
         const filtered = options.filter(option =>
             option.label.toLowerCase().includes(value.toLowerCase())
         );
-        setFilteredOptions(filtered);
-
-        if (filtered.length === 0) {
-            setNoMatches(true)
-        } else {
-            setNoMatches(false)
-        }
+        setFilteredOptions(filtered.map(f => f.id));
+        setEmpty(filtered.length === 0)
     };
 
     const handleClearClick = () => {
         setInputValue('');
-        setFilteredOptions(options);
+        setFilteredOptions(options.map(o => o.id));
         setSelectedOption(null);
     };
 
     const handleDropdownClick = () => {
-        setShowDropdown(!showDropdown);
+        setShowed(prevValue => !prevValue);
     };
 
-
-    const handleOptionClick = (option: Option, index: number) => {
+    const handleOptionClick = (option: Option) => {
         if (option.disabled) {
             return;
         };
-        setSelectedOption(option);
+        setSelectedOption(option.id);
         setInputValue(option.label);
-        setShowDropdown(false);
-        setSelectedOptionIndex(index);
+        setShowed(false);
     };
 
     const handleKeyboard = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,14 +79,8 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
         }
     };
 
-
-    const handleOptionHover = (index: number) => {
-        setSelectedOptionIndex(index);
-
-    };
-
     let className = ''
-    if (showDropdown) {
+    if (showed) {
         className = 'showDropdown'
     }
 
@@ -99,8 +90,8 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     }
 
 
-    return (
-        <div className='dropdownWrapper' onKeyDown={handleKeyboard}>
+    const DropDownInput = () => {
+        return (
             <div className="dropdownInput">
                 <input
                     type="text"
@@ -117,39 +108,57 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
                 <button className={`dropdownButton ${lineClassName}`} onClick={handleDropdownClick}>
                     <img
                         className='iconArrow'
-                        src={showDropdown ? IconArrowUp.default : IconArrowDown.default}
+                        src={showed ? IconArrowUp.default : IconArrowDown.default}
                         alt='Dropdown'
                     />
                 </button>
             </div>
+        );
+    }
 
-            <div className={`dropdown ${className}`}>
-                {showDropdown && (
-                    <>
-                        {filteredOptions.length > 0 ? (
-                            filteredOptions.map((option, index) => (
-                                <div
-                                    className={`optionsClassName  
-                                            ${index === selectedOptionIndex ? 'keydownOption' : ''} 
-                                            ${(selectedOptionEnter && selectedOption?.value === option.value) ? 'enterClick' : ''}`
-                                    }
-                                    key={option.value}
-                                    onClick={() => handleOptionClick(option, index)}
-                                    onKeyDown={handleKeyboard}
-                                    onMouseEnter={() => handleOptionHover(index)}
-                                    style={{ opacity: option.disabled ? 0.5 : 1 }}
-                                >
-                                    {option.label}
-                                </div>
-                            ))
-                        ) : (
-                            <div className='noMatchesText'>
-                                Совпадений не найдено
+    const DropdownBody = () => {
+        const showedOptions = options.map(o => {
+            if (filteredOptions.indexOf(o.id) != -1) {
+                return o;
+            }
+        }).filter(Boolean) as Option[];
+        if (showedOptions.length == 0) {
+            return (
+                <div className='noMatchesText'>{`Совпадений не найдено`}</div>
+            );
+        }
+        return (
+            <>
+                {
+                    showedOptions.map((o, i) => {
+                        let newClassName = 'optionItem';
+                        if (o.disabled) {
+                            newClassName += ' disabled';
+                        }
+                        return (
+                            <div className={newClassName}
+                                key={o.id}
+                                onClick={() => handleOptionClick(o)}
+                                onMouseEnter={() => {
+                                    setHoveredOption(o.id);
+                                }}
+                            >
+                                {o.label}
                             </div>
-                        )}
-                    </>
-                )}
-            </div>
+                        );
+                    })
+                }
+            </>
+        );
+    }
+
+    return (
+        <div className='dropdownWrapper' onKeyDown={handleKeyboard}
+            onMouseLeave={() => {
+                setHoveredOption(null);
+            }}>
+            <DropDownInput />
+            {showed && <DropdownBody />}
         </div>
     );
 };
