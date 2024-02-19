@@ -20,6 +20,9 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     const [noMatches, setNoMatches] = useState<boolean>(false);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
     const [selectedOptionClassName, setSelectedOptionClassName] = useState<string>('');
+    const [selectedOptionEnter, setSelectedOptionEnter] = useState<boolean>(false);
+
+
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -61,25 +64,28 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
     const handleKeyboard = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'ArrowDown') {
             event.preventDefault();
-            setSelectedOptionClassName('selectedOption');
+            setSelectedOptionClassName('optionsClassName');
             setSelectedOptionIndex(prevIndex =>
                 Math.min(prevIndex + 1, filteredOptions.length - 1)
             );
         } else if (event.key === 'ArrowUp') {
             event.preventDefault();
-            setSelectedOptionClassName('selectedOption');
+            setSelectedOptionClassName('optionsClassName');
             setSelectedOptionIndex(prevIndex =>
                 Math.max(prevIndex - 1, 0)
             );
         } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
-            setShowDropdown(false)
+            setSelectedOptionEnter(true);
             handleOptionClick(filteredOptions[selectedOptionIndex], selectedOptionIndex);
+            setShowDropdown(false);
+
         }
     };
 
 
     const handleOptionHover = (index: number) => {
         setSelectedOptionIndex(index);
+
     };
 
     let className = ''
@@ -123,9 +129,13 @@ export const Dropdown: React.FC<Props> = ({ options }) => {
                         {filteredOptions.length > 0 ? (
                             filteredOptions.map((option, index) => (
                                 <div
-                                    className={`optionsClassName ${index === selectedOptionIndex ? 'selectedOption' : ''}`}
+                                    className={`optionsClassName  
+                                            ${index === selectedOptionIndex ? 'keydownOption' : ''} 
+                                            ${(selectedOptionEnter && selectedOption?.value === option.value) ? 'enterClick' : ''}`
+                                    }
                                     key={option.value}
                                     onClick={() => handleOptionClick(option, index)}
+                                    onKeyDown={handleKeyboard}
                                     onMouseEnter={() => handleOptionHover(index)}
                                     style={{ opacity: option.disabled ? 0.5 : 1 }}
                                 >
