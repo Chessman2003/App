@@ -75,12 +75,9 @@
         background-color: lightblue;
     }
 
-    &.selectedOption {
-        background-color: #00CED1;
-    }
 }
 
-.dropdown {
+.dropdownBody {
     max-height: 200px;
     overflow: auto;
 
@@ -95,12 +92,33 @@
 
 .noMatchesText {
     font-size: 20px;
+    border: 1px solid blue;
+    border-top: none;
 }
 
 .keydownOption {
     background-color: lightblue;
 }
 
-.enterClick {
-    background-color: #00CED1;
+.disabled {
+    opacity: 0.5;
+}
+
+.optionItem {
+    font-size: 20px;
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lightblue;
+    }
+
+    &.selectedOption {
+        background-color: #00CED1;
+    }
+}
+
+.dropdownBody {
+    border: 1px solid blue;
+    border-top: none;
 }

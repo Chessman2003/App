@@ -22,10 +22,10 @@ export const App = () => {
     return (
         <div>
             <h1>Dropdown component</h1>
-            <Dropdown 
+            <Dropdown
                 options={dropdownOptions}
-                value={selectedValue} 
-                onChangeValue={(value: string)=>{
+                value={selectedValue}
+                onChangeValue={(value: string) => {
                     setSelectedValue(value);
                 }}
             />

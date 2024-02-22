@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { IconArrowDown, IconArrowUp, IconClear } from '../icons/icons';
 import './Dropdown.scss'
 
-interface Option {
+type Option = {
     id: string;
     label: string;
     disabled?: boolean;
@@ -28,6 +28,35 @@ export const Dropdown = ({
     const [empty, setEmpty] = useState<boolean>(false);
     const [hoveredOption, setHoveredOption] = useState<string | null>(null);
 
+
+
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setShowed(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    }, []);
+
+
+    useEffect(() => {
+        if (showed && dropdownRef.current && selectedOption) {
+            const selectedIndex = options.findIndex(option => option.id === selectedOption);
+            if (selectedIndex !== -1 && dropdownRef.current.childNodes[selectedIndex]) {
+                (dropdownRef.current.childNodes[selectedIndex] as HTMLLIElement).focus();
+            }
+        }
+    }, [showed, options, selectedOption]);
+
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setInputValue(value);
@@ -43,6 +72,7 @@ export const Dropdown = ({
         setInputValue('');
         setFilteredOptions(options.map(o => o.id));
         setSelectedOption(null);
+
     };
 
     const handleDropdownClick = () => {
@@ -58,26 +88,10 @@ export const Dropdown = ({
         setShowed(false);
     };
 
-    const handleKeyboard = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'ArrowDown') {
-            event.preventDefault();
-            setSelectedOptionClassName('optionsClassName');
-            setSelectedOptionIndex(prevIndex =>
-                Math.min(prevIndex + 1, filteredOptions.length - 1)
-            );
-        } else if (event.key === 'ArrowUp') {
-            event.preventDefault();
-            setSelectedOptionClassName('optionsClassName');
-            setSelectedOptionIndex(prevIndex =>
-                Math.max(prevIndex - 1, 0)
-            );
-        } else if (event.key === 'Enter' && selectedOptionIndex !== -1) {
-            setSelectedOptionEnter(true);
-            handleOptionClick(filteredOptions[selectedOptionIndex], selectedOptionIndex);
-            setShowDropdown(false);
 
-        }
-    };
+
+
+
 
     let className = ''
     if (showed) {
@@ -88,6 +102,7 @@ export const Dropdown = ({
     if (inputValue !== '') {
         lineClassName = 'line'
     }
+
 
 
     const DropDownInput = () => {
@@ -126,9 +141,53 @@ export const Dropdown = ({
             return (
                 <div className='noMatchesText'>{`Совпадений не найдено`}</div>
             );
+        };
+
+        const handleOptionKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+
+            switch (e.key) {
+
+                case "ArrowDown":
+                    e.preventDefault();
+                    // if there's a next item, focus on it
+                    if (e.currentTarget.nextSibling) {
+                        (e.currentTarget.nextSibling as HTMLDivElement).focus();
+                        break;
+                    }
+
+                    // if there's no next list item (last item), focus on the first item
+                    if (!e.currentTarget.nextSibling) {
+                        (e.currentTarget.parentNode?.childNodes[0] as HTMLDivElement).focus();
+                        break;
+                    }
+                    break;
+
+                case "ArrowUp":
+                    e.preventDefault();
+                    // if there's a previous item, focus on it
+                    if (e.currentTarget.previousSibling) {
+                        (e.currentTarget.previousSibling as HTMLDivElement).focus();
+                        break;
+                    }
+                    // if there's no previous list item (first item), focus on the last item
+                    if (!e.currentTarget.previousSibling && e.currentTarget.parentNode) {
+                        const indexOfLastElement = e.currentTarget?.parentNode?.childNodes?.length - 1;
+                        (e.currentTarget.parentNode?.childNodes[indexOfLastElement] as HTMLDivElement).focus();
+                        break;
+
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+
         }
+
+
+
         return (
-            <>
+            <div className='dropdownBody' onKeyDown={handleOptionKeyDown}>
                 {
                     showedOptions.map((o, i) => {
                         let newClassName = 'optionItem';
@@ -136,27 +195,24 @@ export const Dropdown = ({
                             newClassName += ' disabled';
                         }
                         return (
-                            <div className={newClassName}
+                            <div className={`${newClassName} ${(o.id === selectedOption) ? 'selectedOption' : ''}`}
                                 key={o.id}
                                 onClick={() => handleOptionClick(o)}
-                                onMouseEnter={() => {
-                                    setHoveredOption(o.id);
-                                }}
+                                onKeyDown={handleOptionKeyDown}
                             >
                                 {o.label}
                             </div>
                         );
                     })
                 }
-            </>
+            </div>
         );
     }
 
     return (
-        <div className='dropdownWrapper' onKeyDown={handleKeyboard}
-            onMouseLeave={() => {
-                setHoveredOption(null);
-            }}>
+        <div className='dropdownWrapper'
+            ref={dropdownRef}
+        >
             <DropDownInput />
             {showed && <DropdownBody />}
         </div>
