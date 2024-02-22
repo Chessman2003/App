@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dropdown, } from "../Dropdown/Dropdown"
+import { Dropdown, DropdownOption, } from "../Dropdown"
 import './App.scss'
 
 const dropdownOptions = [
@@ -18,15 +18,24 @@ const dropdownOptions = [
 ];
 
 export const App = () => {
-    const [selectedValue, setSelectedValue] = useState('option1');
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     return (
         <div>
             <h1>Dropdown component</h1>
             <Dropdown
                 options={dropdownOptions}
-                value={selectedValue}
-                onChangeValue={(value: string) => {
-                    setSelectedValue(value);
+                selectedIndex={selectedIndex}
+                onChangeValue={(value?: DropdownOption) => {
+                    if (value) {
+                        dropdownOptions.forEach((o, i) => {
+                            if (o.id == value.id) {
+                                setSelectedIndex(i)
+                                return;
+                            }
+                        })
+                    } else {
+                        setSelectedIndex(-1);
+                    }
                 }}
             />
         </div>

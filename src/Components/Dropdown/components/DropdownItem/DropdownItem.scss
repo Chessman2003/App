@@ -1,0 +1,12 @@
+.dropdownItem {
+    &.selected {
+        background-color: rgba($color: blue, $alpha: .5);
+    }
+    &.disabled {
+        color: darkgray;
+        background-color:gainsboro;
+    }
+    &:not(.disabled):hover {
+        background-color: aquamarine;
+    }
+}
