@@ -66,7 +66,7 @@ export const Dropdown = ({
     }, [selectedIndex]);
 
     useEffect(() => {
-        setFilteredOptions(options.filter(o => o.label.includes(inputValue)));
+        setFilteredOptions(options.filter(o => o.label.toLowerCase().includes(inputValue.toLowerCase())));
     }, [inputValue]);
 
 

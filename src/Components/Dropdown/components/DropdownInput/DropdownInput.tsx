@@ -15,7 +15,8 @@ export const DropDownInput = ({
     openedDropdown,
     onToggleDropDown
 }: Props) => {
-    const handleClearClick = () => {
+    const handleClearClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
         onChangeText('');
     };
 
