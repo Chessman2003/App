@@ -2,11 +2,17 @@
     &.selected {
         background-color: rgba($color: blue, $alpha: .5);
     }
+
     &.disabled {
         color: darkgray;
-        background-color:gainsboro;
+        background-color: gainsboro;
+        cursor: not-allowed;
     }
+
     &:not(.disabled):hover {
         background-color: aquamarine;
     }
+
+    font-size: 20px;
+    cursor: pointer;
 }

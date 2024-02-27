@@ -27,11 +27,12 @@ export const DropDownInput = ({
                 onChange={(e) => {
                     onChangeText(e.target.value);
                 }}
+                className="input"
             />
             {text && (
                 <>
                     <button className='clearButton' onClick={handleClearClick}>
-                        <img src={IconClear.default} />
+                        <img className='clearImage' src={IconClear.default} />
                     </button>
                     <div className="borderLine" />
                 </>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { IconArrowDown, IconArrowUp, IconClear } from '../../../icons/icons';
 import './Dropdown.scss'
 import { DropdownOption } from '../../types/dropdownTypes';
 import { DropDownInput } from '../DropdownInput/DropdownInput';
@@ -22,7 +21,36 @@ export const Dropdown = ({
     const [selectedOption, setSelectedOption] = useState<DropdownOption | undefined>(undefined);
     const [filteredOptions, setFilteredOptions] = useState<DropdownOption[]>(options);
 
-    useEffect(()=>{
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const dropdownBodyRef = useRef<HTMLDivElement | null>(null);
+
+
+    useEffect(() => {
+        if (opened && dropdownBodyRef.current && selectedOption) {
+            const targetElement = dropdownBodyRef.current.childNodes[options.indexOf(selectedOption)] as HTMLLIElement;
+            if (targetElement) {
+                targetElement.focus();
+            }
+        }
+    }, [opened, selectedOption]);
+
+    useEffect(() => {
+        const closeDropdownOnClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setOpened(false);
+            }
+        };
+
+        document.addEventListener('click', closeDropdownOnClickOutside);
+
+        return () => {
+            document.removeEventListener('click', closeDropdownOnClickOutside);
+        };
+    }, [setOpened, dropdownRef]);
+
+
+
+    useEffect(() => {
         onChangeValue(selectedOption)
     }, [selectedOption]);
 
@@ -41,21 +69,32 @@ export const Dropdown = ({
         setFilteredOptions(options.filter(o => o.label.includes(inputValue)));
     }, [inputValue]);
 
+
+
     return (
-        <div className='dropdownWrapper'>
+        <div className='dropdownWrapper' ref={dropdownRef}>
             <DropDownInput
                 text={inputValue}
                 onChangeText={setInputValue}
                 openedDropdown={opened}
                 onToggleDropDown={() => {
                     setOpened(prevState => !prevState);
+                    if (!opened) {
+                        setFilteredOptions(options);
+                    }
                 }}
             />
-            {opened && <DropdownBody
-                options={filteredOptions}
-                selectedOption={selectedOption}
-                onChangeOption={setSelectedOption}
-            />}
+            <div className="dropdownBodyWrapper" ref={dropdownBodyRef}>
+                {opened && <DropdownBody
+                    options={filteredOptions}
+                    selectedOption={selectedOption}
+                    onChangeOption={(option) => {
+                        setSelectedOption(option);
+                        setOpened(false);
+                    }}
+
+                />}
+            </div>
         </div>
     );
 };

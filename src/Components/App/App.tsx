@@ -4,7 +4,7 @@ import './App.scss'
 
 const dropdownOptions = [
     { label: 'Опция 1', id: 'option1' },
-    { label: 'Опция 5', id: 'option2', disabled: true },
+    { label: 'Опция 2', id: 'option2', disabled: true },
     { label: 'Опция 3 при наличии', id: 'option3' },
     { label: 'Опция 2', id: 'option4' },
     { label: 'Опция 5', id: 'option5' },
