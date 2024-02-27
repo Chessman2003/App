@@ -26,6 +26,13 @@ export const Dropdown = ({
 
 
     useEffect(() => {
+        if (inputValue.trim() !== '' && !opened) {
+            setOpened(true);
+        }
+    }, [inputValue, opened])
+
+
+    useEffect(() => {
         if (opened && dropdownBodyRef.current && selectedOption) {
             const targetElement = dropdownBodyRef.current.childNodes[options.indexOf(selectedOption)] as HTMLLIElement;
             if (targetElement) {
