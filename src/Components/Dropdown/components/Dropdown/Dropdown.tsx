@@ -17,45 +17,30 @@ export const Dropdown = ({
     onChangeValue
 }: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
+
+    const handleChangeText = (text: string) => {
+        setOpened(true);
+        setInputValue(text);
+    }
     const [opened, setOpened] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<DropdownOption | undefined>(undefined);
     const [filteredOptions, setFilteredOptions] = useState<DropdownOption[]>(options);
 
     const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const dropdownBodyRef = useRef<HTMLDivElement | null>(null);
-
-
-    useEffect(() => {
-        if (inputValue.trim() !== '' && !opened) {
-            setOpened(true);
+    
+    const closeDropdownOnClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setOpened(false);
         }
-    }, [inputValue, opened])
-
-
-    useEffect(() => {
-        if (opened && dropdownBodyRef.current && selectedOption) {
-            const targetElement = dropdownBodyRef.current.childNodes[options.indexOf(selectedOption)] as HTMLLIElement;
-            if (targetElement) {
-                targetElement.focus();
-            }
-        }
-    }, [opened, selectedOption]);
+    };
 
     useEffect(() => {
-        const closeDropdownOnClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setOpened(false);
-            }
-        };
-
         document.addEventListener('click', closeDropdownOnClickOutside);
 
         return () => {
             document.removeEventListener('click', closeDropdownOnClickOutside);
         };
     }, [setOpened, dropdownRef]);
-
-
 
     useEffect(() => {
         onChangeValue(selectedOption)
@@ -66,6 +51,7 @@ export const Dropdown = ({
             const _selectedOption = options[selectedIndex];
             setInputValue(_selectedOption.label);
             setSelectedOption(_selectedOption);
+            setOpened(false);
         } else {
             setSelectedOption(undefined);
             setInputValue('');
@@ -82,7 +68,7 @@ export const Dropdown = ({
         <div className='dropdownWrapper' ref={dropdownRef}>
             <DropDownInput
                 text={inputValue}
-                onChangeText={setInputValue}
+                onChangeText={handleChangeText}
                 openedDropdown={opened}
                 onToggleDropDown={() => {
                     setOpened(prevState => !prevState);
@@ -91,7 +77,7 @@ export const Dropdown = ({
                     }
                 }}
             />
-            <div className="dropdownBodyWrapper" ref={dropdownBodyRef}>
+            <div className="dropdownBodyWrapper">
                 {opened && <DropdownBody
                     options={filteredOptions}
                     selectedOption={selectedOption}
