@@ -19,10 +19,19 @@ type Props = {
 const modalContainerId = 'modalContainerId';
 
 export const Modal = ({ onClose, title, footerButtons, children }: Props) => {
-    const [Mounted, setMounted] = useState(false);
-
+    const [mounted, setMounted] = useState(false);
+    
     const rootRef = useRef<HTMLDivElement>(null);
+    
+    useEffect(() => {
+        //createContainer({ id: modalContainerId });
+        setMounted(true);
 
+        return () => {
+            setMounted(false);
+        }
+    }, []);
+    
     const handleClose: MouseEventHandler<HTMLButtonElement> =
         useCallback(() => {
             onClose?.();
@@ -42,13 +51,8 @@ export const Modal = ({ onClose, title, footerButtons, children }: Props) => {
     }, [onClose]);
 
 
-    useEffect(() => {
-        createContainer({ id: modalContainerId });
-        setMounted(true);
-    }, []);
-
     return (
-        Mounted
+        mounted
             ? (
                 <Portal id={modalContainerId}>
                     <div className='modalWrapper' ref={rootRef}>

@@ -68,23 +68,22 @@ export const App = () => {
             </div>
 
             {isModalActive1 && (
-                <div className="modal">
                     <Modal title='Modal window' onClose={handleModalClose1} footerButtons={footerButtons}>
-                        fesfsfesf уаыуаыуа уыаыуау fesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsf  уыаыуауfesfsfesf уаыуаыуа уыаыуау
+                        <ModalHeader></ModalHeader>
+                        <ModalBody>
+                            fesfsfesf уаыуаыуа уыаыуау fesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsf  уыаыуауfesfsfesf уаыуаыуа уыаыуау
+                        </ModalBody>
+                        <ModalFooter></ModalFooter>
                     </Modal>
-                </div>
             )}
 
             {isModalActive2 && (
-                <div className="modal">
                     <Modal title='Modal window' onClose={handleModalClose2} footerButtons={footerButtons}>
                         wefwe
                     </Modal>
-                </div>
             )}
 
             {isModalActive3 && (
-                <div className="modal">
                     <Modal title='Modal window' onClose={handleModalClose3} footerButtons={footerButtons}>
                         <p className="text">  fesf уаыуаыуа уыаыуауfesfsf  уыаыуауfesfsfesf уаыуаыуа уыаыуау
                             fwwefewf wefwefw weffewfew weffewf wefewfwe fewfewef wefwefew
@@ -94,7 +93,6 @@ export const App = () => {
                             sfesfes esfes sefse sef
                         </p>
                     </Modal>
-                </div>
             )}
         </div>
 

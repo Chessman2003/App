@@ -4,7 +4,7 @@ type ContentProps = {
     children: React.ReactNode;
 };
 
-export const Content: React.FC<ContentProps> = ({ children }) => {
+export const Content = ({ children }: ContentProps) => {
     return (
         <div className="modal-content">
             {children}
