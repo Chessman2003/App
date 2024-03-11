@@ -1,29 +1,6 @@
-.button1 {
-    background-color: red;
-    border-radius: 6px;
-    border: none;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-
-    &:active {
-        transform: scale(0.98);
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-    }
-}
-
-.button2 {
-    background-color: green;
-    border-radius: 6px;
-    border: none;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-
-    &:active {
-        transform: scale(0.98);
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-    }
+h2 {
+    margin: 0;
+    margin-bottom: 3%;
 }
 
 .buttonOpenModal {
@@ -48,8 +25,4 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
-
-.text {
-    max-height: 140px;
 }

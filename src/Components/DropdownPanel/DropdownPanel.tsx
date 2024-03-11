@@ -21,7 +21,6 @@ export const DropdownPanel = () => {
     const [selectedIndex, setSelectedIndex] = useState(-1);
     return (
         <div>
-            <h1>Dropdown component</h1>
             <Dropdown
                 options={dropdownOptions}
                 selectedIndex={selectedIndex}

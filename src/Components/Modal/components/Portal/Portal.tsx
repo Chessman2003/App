@@ -38,6 +38,6 @@ export const createContainer = (options: containerOptions) => {
     const portalContainer = document.createElement('div');
 
     portalContainer.setAttribute('id', id);
-    mountNode.appendChild(portalContainer);;
+    mountNode.appendChild(portalContainer);
 }
 

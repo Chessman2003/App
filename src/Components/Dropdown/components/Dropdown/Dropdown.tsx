@@ -27,7 +27,7 @@ export const Dropdown = ({
     const [filteredOptions, setFilteredOptions] = useState<DropdownOption[]>(options);
 
     const dropdownRef = useRef<HTMLDivElement | null>(null);
-    
+
     const closeDropdownOnClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             setOpened(false);

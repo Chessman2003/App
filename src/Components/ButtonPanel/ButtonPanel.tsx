@@ -26,7 +26,7 @@ export const ButtonPanel = () => {
         }
     }
     return (
-        <div>
+        <div className="buttonsWrapper">
             <Button
                 onClick={handleClick}
                 colorBackground={colorBackground}

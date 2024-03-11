@@ -20,18 +20,16 @@ const modalContainerId = 'modalContainerId';
 
 export const Modal = ({ onClose, title, footerButtons, children }: Props) => {
     const [mounted, setMounted] = useState(false);
-    
-    const rootRef = useRef<HTMLDivElement>(null);
-    
-    useEffect(() => {
-        //createContainer({ id: modalContainerId });
-        setMounted(true);
 
+    const rootRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setMounted(true);
         return () => {
             setMounted(false);
         }
     }, []);
-    
+
     const handleClose: MouseEventHandler<HTMLButtonElement> =
         useCallback(() => {
             onClose?.();

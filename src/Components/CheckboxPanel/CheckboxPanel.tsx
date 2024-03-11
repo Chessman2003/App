@@ -10,6 +10,8 @@ export const CheckboxPanel = () => {
     const [checkbox5, setCheckbox5] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
     const [checkbox6, setCheckbox6] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
     const [checkbox7, setCheckbox7] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
+    const [checkbox8, setCheckbox8] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
+    const [checkbox9, setCheckbox9] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
     return (
         <div className="inputCheckboxWrapper">
             <div className="cantainer">
@@ -21,10 +23,12 @@ export const CheckboxPanel = () => {
                 <div className="row">
                     <Checkbox text="Checkbox 4" value={checkbox4} onChange={(value) => { setCheckbox4(value) }} />
                     <Checkbox text="Checkbox 5" value={checkbox5} onChange={(value) => { setCheckbox5(value) }} />
+                    <Checkbox text="Checkbox 6" value={checkbox6} onChange={(value) => { setCheckbox6(value) }} />
                 </div>
                 <div className="row">
-                    <Checkbox text="Checkbox 6" value={checkbox6} onChange={(value) => { setCheckbox6(value) }} />
                     <Checkbox text="Checkbox 7" value={checkbox7} onChange={(value) => { setCheckbox7(value) }} />
+                    <Checkbox text="Checkbox 8" value={checkbox8} onChange={(value) => { setCheckbox8(value) }} />
+                    <Checkbox text="Checkbox 9" value={checkbox9} onChange={(value) => { setCheckbox9(value) }} />
                 </div>
             </div>
         </div>

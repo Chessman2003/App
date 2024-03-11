@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Modal, ButtonProps } from "../Modal/components/Modal/Modal";
+import { Modal } from "../Modal/components/Modal2/Modal2";
+import { Header } from "../Modal/components/Modal2/components2/Header/Header";
+import { Content } from "../Modal/components/Modal2/components2/Content/Content";
+import { Footer } from "../Modal/components/Modal2/components2/Footer/Footer";
+import { DropdownPanel } from "../DropdownPanel/DropdownPanel";
+import { ButtonPanel } from "../ButtonPanel/ButtonPanel";
+import { CheckboxPanel } from "../CheckboxPanel/CheckboxPanel";
 import './App.scss'
 
 export const App = () => {
     const [isModalActive1, setIsModalActive1] = useState(false);
     const [isModalActive2, setIsModalActive2] = useState(false);
-    const [isModalActive3, setIsModalActive3] = useState(false);
-
 
     const handleModalOpen1 = () => {
         setIsModalActive1(true)
@@ -24,34 +28,7 @@ export const App = () => {
         setIsModalActive2(false)
     };
 
-    const handleModalOpen3 = () => {
-        setIsModalActive3(true)
-    };
 
-    const handleModalClose3 = () => {
-        setIsModalActive3(false)
-    };
-
-    const handleButton1Click = () => {
-        alert('Button 1 is clicked')
-    }
-
-    const handleButton2Click = () => {
-        alert('Button 2 is clicked')
-    }
-
-    const footerButtons: ButtonProps[] = [
-        {
-            text: 'Button 1',
-            onClick: handleButton1Click,
-            className: 'button1'
-        },
-        {
-            text: 'Button 2',
-            onClick: handleButton2Click,
-            className: 'button2'
-        }
-    ]
     return (
         <div className="App">
             <h1>Modal component</h1>
@@ -62,38 +39,37 @@ export const App = () => {
                 <button className="buttonOpenModal" type="button" onClick={handleModalOpen2}>
                     open modal 2
                 </button>
-                <button className="buttonOpenModal" type="button" onClick={handleModalOpen3}>
-                    open modal 3
-                </button>
             </div>
 
             {isModalActive1 && (
-                    <Modal title='Modal window' onClose={handleModalClose1} footerButtons={footerButtons}>
-                        <ModalHeader></ModalHeader>
-                        <ModalBody>
-                            fesfsfesf уаыуаыуа уыаыуау fesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsfesf уаыуаыуа уыаыуауfesfsf  уыаыуауfesfsfesf уаыуаыуа уыаыуау
-                        </ModalBody>
-                        <ModalFooter></ModalFooter>
+                <div className="modalWrapper">
+                    <Modal onClick={handleModalClose1}>
+                        <Header>
+                            <h2>Dropdown</h2>
+                        </Header>
+                        <Content>
+                            <DropdownPanel />
+                        </Content>
+                        <Footer>
+                            <ButtonPanel />
+                        </Footer>
                     </Modal>
+                </div>
             )}
 
             {isModalActive2 && (
-                    <Modal title='Modal window' onClose={handleModalClose2} footerButtons={footerButtons}>
-                        wefwe
+                <div className="modalWrapper">
+                    <Modal onClick={handleModalClose2}>
+                        <Header>
+                            <h2>Dropdown</h2>
+                        </Header>
+                        <Content>
+                            <CheckboxPanel />
+                        </Content>
                     </Modal>
+                </div>
             )}
 
-            {isModalActive3 && (
-                    <Modal title='Modal window' onClose={handleModalClose3} footerButtons={footerButtons}>
-                        <p className="text">  fesf уаыуаыуа уыаыуауfesfsf  уыаыуауfesfsfesf уаыуаыуа уыаыуау
-                            fwwefewf wefwefw weffewfew weffewf wefewfwe fewfewef wefwefew
-                            wefewfew ewfwefew fewfwefe efwweef wfwefwe weffwefw wefweewf
-                            wfwefwef wefwfew fewfewwe fwfewe fwefwef ewfwefwe fewfew fewfew
-                            ergerg ergerg ergerg egrreg  efsfes esfse  esfesfe sef sefsef sefsefs
-                            sfesfes esfes sefse sef
-                        </p>
-                    </Modal>
-            )}
         </div>
 
     );

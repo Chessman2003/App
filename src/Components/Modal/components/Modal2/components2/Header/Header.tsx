@@ -1,18 +1,11 @@
-import React, { useCallback } from "react";
-import { MouseEventHandler } from 'react';
+import React from "react";
+import './Header.scss';
+
 
 type HeaderProps = {
     children: React.ReactNode,
-    onClose: () => void
 }
 
-export const Header = ({ children, onClose }: HeaderProps) => {
-    return (
-        <div className="modalHeader">
-            <div className="children">
-                {children}
-            </div>
-            <button className="closeButton" onClick={onClose}>x</button>
-        </div>
-    )
-}
+export const Header = ({ children }: HeaderProps) => {
+    return <div className="modalHeader">{children}</div>;
+};

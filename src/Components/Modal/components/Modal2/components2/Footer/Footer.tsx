@@ -1,14 +1,10 @@
 import React from 'react';
+import './Footer.scss';
 
 type ContentProps = {
     children: React.ReactNode;
 };
 
-export const Footer: React.FC<ContentProps> = ({ children }) => {
-    return (
-        <div className="modalFooter">
-            {children}
-        </div>
-    );
+export const Footer = ({ children }: ContentProps) => {
+    return <div className="modalFooter">{children}</div>;
 };
-
