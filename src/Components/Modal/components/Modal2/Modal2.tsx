@@ -1,33 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import './Modal2.scss';
 
-
-
 type Modal2Props = {
-    children: React.ReactNode,
+    modalElement: HTMLElement | null
+    children: React.ReactNode
     onClick: () => void
 }
 
-type ChildrenProps = {
-    children: React.ReactNode
-}
-
-const modalRoot: HTMLElement | null = document.getElementById("modalRoot");
-
-export const Modal = ({ children, onClick }: Modal2Props) => {
-    if (!modalRoot) {
-        return null
+export const Modal = ({
+    modalElement,
+    children, onClick
+}: Modal2Props) => {
+    if (!modalElement) {
+        console.error('root modal id not found');
+        return;
     }
-
-    const modalElement = (
-        <div className="modal">
-            <button className="modalClose" onClick={onClick}>x</button>
-            {children}
-        </div>
-    );
-
-    return createPortal(modalElement, modalRoot);
+    return createPortal(
+        (
+            <div className="modal">
+                <button className="modalClose" onClick={onClick}>x</button>
+                {children}
+            </div>
+        ), modalElement);
 };
 
 

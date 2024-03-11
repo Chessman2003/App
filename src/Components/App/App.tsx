@@ -7,10 +7,12 @@ import { DropdownPanel } from "../DropdownPanel/DropdownPanel";
 import { ButtonPanel } from "../ButtonPanel/ButtonPanel";
 import { CheckboxPanel } from "../CheckboxPanel/CheckboxPanel";
 import './App.scss'
+import { useRootModal } from "../Modal/lib/hooks/useRootModal";
 
 export const App = () => {
     const [isModalActive1, setIsModalActive1] = useState(false);
     const [isModalActive2, setIsModalActive2] = useState(false);
+    const {modalElement} = useRootModal({});
 
     const handleModalOpen1 = () => {
         setIsModalActive1(true)
@@ -43,7 +45,7 @@ export const App = () => {
 
             {isModalActive1 && (
                 <div className="modalWrapper">
-                    <Modal onClick={handleModalClose1}>
+                    <Modal onClick={handleModalClose1} modalElement={modalElement}>
                         <Header>
                             <h2>Dropdown</h2>
                         </Header>
@@ -59,17 +61,17 @@ export const App = () => {
 
             {isModalActive2 && (
                 <div className="modalWrapper">
-                    <Modal onClick={handleModalClose2}>
-                        <Header>
-                            <h2>Dropdown</h2>
-                        </Header>
+                    <Modal onClick={handleModalClose2} modalElement={modalElement}>
+                        
                         <Content>
                             <CheckboxPanel />
                         </Content>
+                        <Footer>
+                            <ButtonPanel />
+                        </Footer>
                     </Modal>
                 </div>
             )}
-
         </div>
 
     );
