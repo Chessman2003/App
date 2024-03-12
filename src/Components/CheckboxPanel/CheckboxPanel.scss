@@ -1,14 +1,7 @@
-.row {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-    gap: 20px
-}
-
 .inputCheckboxWrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    max-width: 600px;
-
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
 }

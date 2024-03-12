@@ -10,7 +10,8 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    height: 25px;
+    height: 32px;
+    background-color: white;
 
 }
 
@@ -78,8 +79,12 @@
 }
 
 .dropdownBody {
+    border: 2px solid blue;
+    border-top: none;
     max-height: 200px;
+    background-color: white;
     overflow: auto;
+    width: 270px;
 
     &::-webkit-scrollbar {
         width: 4px;
@@ -88,6 +93,9 @@
     &::-webkit-scrollbar-thumb {
         background-color: gray;
     }
+
+    position: absolute;
+    z-index: 9999;
 }
 
 .noMatchesText {
@@ -116,9 +124,4 @@
     &.selectedOption {
         background-color: #00CED1;
     }
-}
-
-.dropdownBody {
-    border: 1px solid blue;
-    border-top: none;
 }

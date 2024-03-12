@@ -14,23 +14,22 @@ export const CheckboxPanel = () => {
     const [checkbox9, setCheckbox9] = useState<boolean>((Math.random() * 100) % 100 > 50 ? true : false);
     return (
         <div className="inputCheckboxWrapper">
-            <div className="cantainer">
-                <div className="row">
-                    <Checkbox text="Checkbox 1" value={checkbox1} onChange={(value) => { setCheckbox1(value) }} />
-                    <Checkbox text="Checkbox 2" value={checkbox2} onChange={(value) => { setCheckbox2(value) }} />
-                    <Checkbox text="Checkbox 3" value={checkbox3} onChange={(value) => { setCheckbox3(value) }} />
-                </div>
-                <div className="row">
-                    <Checkbox text="Checkbox 4" value={checkbox4} onChange={(value) => { setCheckbox4(value) }} />
-                    <Checkbox text="Checkbox 5" value={checkbox5} onChange={(value) => { setCheckbox5(value) }} />
-                    <Checkbox text="Checkbox 6" value={checkbox6} onChange={(value) => { setCheckbox6(value) }} />
-                </div>
-                <div className="row">
-                    <Checkbox text="Checkbox 7" value={checkbox7} onChange={(value) => { setCheckbox7(value) }} />
-                    <Checkbox text="Checkbox 8" value={checkbox8} onChange={(value) => { setCheckbox8(value) }} />
-                    <Checkbox text="Checkbox 9" value={checkbox9} onChange={(value) => { setCheckbox9(value) }} />
-                </div>
-            </div>
+
+
+            <Checkbox text="Checkbox 1" value={checkbox1} onChange={(value) => { setCheckbox1(value) }} />
+            <Checkbox text="Checkbox 2" value={checkbox2} onChange={(value) => { setCheckbox2(value) }} />
+            <Checkbox text="Checkbox 3" value={checkbox3} onChange={(value) => { setCheckbox3(value) }} />
+
+
+            <Checkbox text="Checkbox 4" value={checkbox4} onChange={(value) => { setCheckbox4(value) }} />
+            <Checkbox text="Checkbox 5" value={checkbox5} onChange={(value) => { setCheckbox5(value) }} />
+            <Checkbox text="Checkbox 6" value={checkbox6} onChange={(value) => { setCheckbox6(value) }} />
+
+            <Checkbox text="Checkbox 7" value={checkbox7} onChange={(value) => { setCheckbox7(value) }} />
+            <Checkbox text="Checkbox 8" value={checkbox8} onChange={(value) => { setCheckbox8(value) }} />
+            <Checkbox text="Checkbox 9" value={checkbox9} onChange={(value) => { setCheckbox9(value) }} />
+
+
         </div>
     )
 }

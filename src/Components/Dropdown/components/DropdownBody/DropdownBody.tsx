@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DropdownOption } from "../../types/dropdownTypes";
 import { DropdownItem } from '../DropdownItem/DropdownItem';
+import './DropdownBody.scss';
 
 type Props = {
     options: DropdownOption[]
@@ -22,15 +23,15 @@ export const DropdownBody = ({
         );
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         if (selectedOption) {
             const position = positions.current.get(selectedOption.id);
             setOffset(position);
         }
     }, [selectedOption]);
 
-    useEffect(()=>{
-        bodyRef.current?.scrollTo({top: offset});
+    useEffect(() => {
+        bodyRef.current?.scrollTo({ top: offset });
     }, [offset]);
 
     const handleChangePosition = (option: DropdownOption, position: number) => {

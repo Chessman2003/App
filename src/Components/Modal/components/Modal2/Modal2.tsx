@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import './Modal2.scss';
 
@@ -6,9 +6,10 @@ type Modal2Props = {
     modalElement: HTMLElement | null
     children: React.ReactNode
     onClick: () => void
+    className: string
 }
 
-export const Modal = ({
+export const Modal2 = ({
     modalElement,
     children, onClick
 }: Modal2Props) => {
@@ -16,6 +17,9 @@ export const Modal = ({
         console.error('root modal id not found');
         return;
     }
+
+
+
     return createPortal(
         (
             <div className="modal">
@@ -23,6 +27,8 @@ export const Modal = ({
                 {children}
             </div>
         ), modalElement);
+
+
 };
 
 
