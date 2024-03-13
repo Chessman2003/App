@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { Portal, createContainer } from "../Portal/Portal";
+import { Portal, createContainer } from "../../../Portal/Portal";
 import { MouseEventHandler } from 'react';
 import './Modal.scss';
 

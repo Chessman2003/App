@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from 'react-dom';
-import { PortalProps } from "../../types/PortalTypes";
+import { PortalProps } from "../Modal/types/PortalTypes";
 
 
 const portalErrorMessage: string = 'There is no portal container in markup. Please add portal container with proper id attribute.';
