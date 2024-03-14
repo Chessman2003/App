@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Modal2 } from "../Modal/components/Modal2/Modal2";
-import { Header } from "../Modal/components/Modal2/components2/Modal2Header/Modal2Header";
-import { Content } from "../Modal/components/Modal2/components2/Modal2Content/Modal2Content";
-import { Footer } from "../Modal/components/Modal2/components2/Modal2Footer/Modal2Footer";
+import { Modal } from "../Modal/Modal";
+import { ModalHeader } from "../Modal/ModalComponents/ModalHeader/ModalHeader";
+import { ModalContent } from "../Modal/ModalComponents/ModalContent/ModalContent";
+import { ModalFooter } from "../Modal/ModalComponents/ModalFooter/ModalFooter";
 import { DropdownPanel } from "../DropdownPanel/DropdownPanel";
 import { ButtonPanel } from "../ButtonPanel/ButtonPanel";
 import { CheckboxPanel } from "../CheckboxPanel/CheckboxPanel";
 import './App.scss'
-import { useRootModal } from "../Modal/lib/hooks/useRootModal";
+import { useRootModal } from "../Modal/ModalHooks/useRootModal";
 
 export const App = () => {
 
@@ -75,49 +75,50 @@ export const App = () => {
 
             {isModalActive1 && (
                 <div className="modalWrapper">
-                    <Modal2 onClick={handleModalClose1} modalElement={modalElement} className={isModalActive1 ? 'mod' : ''}>
-                        <Header>
+                    <Modal onClose={handleModalClose1} modalElement={modalElement}>
+                        <ModalHeader>
                             <h2>Dropdown</h2>
-                        </Header>
-                        <Content>
+                        </ModalHeader>
+                        <ModalContent>
                             <DropdownPanel />
-                        </Content>
-                        <Footer>
+                        </ModalContent>
+                        <ModalFooter>
                             <ButtonPanel />
-                        </Footer>
-                    </Modal2>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )}
 
             {isModalActive2 && (
                 <div className="modalWrapper">
-                    <Modal2 onClick={handleModalClose2} modalElement={modalElement} className={isModalActive2 ? 'mod' : ''}>
+                    <Modal onClose={handleModalClose2} modalElement={modalElement}>
 
-                        <Content>
+                        <ModalContent>
                             <CheckboxPanel />
-                        </Content>
-                        <Footer>
+                        </ModalContent>
+                        <ModalFooter>
                             <ButtonPanel />
-                        </Footer>
-                    </Modal2>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )}
 
             {isModalActive3 && (
                 <div className="modalWrapper">
-                    <Modal2 onClick={handleModalClose3} modalElement={modalElement} className={isModalActive3 ? 'mod' : ''}>
-                        <Header>
+                    <Modal onClose={handleModalClose3} modalElement={modalElement}>
+                        <ModalHeader>
                             <h2>Little Big</h2>
-                        </Header>
-                        <Content>
+                        </ModalHeader>
+                        <ModalContent>
                             {components[currentIndex]}
-                        </Content>
-                        <Footer>
+                        </ModalContent>
+                        <ModalFooter>
                             <button className="changeButton" onClick={toggleComponents}>Litle Big</button>
-                        </Footer>
-                    </Modal2>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )}
+
         </div>
 
 

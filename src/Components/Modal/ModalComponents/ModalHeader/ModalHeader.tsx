@@ -1,11 +1,11 @@
 import React from "react";
-import './Modal2Header.scss';
+import './ModalHeader.scss';
 
 
 type Props = {
     children: React.ReactNode,
 }
 
-export const Header = ({ children }: Props) => {
+export const ModalHeader = ({ children }: Props) => {
     return <div className="modalHeader">{children}</div>;
 };
