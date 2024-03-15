@@ -7,7 +7,7 @@ import { DropdownPanel } from "../DropdownPanel/DropdownPanel";
 import { ButtonPanel } from "../ButtonPanel/ButtonPanel";
 import { CheckboxPanel } from "../CheckboxPanel/CheckboxPanel";
 import './App.scss'
-import { useRootModal } from "../Modal/ModalHooks/useRootModal";
+import { useRootModal } from "../Modal/lib/hooks/useRootModal";
 
 export const App = () => {
 
@@ -80,7 +80,9 @@ export const App = () => {
                             <h2>Dropdown</h2>
                         </ModalHeader>
                         <ModalContent>
-                            <DropdownPanel />
+                            {() => {
+                                return <DropdownPanel />
+                            }}
                         </ModalContent>
                         <ModalFooter>
                             <ButtonPanel />
@@ -94,7 +96,9 @@ export const App = () => {
                     <Modal onClose={handleModalClose2} modalElement={modalElement}>
 
                         <ModalContent>
-                            <CheckboxPanel />
+                            {() => {
+                                return <CheckboxPanel />
+                            }}
                         </ModalContent>
                         <ModalFooter>
                             <ButtonPanel />
@@ -110,7 +114,9 @@ export const App = () => {
                             <h2>Little Big</h2>
                         </ModalHeader>
                         <ModalContent>
-                            {components[currentIndex]}
+                            {() => {
+                                return components[currentIndex];
+                            }}
                         </ModalContent>
                         <ModalFooter>
                             <button className="changeButton" onClick={toggleComponents}>Litle Big</button>
