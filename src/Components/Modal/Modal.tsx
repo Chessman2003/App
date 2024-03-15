@@ -2,7 +2,7 @@ import React, { ReactElement, ReactPortal } from "react";
 import { createPortal } from "react-dom";
 import './Modal.scss';
 
-type Modal2Props = {
+type ModalProps = {
     modalElement: HTMLElement | null
     children: JSX.Element[]
     onClose: () => void
@@ -11,7 +11,7 @@ type Modal2Props = {
 export const Modal = ({
     modalElement,
     children, onClose
-}: Modal2Props) => {
+}: ModalProps) => {
     if (!modalElement) {
         console.error('root modal id not found');
         return;
@@ -21,9 +21,11 @@ export const Modal = ({
 
     return createPortal(
         (
-            <div className="modal">
-                <button className="modalClose" onClick={onClose}>x</button>
-                {children}
+            <div className="modalOverlay">
+                <div className="modal">
+                    <button className="modalClose" onClick={onClose}>x</button>
+                    {children}
+                </div>
             </div>
         ), modalElement);
 
