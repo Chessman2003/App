@@ -5,3 +5,7 @@ export * as IconSuccess from './success.png';
 export * as IconArrowUp from './ArrowIconUp.png';
 export * as IconArrowDown from './ArrowIconDown.png';
 export * as IconClear from './clearIcon.png';
+export * as IconOpen from './sidebarOpen.png';
+export * as IconClose from './sidebarClose.png';
+export * as AddCategories from './round.png';
+export * as SortCategories from './sort.png';
