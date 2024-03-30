@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect, useRef } from "react";
 import { Modal } from "../Modal";
 import { ModalHeader } from "../Modal";
@@ -130,5 +131,4 @@ export const ModalPage = () => {
 
     );
 }
-
-
+*/

@@ -3,9 +3,9 @@ import './ModalHeader.scss';
 
 
 type Props = {
-    children: React.ReactNode,
+    text: string,
 }
 
-export const ModalHeader = ({ children }: Props) => {
-    return <div className="modalHeader">{children}</div>;
+export const ModalHeader = ({ text }: Props) => {
+    return <div className="modalHeader">{text}</div>;
 };

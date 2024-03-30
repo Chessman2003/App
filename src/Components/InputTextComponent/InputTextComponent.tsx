@@ -34,7 +34,7 @@ export const Input = ({
     const [isActive, setIsActive] = useState<boolean>(false);
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isFocused) {
             setCurrentColor('blue');
             setShowLine(true);
@@ -88,7 +88,7 @@ export const Input = ({
 
     return (
         <div className="inputBoxWrapper" style={wrapperBoxStyle}>
-            <div className={`inputWrapper ${isActive ? 'active' :  ''}`} style={wrapperStyle}>
+            <div className={`inputWrapper ${isActive ? 'active' : ''}`} style={wrapperStyle}>
                 <div className={`inputLine ${isActive ? 'active' : ''}`} style={inputLineStyle} />
                 <div className="inputField">
                     <input

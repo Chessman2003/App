@@ -12,8 +12,8 @@ type SideBarCloseProps = {
 
 }
 
-export const SideBarClose = ({categoriesImage, toggleSidebar }: SideBarCloseProps) => {
-return (
+export const SideBarClose = ({ categoriesImage, toggleSidebar }: SideBarCloseProps) => {
+    return (
         <div className="sideBarWrapperClose">
             <button className="toggleSidebar" onClick={toggleSidebar}><img className="iconOpen" src={IconOpen.default} /></button>
             <div className="categoriesArray">
@@ -24,10 +24,11 @@ return (
             <button className="addCategoriesButton" >
                 <img className="AddCategoriesIcon" src={AddCategories.default} />
             </button>
+            <div className="borderLine"></div>
             <button className="sortCategoriesButton" >
                 <img className="sortCategoriesIcon" src={SortCategories.default} />
             </button>
         </div>
-    
+
     )
 }
