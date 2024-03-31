@@ -4,7 +4,7 @@ import './Modal.scss';
 
 type ModalProps = {
     modalElement: HTMLElement | null
-    children: JSX.Element[]
+    children: React.ReactNode
     onClose: () => void
 }
 

@@ -1,11 +1,12 @@
 .sideBarWrapperClose {
     display: flex;
     flex-direction: column;
-    width: 90px;
+    width: 94px;
     border: 3px solid red;
     align-items: center;
     justify-content: center;
 }
+
 .toggleSidebar {
     width: 70px;
     height: 70px;
@@ -30,11 +31,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-top: 3px solid black;
     width: 90px;
     gap: 15px;
     padding-bottom: 10px;
-    border-bottom: 3px solid black;
     max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -47,10 +46,11 @@
         background-color: gray;
     }
 }
+
 .categoriesImage {
     width: 70px;
     height: 70px;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 100%;
     padding: 3px;
 }
@@ -66,7 +66,6 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-
 }
 
 
@@ -74,6 +73,7 @@
     width: 70px;
     height: 70px;
 }
+
 .sortCategoriesButton {
     margin-top: 7px;
     margin-bottom: 3px;
@@ -86,6 +86,7 @@
     border: none;
     cursor: pointer;
 }
+
 .sortCategoriesIcon {
     width: 70px;
     height: 70px;
@@ -93,6 +94,6 @@
 
 .borderLine {
     height: 3px;
-    width: 90px;
+    width: 100%;
     background-color: black;
 }

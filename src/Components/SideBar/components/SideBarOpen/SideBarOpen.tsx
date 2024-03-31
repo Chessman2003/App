@@ -7,11 +7,11 @@ import './SideBarOpen.scss';
 type SideBarOpenProps = {
     children: React.ReactNode;
     toggleSideBarOpen: () => void;
-    //addCategories: () => void;
+    addCategories: () => void;
     //sortCategories: () => void;
 }
 
-export const SideBarOpen = ({ children, toggleSideBarOpen }: SideBarOpenProps) => {
+export const SideBarOpen = ({ children, toggleSideBarOpen, addCategories }: SideBarOpenProps) => {
     return (
         <div className="sideBarWrapperOpen">
             <div className="headerOpen">
@@ -25,7 +25,7 @@ export const SideBarOpen = ({ children, toggleSideBarOpen }: SideBarOpenProps) =
                 {children}
             </div>
             <div className="bordeLineOpen"></div>
-            <button className="addCategoriesButtonOpen" >
+            <button className="addCategoriesButtonOpen" onClick={addCategories}>
                 <img className="AddCategoriesIconOpen" src={AddCategories.default} />
                 <p className="AddCategoriesText">{`Добавить категорию`}</p>
             </button>

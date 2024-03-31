@@ -5,23 +5,25 @@ import { AddCategories } from "../../../icons/icons";
 import './SideBarClose.scss';
 
 type SideBarCloseProps = {
-    categoriesImage: string[];
+    categoriesImage: Array<{ title: string, icon: string }>;
     toggleSidebar: () => void;
-    //addCategories: () => void;
+    addCategories: () => void;
     //sortCategories: () => void;
 
 }
 
-export const SideBarClose = ({ categoriesImage, toggleSidebar }: SideBarCloseProps) => {
+export const SideBarClose = ({ categoriesImage, toggleSidebar, addCategories }: SideBarCloseProps) => {
     return (
         <div className="sideBarWrapperClose">
             <button className="toggleSidebar" onClick={toggleSidebar}><img className="iconOpen" src={IconOpen.default} /></button>
+            <div className="borderLine"></div>
             <div className="categoriesArray">
-                {categoriesImage.map((image, index) => (
-                    <img className="categoriesImage" key={index} src={image} />
+                {categoriesImage.map((category, index) => (
+                    <img className="categoriesImage" key={index} src={category.icon} />
                 ))}
             </div>
-            <button className="addCategoriesButton" >
+            <div className="borderLine"></div>
+            <button className="addCategoriesButton" onClick={addCategories}>
                 <img className="AddCategoriesIcon" src={AddCategories.default} />
             </button>
             <div className="borderLine"></div>
