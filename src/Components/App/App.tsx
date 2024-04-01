@@ -8,6 +8,7 @@ import { ModalContent } from "../Modal";
 import { ModalFooter } from "../Modal";
 import { useRootModal } from "../Modal";
 import './App.scss'
+import { url } from "inspector";
 
 
 export const App = () => {
@@ -30,8 +31,29 @@ export const App = () => {
             setNewCategoryName('');
             setDroppedImage('');
             setShowModal(false);
+        } else if (newCategoryName) {
+            alert(`Вставте иконку новой категории!`);
+        } else if (droppedImage) {
+            alert(`Введите название новой категории!`);
+        } else {
+            alert(`Введите название и вставьте иконку для новой категории!`);
         }
     }
+
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event: ProgressEvent<FileReader>) => {
+                if (event.target && typeof event.target.result === 'string') {
+                    setDroppedImage(event.target.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
 
 
@@ -53,7 +75,10 @@ export const App = () => {
 
     const closeModal = () => {
         setShowModal(false);
+        setNewCategoryName('');
+        setDroppedImage('');
     };
+
 
 
 
@@ -81,30 +106,36 @@ export const App = () => {
                         <p className="addCategoryHeader">{`Добавление категории`}</p>
                     </ModalHeader>
                     <ModalContent>
-                        <input
-                            type="text"
-                            placeholder="Название категории"
-                            value={newCategoryName}
-                            onChange={(e) => setNewCategoryName(e.target.value)}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="url"
-                            value={droppedImage}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDroppedImage(e.target.value)}
-                            onDrop={(e: React.DragEvent<HTMLInputElement>) => {
-                                e.preventDefault();
-                                const file = e.dataTransfer.files[0];
-                                const reader = new FileReader();
-                                reader.onload = (event: ProgressEvent<FileReader>) => {
-                                    setDroppedImage(event.target?.result as string);
-                                };
-                                reader.readAsDataURL(file);
-                            }}
-                            onDragOver={(e: React.DragEvent<HTMLInputElement>) => e.preventDefault()}
-                        />
-
+                        <div className="addCategoryContent">
+                            <div className="addCategoryName">
+                                <p className="categoryNameTitle">{`Название категории`}</p>
+                                <input
+                                    type="text"
+                                    className="categoryTextInput"
+                                    value={newCategoryName}
+                                    onChange={(e) => setNewCategoryName(e.target.value)}
+                                />
+                            </div>
+                            <div className="addCategoryImage">
+                                <p className="categoryNameTitle">{`Иконка`}</p>
+                                <input
+                                    type="text"
+                                    className="categoryDrugInput"
+                                    value={droppedImage}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDroppedImage(e.target.value)}
+                                    onDrop={(e: React.DragEvent<HTMLInputElement>) => {
+                                        e.preventDefault();
+                                        const file = e.dataTransfer.files[0];
+                                        const reader = new FileReader();
+                                        reader.onload = (event: ProgressEvent<FileReader>) => {
+                                            setDroppedImage(event.target?.result as string);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }}
+                                    onDragOver={(e: React.DragEvent<HTMLInputElement>) => e.preventDefault()}
+                                />
+                            </div>
+                        </div>
                     </ModalContent>
                     <ModalFooter>
                         <button className="saveCategoryBtn" onClick={handleSave}>{`сохранить`}</button>
