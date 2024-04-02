@@ -93,7 +93,7 @@ export const App = () => {
             }
 
             {isOpen && (
-                <SideBarOpen toggleSideBarOpen={sideBarClose} addCategories={openModal}>
+                <SideBarOpen height={'400px'} toggleSideBarOpen={sideBarClose} addCategories={openModal}>
                     {categories.map((category, index) => (
                         <Category key={index} title={category.title} icon={category.icon} />
                     ))}

@@ -9,9 +9,20 @@ type SideBarOpenProps = {
     toggleSideBarOpen: () => void;
     addCategories: () => void;
     //sortCategories: () => void;
+    height: string
 }
 
-export const SideBarOpen = ({ children, toggleSideBarOpen, addCategories }: SideBarOpenProps) => {
+export const SideBarOpen = ({
+    children,
+    toggleSideBarOpen,
+    addCategories,
+    height
+}: SideBarOpenProps) => {
+
+    const categoriesStyle: React.CSSProperties = {
+        height: height
+    }
+
     return (
         <div className="sideBarWrapperOpen">
             <div className="headerOpen">
@@ -21,7 +32,7 @@ export const SideBarOpen = ({ children, toggleSideBarOpen, addCategories }: Side
                 <p className="toggleSidebarText">Свернуть</p>
             </div>
             <div className="bordeLineOpen"></div>
-            <div className="categories">
+            <div className="categories" style={categoriesStyle}>
                 {children}
             </div>
             <div className="bordeLineOpen"></div>
