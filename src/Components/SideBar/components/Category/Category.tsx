@@ -1,22 +1,48 @@
 import React from "react";
+import { CategoriesType } from "../types/categoriesType";
 import './Category.scss';
 
 type CategoryProps = {
-    title: string;
-    icon: string;
+    categoryArray: Array<{ title: string, icon: string }>
     elementsArray?: string[];
+    type: CategoriesType
 }
 
-export const Category = ({ title, icon, elementsArray }: CategoryProps) => {
-    return (
-        <div className="categoryWrapper">
-            <div className="header">
-                <img className='categoriesImage' src={icon} alt="categoryIcon" />
-                <p className="categoryTittle">{title}</p>
+export const Category = ({
+    categoryArray,
+    elementsArray,
+    type
+}: CategoryProps) => {
+    if (type == CategoriesType.Open) {
+        return (
+            <div className="categoryWrapper">
+                {categoryArray.map((category, index) => (
+                    <>
+                        <div className="header">
+                            <img className='categoriesImage' key={index} src={category.icon} alt={category.title} />
+                            <p className="categoryTittle">{category.title}</p>
+                        </div>
+                        <div className="elementsArray">
+                            {elementsArray}
+                        </div>
+                    </>
+                ))}
             </div>
-            <div className="elementsArray">
-                {elementsArray}
+        )
+    } else if (type == CategoriesType.Close) {
+        return (
+            <div className="CategoryWrapperClose">
+                {
+                    categoryArray.map((category, index) => (
+                        <img className="categoriesImage" key={index} src={category.icon} alt={category.title} />
+                    ))
+                }
             </div>
-        </div>
-    )
+
+        )
+    }
+
+    console.error('Unknown category!');
+    return null
+
 }

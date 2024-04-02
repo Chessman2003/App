@@ -1,39 +1,43 @@
 import React from "react";
-import { SortCategories } from "../../../icons/icons";
-import { AddCategories } from "../../../icons/icons";
-
+import { Category } from "../Category/Category";
 import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
+import { ControlPanel } from "../ControlPanel/ControlPane";
+import { SettingsPanel } from "../SettingsPanel/SettingsPanel";
+import { SideBarType } from "../types/sideBarType";
+import { CategoriesType } from "../types/categoriesType";
 import './SideBarClose.scss';
+import { SortCategories } from "../../../icons/icons";
 
 type SideBarCloseProps = {
-    categoriesImage: Array<{ title: string, icon: string }>;
+    categoriesArray: Array<{ title: string, icon: string }>;
+    type: SideBarType;
     toggleSidebar: () => void;
     addCategories: () => void;
-    //sortCategories: () => void;
-
+    sortCategories?: () => void;
 }
 
-export const SideBarClose = ({ categoriesImage, toggleSidebar, addCategories }: SideBarCloseProps) => {
-    return (
-        <div className="sideBarWrapperClose">
-            <MonipulatorPanel onClick={toggleSidebar} />
-            <div className="categoriesPanel">
-                <div className="categoriesArray">
-                    {categoriesImage.map((category, index) => (
-                        <img className="categoriesImage" key={index} src={category.icon} />
-                    ))}
-                </div>
+export const SideBarClose = ({
+    categoriesArray,
+    toggleSidebar,
+    addCategories,
+    type,
+    sortCategories
+}: SideBarCloseProps) => {
+    if (type == SideBarType.Close) {
+        return (
+            <div className="sideBarWrapperClose">
+                <MonipulatorPanel onClick={toggleSidebar} />
+                <Category type={CategoriesType.Close} categoryArray={categoriesArray} />
+                <ControlPanel onClick={addCategories} />
+                <SettingsPanel onClick={sortCategories} />
             </div>
-            <div className="controlPanel">
-                <button className="addCategoriesButton" onClick={addCategories}>
-                    <img className="AddCategoriesIcon" src={AddCategories.default} />
-                </button>
+        )
+    }
+    else if (type == SideBarType.Open) {
+        return (
+            <div className="sideBarWrapperOpen">
+
             </div>
-            <div className="settingsPanel">
-                <button className="sortCategoriesButton" >
-                    <img className="sortCategoriesIcon" src={SortCategories.default} />
-                </button>
-            </div>
-        </div>
-    )
+        )
+    }
 }
