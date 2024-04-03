@@ -5,8 +5,11 @@ import { ControlPanel } from "../ControlPanel/ControlPane";
 import { SettingsPanel } from "../SettingsPanel/SettingsPanel";
 import { SideBarType } from "../types/sideBarType";
 import { CategoriesType } from "../types/categoriesType";
-import './SideBarClose.scss';
-import { SortCategories } from "../../../icons/icons";
+import { MonipulatorPanelType } from "../types/MonipulatorPanelType";
+import { ControlPanelType } from "../types/ControlPanelType";
+import { SettingsPanelType } from "../types/SettingsPanelType";
+import './SideBar.scss';
+
 
 type SideBarCloseProps = {
     categoriesArray: Array<{ title: string, icon: string }>;
@@ -16,7 +19,7 @@ type SideBarCloseProps = {
     sortCategories?: () => void;
 }
 
-export const SideBarClose = ({
+export const SideBar = ({
     categoriesArray,
     toggleSidebar,
     addCategories,
@@ -26,17 +29,20 @@ export const SideBarClose = ({
     if (type == SideBarType.Close) {
         return (
             <div className="sideBarWrapperClose">
-                <MonipulatorPanel onClick={toggleSidebar} />
+                <MonipulatorPanel onClick={toggleSidebar} type={MonipulatorPanelType.Close} />
                 <Category type={CategoriesType.Close} categoryArray={categoriesArray} />
-                <ControlPanel onClick={addCategories} />
-                <SettingsPanel onClick={sortCategories} />
+                <ControlPanel onClick={addCategories} type={ControlPanelType.Close} />
+                <SettingsPanel onClick={sortCategories} type={SettingsPanelType.Close} />
             </div>
         )
     }
     else if (type == SideBarType.Open) {
         return (
             <div className="sideBarWrapperOpen">
-
+                <MonipulatorPanel onClick={toggleSidebar} type={MonipulatorPanelType.Open} />
+                <Category categoryArray={categoriesArray} type={CategoriesType.Open} />
+                <ControlPanel onClick={addCategories} type={ControlPanelType.Open} />
+                <SettingsPanel onClick={sortCategories} type={SettingsPanelType.Open} />
             </div>
         )
     }

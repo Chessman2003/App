@@ -5,7 +5,16 @@
     border: 3px solid red;
 }
 
-.modeMonipulatorPanel {
+.sideBarWrapperOpen {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 604px;
+    border: 3px solid red
+}
+
+
+.modeMonipulatorPanelClose {
     border-bottom: 3px solid black;
     display: flex;
     align-items: center;
@@ -43,27 +52,7 @@
     height: 70px;
 }
 
-.categoriesArray {
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    gap: 15px;
-    padding-bottom: 10px;
-    max-height: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: gray;
-    }
-}
 
 .categoriesImage {
     width: 70px;
@@ -108,10 +97,4 @@
 .sortCategoriesIcon {
     width: 70px;
     height: 70px;
-}
-
-.borderLine {
-    height: 3px;
-    width: 100%;
-    background-color: black;
 }

@@ -15,7 +15,7 @@ export const Category = ({
 }: CategoryProps) => {
     if (type == CategoriesType.Open) {
         return (
-            <div className="categoryWrapper">
+            <div className="categoryWrapperOpen">
                 {categoryArray.map((category, index) => (
                     <>
                         <div className="header">
@@ -31,7 +31,7 @@ export const Category = ({
         )
     } else if (type == CategoriesType.Close) {
         return (
-            <div className="CategoryWrapperClose">
+            <div className="categoryWrapperClose">
                 {
                     categoryArray.map((category, index) => (
                         <img className="categoriesImage" key={index} src={category.icon} alt={category.title} />

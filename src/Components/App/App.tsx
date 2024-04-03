@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { SideBarClose } from "../SideBar";
-import { SideBarOpen } from "../SideBar";
+import { SideBar } from "../SideBar";
 import { Category } from "../SideBar";
 import { Modal } from "../Modal";
 import { ModalHeader } from "../Modal";
 import { ModalContent } from "../Modal";
 import { ModalFooter } from "../Modal";
 import { useRootModal } from "../Modal";
+import { SideBarType } from "../SideBar/components/types/sideBarType";
 import './App.scss'
 import { url } from "inspector";
 
@@ -88,16 +88,12 @@ export const App = () => {
     return (
         <div className="app">
             {!isOpen && (
-                <SideBarClose categoriesImage={categories} toggleSidebar={sideBarOpen} addCategories={openModal} />
+                <SideBar type={SideBarType.Close} categoriesArray={categories} toggleSidebar={sideBarOpen} addCategories={openModal} />
             )
             }
 
             {isOpen && (
-                <SideBarOpen height={'400px'} toggleSideBarOpen={sideBarClose} addCategories={openModal}>
-                    {categories.map((category, index) => (
-                        <Category key={index} title={category.title} icon={category.icon} />
-                    ))}
-                </SideBarOpen>
+                <SideBar type={SideBarType.Open} categoriesArray={categories} toggleSidebar={sideBarClose} addCategories={openModal} />
             )}
 
             {showModal && (
