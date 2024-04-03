@@ -88,12 +88,12 @@ export const App = () => {
     return (
         <div className="app">
             {!isOpen && (
-                <SideBar type={SideBarType.Close} categoriesArray={categories} toggleSidebar={sideBarOpen} addCategories={openModal} />
+                <SideBar type={SideBarType.Close} categoriesArray={categories} addCategories={openModal} />
             )
             }
 
             {isOpen && (
-                <SideBar type={SideBarType.Open} categoriesArray={categories} toggleSidebar={sideBarClose} addCategories={openModal} />
+                <SideBar type={SideBarType.Open} categoriesArray={categories} addCategories={openModal} />
             )}
 
             {showModal && (

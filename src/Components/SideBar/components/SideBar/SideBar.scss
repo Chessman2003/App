@@ -1,16 +1,18 @@
-.sideBarWrapperClose {
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    border: 3px solid red;
-}
+.sideBarWrapper {
+    &.Opened {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: 604px;
+        border: 3px solid red
+    }
 
-.sideBarWrapperOpen {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: 604px;
-    border: 3px solid red
+    &.Closed {
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        border: 3px solid red;
+    }
 }
 
 

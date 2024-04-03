@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Category } from "../Category/Category";
 import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
 import { ControlPanel } from "../ControlPanel/ControlPane";
@@ -14,36 +14,53 @@ import './SideBar.scss';
 type SideBarCloseProps = {
     categoriesArray: Array<{ title: string, icon: string }>;
     type: SideBarType;
-    toggleSidebar: () => void;
     addCategories: () => void;
     sortCategories?: () => void;
 }
 
 export const SideBar = ({
     categoriesArray,
-    toggleSidebar,
     addCategories,
     type,
     sortCategories
 }: SideBarCloseProps) => {
-    if (type == SideBarType.Close) {
-        return (
-            <div className="sideBarWrapperClose">
-                <MonipulatorPanel onClick={toggleSidebar} type={MonipulatorPanelType.Close} />
-                <Category type={CategoriesType.Close} categoryArray={categoriesArray} />
-                <ControlPanel onClick={addCategories} type={ControlPanelType.Close} />
-                <SettingsPanel onClick={sortCategories} type={SettingsPanelType.Close} />
-            </div>
-        )
+    let newClassname = 'sideBarWrapper';
+    const [currentType, setCurrentType] = useState<SideBarType>(type);
+    if (currentType == SideBarType.Open) {
+        newClassname += ' Opened';
+    } else {
+        newClassname += ' Closed';
     }
-    else if (type == SideBarType.Open) {
-        return (
-            <div className="sideBarWrapperOpen">
-                <MonipulatorPanel onClick={toggleSidebar} type={MonipulatorPanelType.Open} />
-                <Category categoryArray={categoriesArray} type={CategoriesType.Open} />
-                <ControlPanel onClick={addCategories} type={ControlPanelType.Open} />
-                <SettingsPanel onClick={sortCategories} type={SettingsPanelType.Open} />
-            </div>
-        )
+
+    const [controlType, setControlType] = useState(ControlPanelType.Close);
+    const [settingsType, setSettingsType] = useState(SettingsPanelType.Close);
+
+    useEffect(() => {
+        if (currentType == SideBarType.Close) {
+            setControlType(ControlPanelType.Close);
+            setSettingsType(SettingsPanelType.Close);
+        } else {
+            setControlType(ControlPanelType.Open);
+            setSettingsType(SettingsPanelType.Open);
+        }
+    }, [currentType]);
+
+
+    const handleToggleSidebar = () => {
+        setCurrentType(prevState => {
+            let newState: SideBarType = SideBarType.Close;
+            if (prevState == SideBarType.Close) {
+                newState = SideBarType.Open;
+            }
+            return newState;
+        });
     }
+    return (
+        <div className={newClassname}>
+            <MonipulatorPanel onClick={handleToggleSidebar} type={currentType} />
+            <Category type={CategoriesType.Close} categoryArray={categoriesArray} />
+            <ControlPanel onClick={addCategories} type={controlType} />
+            <SettingsPanel onClick={sortCategories} type={settingsType} />
+        </div>
+    )
 }
