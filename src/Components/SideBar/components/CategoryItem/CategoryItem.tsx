@@ -36,7 +36,7 @@ export const CategoryItem = ({
                 <img className='categoriesImage' src={icon} alt={title} />
                 {!isClosed &&
                     <>
-                        <p className="categoryTitle">{title}</p>
+                        <p className="categoryTittle">{title}</p>
                         <div className="elements">
                             {elements}
                         </div>

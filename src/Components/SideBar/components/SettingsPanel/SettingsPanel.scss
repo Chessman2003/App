@@ -1,16 +1,14 @@
 .settingsPanel {
     button {
+        background-color: transparent;
         height: 64px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
         border: none;
-        gap: 30px;
         cursor: pointer;
         width: 100%;
         margin-top: 5px;
-        margin-bottom: 3px;
 
         &.sortCategoriesIcon {
             width: 70px;
@@ -18,8 +16,13 @@
         }
 
         p {
+            display: flex;
+            align-items: center;
             font-size: 15px;
-            margin-right: 50%;
+            height: 65px;
+            width: 200px;
         }
     }
+
+    margin-bottom: 7px;
 }

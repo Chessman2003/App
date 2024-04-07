@@ -17,19 +17,17 @@ export const Category = ({
 }: CategoryProps) => {
     return (
         <div className='categoryWrapper'>
-            <div className='categoryScroll'>
-                {categoryArray.map((c, i) => {
-                    return (
-                        <CategoryItem
-                            key={i}
-                            elements={elementsArray}
-                            type={type}
-                            title={c.title}
-                            icon={c.icon}
-                        />
-                    );
-                })}
-            </div>
+            {categoryArray.map((c, i) => {
+                return (
+                    <CategoryItem
+                        key={i}
+                        elements={elementsArray}
+                        type={type}
+                        title={c.title}
+                        icon={c.icon}
+                    />
+                );
+            })}
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SideBar } from "../SideBar";
-import { Category } from "../SideBar";
 import { Modal } from "../Modal";
 import { ModalHeader } from "../Modal";
 import { ModalContent } from "../Modal";
@@ -8,7 +7,6 @@ import { ModalFooter } from "../Modal";
 import { useRootModal } from "../Modal";
 import { SideBarType } from "../SideBar/components/types/sideBarType";
 import './App.scss'
-import { url } from "inspector";
 
 
 export const App = () => {
@@ -43,15 +41,26 @@ export const App = () => {
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        if (file) {
+        if (e.dataTransfer.files.length > 0 && e.dataTransfer.files[0].type.startsWith('image/')) {
+            const file = e.dataTransfer.files[0];
             const reader = new FileReader();
             reader.onload = (event: ProgressEvent<FileReader>) => {
                 if (event.target && typeof event.target.result === 'string') {
-                    setDroppedImage(event.target.result);
+                    const img = document.createElement("img");
+                    img.src = event.target.result as string;
+                    img.classList.add('droppedImage');
+
+                    const previewContainer = document.getElementById("previewContainer");
+                    if (previewContainer) {
+                        previewContainer.innerHTML = "";
+                        previewContainer.appendChild(img);
+                        setDroppedImage(event.target.result as string);
+                    }
                 }
             };
             reader.readAsDataURL(file);
+        } else {
+            alert('Перетяните изображение!')
         }
     };
 
@@ -59,15 +68,6 @@ export const App = () => {
 
     const { modalElement } = useRootModal({})
 
-
-
-    const sideBarOpen = () => {
-        setIsOpen(true);
-    };
-
-    const sideBarClose = () => {
-        setIsOpen(false);
-    };
 
     const openModal = () => {
         setShowModal(true);
@@ -114,22 +114,11 @@ export const App = () => {
                             </div>
                             <div className="addCategoryImage">
                                 <p className="categoryNameTitle">{`Иконка`}</p>
-                                <input
-                                    type="text"
-                                    className="categoryDrugInput"
-                                    value={droppedImage}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDroppedImage(e.target.value)}
-                                    onDrop={(e: React.DragEvent<HTMLInputElement>) => {
-                                        e.preventDefault();
-                                        const file = e.dataTransfer.files[0];
-                                        const reader = new FileReader();
-                                        reader.onload = (event: ProgressEvent<FileReader>) => {
-                                            setDroppedImage(event.target?.result as string);
-                                        };
-                                        reader.readAsDataURL(file);
-                                    }}
-                                    onDragOver={(e: React.DragEvent<HTMLInputElement>) => e.preventDefault()}
-                                />
+                                <div
+                                    id="previewContainer"
+                                    onDrop={handleDrop}
+                                    onDragOver={(e) => e.preventDefault()}
+                                ></div>
                             </div>
                         </div>
                     </ModalContent>
