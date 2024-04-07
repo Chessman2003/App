@@ -1,6 +1,5 @@
 import React from "react";
 import { IconOpen } from "../../../icons/icons";
-import { MonipulatorPanelType } from "../types/MonipulatorPanelType";
 import { SideBarType } from '../types/sideBarType';
 import './MonipulatorPanel.scss';
 
@@ -24,7 +23,7 @@ export const MonipulatorPanel = ({
     onClick,
     type
 }: Props) => {
-    const isClosed = type != SideBarType.Open;
+    const isClosed = type == SideBarType.Close;
     return (
         <div className={classNames('modeMonipulatorPanel', {
             closed: isClosed,

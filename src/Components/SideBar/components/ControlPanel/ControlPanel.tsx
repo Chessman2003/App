@@ -1,12 +1,11 @@
 import React from "react";
-import './CategoryItem.scss';
+import { AddCategories } from "../../../icons/icons";
 import { SideBarType } from "../types/sideBarType";
+import './ControlPanel.scss'
 
 type Props = {
+    onClick: () => void;
     type: SideBarType
-    icon: string
-    title: string
-    elements?: string[]
 }
 
 const classNames = (cls: string, props = {}, additionals: string[] = []) => {
@@ -20,28 +19,25 @@ const classNames = (cls: string, props = {}, additionals: string[] = []) => {
     return `${cls} ${propsNames} ${additionals.join(' ')}`;
 }
 
-export const CategoryItem = ({
-    elements,
-    icon,
-    title,
+export const ControlPanel = ({
+    onClick,
     type
 }: Props) => {
     const isClosed = type == SideBarType.Close;
     return (
-        <div className={classNames('categoryItem', {
+        <div className={classNames('controlPanel', {
             closed: isClosed,
             opened: !isClosed
         })}>
-            <div className="header">
-                <img className='categoriesImage' src={icon} alt={title} />
+            <button onClick={onClick}>
+                <img className="AddCategoriesIcon" src={AddCategories.default} />
                 {!isClosed &&
-                    <>
-                        <p className="categoryTitle">{title}</p>
-                        <div className="elements">
-                            {elements}
-                        </div>
-                    </>}
-            </div>
+                    <p className="controlPaneltittle">{'Добавить категорию'}</p>}
+            </button>
         </div>
     )
+
+
+
+
 }

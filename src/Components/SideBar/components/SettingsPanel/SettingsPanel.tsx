@@ -1,32 +1,40 @@
 import React from "react";
 import { SortCategories } from "../../../icons/icons";
-import { SettingsPanelType } from "../types/SettingsPanelType";
+import { SideBarType } from "../types/sideBarType";
 import './SettingsPanel.scss'
 
 type Props = {
     onClick?: () => void;
-    type: SettingsPanelType
+    type: SideBarType
+}
+
+const classNames = (cls: string, props = {}, additionals: string[] = []) => {
+    let propsNames = '';
+    Object.entries(props).forEach(element => {
+        if (element[1] == true) {
+            propsNames += `${element[0]}`
+        }
+    });
+
+    return `${cls} ${propsNames} ${additionals.join(' ')}`;
 }
 
 export const SettingsPanel = ({
     onClick,
     type
 }: Props) => {
-    if (type == SettingsPanelType.Close) {
-        return (
-            <div className="settingsPanelClose" onClick={onClick}>
-                <button className="sortCategoriesButton" >
-                    <img className="sortCategoriesIcon" src={SortCategories.default} />
-                </button>
-            </div>
-        )
-    } else if (type == SettingsPanelType.Open) {
-        return (
-            <div className="settingsPanelOpen" onClick={onClick}>
-                <button className="sortCategoriesButton" >
-                    <img className="sortCategoriesIcon" src={SortCategories.default} />
-                </button>
-            </div>
-        )
-    }
+    const isClosed = type == SideBarType.Close
+    return (
+        <div className={classNames('settingsPanel', {
+            closed: isClosed,
+            opened: !isClosed
+        })}>
+            <button onClick={onClick}>
+                <img className="sortCategoriesIcon" src={SortCategories.default} />
+                {!isClosed &&
+                    <p className="sortCategoriesText">{`Прямая сортировка элементов в категориях`}</p>}
+            </button>
+        </div>
+    )
+
 }

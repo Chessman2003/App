@@ -1,15 +1,8 @@
-.controlPanelClose {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 3px solid black;
-    padding-bottom: 2px;
-}
-
-.controlPanelOpen {
+.controlPanel {
     button {
         height: 64px;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
         border: none;
@@ -19,12 +12,16 @@
         margin-top: 5px;
         margin-bottom: 7px;
 
+        &.AddCategoriesIcon {
+            width: 70px;
+            height: 70px;
+        }
+
         p {
             font-size: 22px;
             margin-right: 50%;
         }
-
     }
 
-    border-bottom: 3px solid black
+    border-bottom: 3px solid black;
 }
