@@ -9,3 +9,6 @@ export * as IconOpen from './sidebarOpen.png';
 export * as IconClose from './sidebarClose.png';
 export * as AddCategories from './round.png';
 export * as SortCategories from './sort.png';
+export * as addElem from './addElem.png';
+export * as DeliteIcon from './deliteIcon.png';
+export * as EditIcon from './editIcon.png';
