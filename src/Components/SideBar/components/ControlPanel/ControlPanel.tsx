@@ -1,6 +1,6 @@
 import React from "react";
 import { AddCategories } from "../../../icons/icons";
-import { SideBarType } from "../types/sideBarType";
+import { SideBarType } from "../..";
 import './ControlPanel.scss'
 
 type Props = {

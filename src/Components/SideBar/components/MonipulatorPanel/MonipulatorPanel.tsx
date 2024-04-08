@@ -1,6 +1,6 @@
 import React from "react";
 import { IconOpen } from "../../../icons/icons";
-import { SideBarType } from '../types/sideBarType';
+import { SideBarType } from '../..';
 import './MonipulatorPanel.scss';
 
 type Props = {

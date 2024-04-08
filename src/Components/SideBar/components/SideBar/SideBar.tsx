@@ -1,47 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, {
+    useEffect,
+    useState
+} from "react";
+
 import { Category } from "../Category/Category";
 import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
 import { ControlPanel } from "../ControlPanel/ControlPanel";
 import { SettingsPanel } from "../SettingsPanel/SettingsPanel";
-import { SideBarType } from "../types/sideBarType";
+
+import {
+    ICategory,
+    SideBarType
+} from "../../types/categories";
+
+
+import {
+    Modal,
+    ModalHeader,
+    ModalContent,
+    ModalFooter,
+    useRootModal
+} from "../../../Modal";
+
 import './SideBar.scss';
+import { EditModal } from "../EditModal/EditModal";
 
-
-type SideBarCloseProps = {
-    categoriesArray: Array<{ title: string, icon: string, elements: string[] }>;
-    type: SideBarType;
-    addCategories: () => void;
-    sortCategories?: () => void;
-    addElements: () => void
-    editElements?: () => void
-    deliteElements?: () => void
-    deliteCategory?: () => void
-    editCategory?: () => void
+type Props = {
+    categories: ICategory[]
+    type: SideBarType
+    addCategory: (category: ICategory) => void
+    toggleSortDirection: () => void
 }
 
 export const SideBar = ({
-    categoriesArray,
-    addCategories,
+    categories,
+    addCategory,
     type,
-    sortCategories,
-    addElements,
-    editElements,
-    deliteElements,
-    deliteCategory,
-    editCategory
-}: SideBarCloseProps) => {
+    toggleSortDirection
+}: Props) => {
+    const { modalElement } = useRootModal({})
+
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
+    const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
 
     let newClassname = 'sideBarWrapper';
-
     const [currentType, setCurrentType] = useState<SideBarType>(type);
-
     if (currentType == SideBarType.Open) {
         newClassname += ' Opened';
     } else {
         newClassname += ' Closed';
     }
 
-    const handleToggleSidebar = () => {
+    const updateCurrentType = () => {
+        setShowEditModal(false);
+        setShowEditElementModal(false);
         setCurrentType(prevState => {
             let newState: SideBarType = SideBarType.Close;
             if (prevState == SideBarType.Close) {
@@ -50,29 +62,65 @@ export const SideBar = ({
             return newState;
         });
     }
+
     return (
         <div className={newClassname}>
             <MonipulatorPanel
-                onClick={handleToggleSidebar}
+                onClick={updateCurrentType}
                 type={currentType}
             />
             <Category
                 type={currentType}
-                categoryArray={categoriesArray}
-                addElements={addElements}
-                editCategory={editCategory}
-                editElements={editElements}
-                deliteCategory={deliteCategory}
-                deliteElements={deliteElements}
+                categoryArray={categories}
+                addElements={() => { }}
+                editCategory={() => { }}
+                editElements={() => { }}
+                deliteCategory={() => { }}
+                deliteElements={() => { }}
             />
             <ControlPanel
-                onClick={addCategories}
+                onClick={() => {
+                    setShowEditModal(true);
+                }}
                 type={currentType}
             />
             <SettingsPanel
-                onClick={sortCategories}
+                onClick={toggleSortDirection}
                 type={currentType}
             />
+            {showEditModal &&
+                <EditModal
+                    modalElement={modalElement}
+                    onClose={(categoryName, droppedImage) => {
+                        if (categoryName && droppedImage) {
+                            addCategory({ title: categoryName, icon: droppedImage, elements: [] });
+                        }
+                        setShowEditModal(false);
+                    }}
+                />
+            }
+
+            {showEditElementModal && (
+                <Modal onClose={() => { }} modalElement={modalElement}>
+                    <ModalHeader>
+                        <p className="categoryHeaderText">{`Добавление элеменов категории`}</p>
+                    </ModalHeader>
+                    <ModalContent>
+                        <div className="addElementContent">
+                            <div className="addCategoryName">
+                                <p className="categoryNameTitle">{`Название элимента`}</p>
+                                <input
+                                    type="text"
+                                    className="categoryTextInput"
+                                    value={'newElement'}
+                                    onChange={(e) => {/*setNewElement(e.target.value)*/ }}
+                                />
+                            </div>
+                        </div>
+                    </ModalContent>
+                </Modal>
+            )}
         </div>
+
     )
 }

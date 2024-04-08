@@ -1,6 +1,6 @@
 import React from "react";
 import { SortCategories } from "../../../icons/icons";
-import { SideBarType } from "../types/sideBarType";
+import { SideBarType } from "../..";
 import './SettingsPanel.scss'
 
 type Props = {

@@ -1,6 +1,6 @@
 import React from "react";
 import { CategoryItem } from '../CategoryItem/CategoryItem';
-import { SideBarType } from "../types/sideBarType";
+import { SideBarType } from "../..";
 import './Category.scss';
 
 type CategoryProps = {

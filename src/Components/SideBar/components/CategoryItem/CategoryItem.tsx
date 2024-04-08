@@ -1,6 +1,6 @@
 import React from "react";
 import './CategoryItem.scss';
-import { SideBarType } from "../types/sideBarType";
+import { SideBarType } from "../..";
 import { addElem } from "../../../icons/icons";
 import { DeliteIcon } from "../../../icons/icons";
 import { EditIcon } from "../../../icons/icons";
