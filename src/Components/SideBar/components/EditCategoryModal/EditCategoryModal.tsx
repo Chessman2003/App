@@ -9,7 +9,7 @@ import {
 } from "../../../Modal";
 import { SelectImage } from "../SelectImage/SelectImage";
 
-import './EditModal.scss';
+import './EditCategoryModal.scss';
 
 type Props = {
     modalElement: HTMLElement | null

@@ -7,6 +7,7 @@ import { Category } from "../Category/Category";
 import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
 import { ControlPanel } from "../ControlPanel/ControlPanel";
 import { SettingsPanel } from "../SettingsPanel/SettingsPanel";
+import { EditElementsModal } from "../EditElementsModal/EditElementsModal";
 
 import {
     ICategory,
@@ -14,21 +15,17 @@ import {
 } from "../../types/categories";
 
 
-import {
-    Modal,
-    ModalHeader,
-    ModalContent,
-    ModalFooter,
-    useRootModal
-} from "../../../Modal";
+import { useRootModal } from "../../../Modal";
 
 import './SideBar.scss';
-import { EditModal } from "../EditModal/EditModal";
+import { EditModal } from "../EditCategoryModal/EditCategoryModal";
+import { addElem } from "../../../icons/icons";
 
 type Props = {
     categories: ICategory[]
     type: SideBarType
     addCategory: (category: ICategory) => void
+    addElement: (categoryTitle: string, newElement: string) => void
     toggleSortDirection: () => void
 }
 
@@ -36,7 +33,8 @@ export const SideBar = ({
     categories,
     addCategory,
     type,
-    toggleSortDirection
+    toggleSortDirection,
+    addElement
 }: Props) => {
     const { modalElement } = useRootModal({})
 
@@ -72,7 +70,7 @@ export const SideBar = ({
             <Category
                 type={currentType}
                 categoryArray={categories}
-                addElements={() => { }}
+                addElements={() => setShowEditElementModal(true)}
                 editCategory={() => { }}
                 editElements={() => { }}
                 deliteCategory={() => { }}
@@ -101,24 +99,12 @@ export const SideBar = ({
             }
 
             {showEditElementModal && (
-                <Modal onClose={() => { }} modalElement={modalElement}>
-                    <ModalHeader>
-                        <p className="categoryHeaderText">{`Добавление элеменов категории`}</p>
-                    </ModalHeader>
-                    <ModalContent>
-                        <div className="addElementContent">
-                            <div className="addCategoryName">
-                                <p className="categoryNameTitle">{`Название элимента`}</p>
-                                <input
-                                    type="text"
-                                    className="categoryTextInput"
-                                    value={'newElement'}
-                                    onChange={(e) => {/*setNewElement(e.target.value)*/ }}
-                                />
-                            </div>
-                        </div>
-                    </ModalContent>
-                </Modal>
+                <EditElementsModal modalElement={modalElement} categories={categories} onClose={(elementName, selectedCategory) => {
+                    if (elementName && selectedCategory) {
+                        addElement(selectedCategory, elementName)
+                    }
+                    setShowEditElementModal(false)
+                }} />
             )}
         </div>
 

@@ -3,7 +3,7 @@
     &.opened {
         display: flex;
         flex-direction: row;
-        height: 230px;
+        max-height: 290px;
     }
 }
 
