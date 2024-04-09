@@ -34,7 +34,7 @@ export const SelectImage = ({
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
         >
-            <img />
+            {droppedImage && <img className='droppedImage' src={droppedImage} />}
         </div>
     );
 }
