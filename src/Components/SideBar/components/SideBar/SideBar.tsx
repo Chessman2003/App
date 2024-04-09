@@ -99,12 +99,15 @@ export const SideBar = ({
             }
 
             {showEditElementModal && (
-                <EditElementsModal modalElement={modalElement} categories={categories} onClose={(elementName, selectedCategory) => {
-                    if (elementName && selectedCategory) {
-                        addElement(selectedCategory, elementName)
-                    }
-                    setShowEditElementModal(false)
-                }} />
+                <EditElementsModal
+                    modalElement={modalElement}
+                    categories={categories}
+                    onClose={(elementName, selectedCategory) => {
+                        if (elementName && selectedCategory) {
+                            addElement(selectedCategory, elementName)
+                        }
+                        setShowEditElementModal(false)
+                    }} />
             )}
         </div>
 

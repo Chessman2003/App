@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Modal,
     ModalHeader,
@@ -28,6 +28,18 @@ export const EditElementsModal = ({
 }: Props) => {
     const [elementName, setElementName] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [accessSave, setAccessSave] = useState<boolean>(false);
+
+    useEffect(() => {
+        let newAccessSave = true;
+        if ('' + elementName == '') {
+            newAccessSave = false;
+        }
+        if ('' + selectedCategory == '') {
+            newAccessSave = false;
+        }
+        setAccessSave(newAccessSave);
+    }, [elementName, selectedCategory]);
 
 
     const handleAddElement = () => {
@@ -60,7 +72,7 @@ export const EditElementsModal = ({
                 </div>
             </ModalContent>
             <ModalFooter>
-                <button onClick={handleAddElement}>{`Добавить элемент`}</button>
+                <button onClick={handleAddElement} disabled={!accessSave}>{`Добавить элемент`}</button>
             </ModalFooter>
         </Modal>
     )
