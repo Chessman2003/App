@@ -49,7 +49,9 @@ export const CategoryItem = ({
             opened: !isClosed
         })}>
 
-            <img className='categoriesImage' src={icon} alt={title} />
+            <div className="imageWrapper">
+                <img className='categoriesImage' src={icon} alt={title} />
+            </div>
 
             {!isClosed &&
                 <div className="categoryOpen">
@@ -67,6 +69,7 @@ export const CategoryItem = ({
                             </button>
                         </div>
                     </div>
+
                     <div className="elements">
                         {elements.map((element, index) => (
                             <div className='item' key={index}>

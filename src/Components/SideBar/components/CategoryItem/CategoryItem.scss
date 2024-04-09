@@ -1,7 +1,10 @@
 .categoryItem {
-    display: flex;
-    flex-direction: row;
-    height: 230px;
+
+    &.opened {
+        display: flex;
+        flex-direction: row;
+        height: 230px;
+    }
 }
 
 .categoryTittle {
@@ -11,6 +14,7 @@
 .categoryOpen {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .header:hover {
@@ -23,6 +27,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
 }
 
 .elements {
@@ -35,11 +40,15 @@
 
 
 .categoriesImage {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
     border-radius: 100%;
-    padding: 3px;
+}
+
+.imageWrapper {
+    width: 70px;
+    height: 70px;
 }
 
 
@@ -51,7 +60,7 @@
     button {
         display: none;
         width: auto;
-        height: 30px;
+        height: 28px;
         border: none;
         background-color: transparent;
         cursor: pointer;
@@ -84,7 +93,7 @@
 }
 
 .editElemBtn {
-    margin-left: 50px;
+    margin-left: 100px;
 }
 
 .item:hover {
