@@ -51,13 +51,14 @@ export const EditElementsModal = ({
     return (
         <Modal onClose={onClose} modalElement={modalElement}>
             <ModalHeader>
-                <p className='editElementTittle'>{wordNames.modalTittle}</p>
+                <p className='elementsHeaderText'>{wordNames.modalTittle}</p>
             </ModalHeader>
             <ModalContent>
                 <div className="addElementsContent">
                     <div className="addElimentName">
                         <p className="addElimentTittle">{wordNames.elementName}</p>
                         <input
+                            className="editElementsInput"
                             type="text"
                             value={elementName}
                             onChange={(e) => setElementName(e.target.value)}
@@ -65,20 +66,23 @@ export const EditElementsModal = ({
                     </div>
                     <div className="chooseCategory">
                         <p className="chooseCategoryTittle">{wordNames.category}</p>
-                        <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                        >
-                            <option value={''} disabled hidden>{`Выберете категорию`}</option>
-                            {categories.map((c, i) => (
-                                <option key={i}>{c.title}</option>
-                            ))}
-                        </select>
+                        <div className="select">
+                            <select
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="chooseCategorySelect"
+                            >
+                                <option value={''} disabled hidden>{`Выберете категорию`}</option>
+                                {categories.map((c, i) => (
+                                    <option key={i} className="categoryOption">{c.title}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </div>
             </ModalContent>
             <ModalFooter>
-                <button onClick={handleAddElement} disabled={!accessSave}>{`Добавить элемент`}</button>
+                <button className="saveElemBtn" onClick={handleAddElement} disabled={!accessSave}>{`Добавить элемент`}</button>
             </ModalFooter>
         </Modal>
     )

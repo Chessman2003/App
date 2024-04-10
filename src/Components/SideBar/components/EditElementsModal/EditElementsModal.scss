@@ -5,8 +5,87 @@
 
 .addElimentName {
     display: flex;
+    align-items: center;
+    padding-top: 7px;
 }
 
 .chooseCategory {
     display: flex;
+    align-items: center;
+}
+
+.editElementsInput {
+    height: 35px;
+    font-size: 20px;
+    width: 200px;
+    margin-left: 90px;
+}
+
+.addElimentTittle {
+    font-size: 23px;
+}
+
+.elementsHeaderText {
+    font-size: 25px;
+}
+
+.chooseCategoryTittle {
+    font-size: 23px;
+}
+
+.select {
+    width: 200px;
+    height: 35px;
+    font-size: 20px;
+    margin-left: 83px;
+}
+
+.select select {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 35px;
+    font-size: 20px;
+    appearance: none;
+    padding-left: 3px;
+}
+
+.select select::-ms-expand {
+    display: none;
+}
+
+.saveElemBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 125px;
+    height: auto;
+    font-size: 20px;
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    outline: 0;
+    transition: 0.3s linear;
+
+    &:active {
+        transform: scale(0.85);
+        box-shadow: 3px 2px 25px 1px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.categoryOption {
+    border: 1px solid gray;
+    font-size: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: gray;
+    }
 }
