@@ -18,7 +18,9 @@ type Props = {
 }
 
 const wordNames = {
-    modalTittle: 'Добавление элемента категории'
+    modalTittle: 'Добавление элемента категории',
+    elementName: 'Название',
+    category: 'Категория'
 }
 
 export const EditElementsModal = ({
@@ -49,26 +51,30 @@ export const EditElementsModal = ({
     return (
         <Modal onClose={onClose} modalElement={modalElement}>
             <ModalHeader>
-                <p className="ElementName">{wordNames.modalTittle}</p>
+                <p className='editElementTittle'>{wordNames.modalTittle}</p>
             </ModalHeader>
             <ModalContent>
-                <div>
-                    <input
-                        type="text"
-                        value={elementName}
-                        onChange={(e) => setElementName(e.target.value)}
-                    />
-                    <select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                    >
-
-                        {categories.map((c, i) => (
-                            <option key={i}>{c.title}</option>
-                        ))}
-
-
-                    </select>
+                <div className="addElementsContent">
+                    <div className="addElimentName">
+                        <p className="addElimentTittle">{wordNames.elementName}</p>
+                        <input
+                            type="text"
+                            value={elementName}
+                            onChange={(e) => setElementName(e.target.value)}
+                        />
+                    </div>
+                    <div className="chooseCategory">
+                        <p className="chooseCategoryTittle">{wordNames.category}</p>
+                        <select
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value={''} disabled hidden>{`Выберете категорию`}</option>
+                            {categories.map((c, i) => (
+                                <option key={i}>{c.title}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </ModalContent>
             <ModalFooter>

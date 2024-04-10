@@ -8,7 +8,6 @@ type Options = {
 
 export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>([]);
-    const [elemenst, setElements] = useState<ICategory[]>([]);
 
 
     const initCategories = () => {
