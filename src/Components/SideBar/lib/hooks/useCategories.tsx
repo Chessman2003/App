@@ -14,21 +14,25 @@ export const useCategories = ({ sortDirection }: Options) => {
     const initCategories = () => {
         setCategories([
             {
+                id: '1',
                 title: 'кирпичи',
                 icon: 'https://cdn-icons-png.freepik.com/512/14524/14524465.png?ga=GA1.1.753315375.1711741126&',
                 elements: ['Элемент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
             },
             {
+                id: '2',
                 title: 'брёвна',
                 icon: 'https://cdn-icons-png.freepik.com/512/6937/6937220.png?ga=GA1.1.753315375.1711741126&',
                 elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
             },
             {
+                id: '3',
                 title: 'кран',
                 icon: 'https://cdn-icons-png.freepik.com/512/4913/4913512.png?ga=GA1.1.753315375.1711741126&',
                 elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
             },
             {
+                id: '4',
                 title: 'тачка',
                 icon: 'https://cdn-icons-png.freepik.com/512/4851/4851585.png?ga=GA1.1.753315375.1711741126&',
                 elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
@@ -63,11 +67,9 @@ export const useCategories = ({ sortDirection }: Options) => {
     }
 
 
-    const handleDeleteCategory = (index: number) => {
+    const deleteCategory = (id: string) => {
         setCategories(prevState => {
-            const updatedCategories = [...prevState];
-            updatedCategories.splice(index, 1);
-            return updatedCategories;
+            return [...prevState].filter(c => c.id != id);
         });
     }
 
