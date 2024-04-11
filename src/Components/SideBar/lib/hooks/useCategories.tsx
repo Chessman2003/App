@@ -10,6 +10,7 @@ export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>([]);
 
 
+
     const initCategories = () => {
         setCategories([
             {
@@ -62,11 +63,46 @@ export const useCategories = ({ sortDirection }: Options) => {
     }
 
 
+    const handleDeleteCategory = (index: number) => {
+        setCategories(prevState => {
+            const updatedCategories = [...prevState];
+            updatedCategories.splice(index, 1);
+            return updatedCategories;
+        });
+    }
+
+    const deleteElement = (categoryTitle: string, elementIndex: number) => {
+        setCategories(prevState => {
+            const updatedCategories = prevState.map(category => {
+                if (category.title === categoryTitle) {
+                    const updatedElements = category.elements.filter((_, idx) => idx !== elementIndex);
+                    return {
+                        ...category,
+                        elements: updatedElements
+                    };
+                }
+                return category;
+            });
+            return updatedCategories;
+        });
+    }
+
+    const sortElements = (category: ICategory, direction: SortDirection) => {
+        const sortedElements = [...category.elements];
+        if (direction === SortDirection.Forward) {
+            sortedElements.sort();
+        } else if (direction === SortDirection.Back) {
+            sortedElements.sort().reverse();
+        }
+        return { ...category, elements: sortedElements };
+    }
     return {
         categories,
         addCategories,
         addCategory,
         initCategories,
-        addElement
+        addElement,
+        handleDeleteCategory,
+        deleteElement
     };
 }

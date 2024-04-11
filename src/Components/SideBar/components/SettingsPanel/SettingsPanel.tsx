@@ -1,10 +1,12 @@
 import React from "react";
 import { SortCategories } from "../../../icons/icons";
 import { SideBarType } from "../..";
+import { ICategory } from "../..";
+import { SortDirection } from "../..";
 import './SettingsPanel.scss'
 
 type Props = {
-    onClick?: () => void;
+    onClick: (category: ICategory, direction: SortDirection) => void;
     type: SideBarType
 }
 
@@ -29,7 +31,7 @@ export const SettingsPanel = ({
             closed: isClosed,
             opened: !isClosed
         })}>
-            <button onClick={onClick}>
+            <button onClick={() => onClick}>
                 <img className="sortCategoriesIcon" src={SortCategories.default} />
                 {!isClosed &&
                     <p className="sortCategoriesText">{`Прямая сортировка элементов в категориях`}</p>}

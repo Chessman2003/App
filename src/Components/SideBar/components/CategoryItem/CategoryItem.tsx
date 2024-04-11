@@ -12,8 +12,8 @@ type Props = {
     elements: string[]
     addElements: () => void
     editElements?: () => void
-    deliteElements?: () => void
-    deliteCategory?: () => void
+    deleteElement: (categoryTitle: string, elementIndex: number) => void
+    deleteCategory: (index: number) => void
     editCategory?: () => void
 
 }
@@ -36,8 +36,8 @@ export const CategoryItem = ({
     type,
     addElements,
     editElements,
-    deliteElements,
-    deliteCategory,
+    deleteElement,
+    deleteCategory,
     editCategory
 }: Props) => {
 
@@ -56,7 +56,7 @@ export const CategoryItem = ({
             {!isClosed &&
                 <div className="categoryOpen">
                     <div className="header">
-                        <p className="categoryTittle">{title}</p>
+                        <p className="categoryTittle">{title} ({elements.length})</p>
                         <div className="buttons">
                             <button className="addElementsBtn" onClick={addElements}>
                                 <img className="addElementsImg" src={addElem.default} alt="Добавить элемент" />
@@ -64,7 +64,7 @@ export const CategoryItem = ({
                             <button className="editCatBtn" onClick={editCategory}>
                                 <img className="editCatImg" src={EditIcon.default} alt="Добавить элемент" />
                             </button>
-                            <button className="deliteCatBtn" onClick={deliteCategory}>
+                            <button className="deliteCatBtn" onClick={() => deleteCategory}>
                                 <img className="deliteCatImg" src={DeliteIcon.default} alt="Добавить элемент" />
                             </button>
                         </div>
@@ -77,7 +77,7 @@ export const CategoryItem = ({
                                 <button className="editElemBtn" onClick={editElements}>
                                     <img className="editElemImg" src={EditIcon.default} />
                                 </button>
-                                <button className="deliteElemBtn" onClick={deliteElements}>
+                                <button className="deliteElemBtn" onClick={() => deleteElement}>
                                     <img className="deliteElemImg" src={DeliteIcon.default} />
                                 </button>
                             </div>

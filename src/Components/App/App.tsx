@@ -4,7 +4,8 @@ import {
     SideBar,
     useCategories,
     SideBarType,
-    SortDirection
+    SortDirection,
+    ICategory
 } from "../SideBar";
 
 import './App.scss';
@@ -21,11 +22,33 @@ export const App = () => {
             }
         })
     }
+
+    const sortElements = (categories: ICategory[], direction: SortDirection) => {
+        const updatedCategories = categories.map(category => {
+            const sortedElements = [...category.elements];
+
+            if (direction === SortDirection.Forward) {
+                sortedElements.sort();
+            } else if (direction === SortDirection.Back) {
+                sortedElements.sort().reverse();
+            }
+
+            return { ...category, elements: sortedElements };
+        });
+
+        setSortDirection(prevState => {
+            return prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
+        });
+
+
+        return updatedCategories;
+    };
+
     const {
         initCategories,
         categories,
         addCategory,
-        addElement
+        addElement,
     } = useCategories({ sortDirection });
 
     useEffect(() => {
@@ -38,7 +61,7 @@ export const App = () => {
                 type={SideBarType.Close}
                 categories={categories}
                 addCategory={addCategory}
-                toggleSortDirection={toggleSortDirection}
+                toggleSortDirection={() => sortElements(categories, sortDirection)}
                 addElement={addElement}
             />
         </div>

@@ -1,8 +1,4 @@
-import React, {
-    useEffect,
-    useState
-} from "react";
-
+import React, { useState } from "react";
 import { Category } from "../Category/Category";
 import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
 import { ControlPanel } from "../ControlPanel/ControlPanel";
@@ -14,19 +10,17 @@ import {
     SideBarType
 } from "../../types/categories";
 
-
 import { useRootModal } from "../../../Modal";
-
 import './SideBar.scss';
 import { EditModal } from "../EditCategoryModal/EditCategoryModal";
-import { addElem } from "../../../icons/icons";
+import { SortDirection } from "../../types/categories";
 
 type Props = {
     categories: ICategory[]
     type: SideBarType
     addCategory: (category: ICategory) => void
     addElement: (categoryTitle: string, newElement: string) => void
-    toggleSortDirection: () => void
+    toggleSortDirection: (category: ICategory, direction: SortDirection) => void
 }
 
 export const SideBar = ({
@@ -34,7 +28,7 @@ export const SideBar = ({
     addCategory,
     type,
     toggleSortDirection,
-    addElement
+    addElement,
 }: Props) => {
     const { modalElement } = useRootModal({})
 
@@ -73,8 +67,6 @@ export const SideBar = ({
                 addElements={() => setShowEditElementModal(true)}
                 editCategory={() => { }}
                 editElements={() => { }}
-                deliteCategory={() => { }}
-                deliteElements={() => { }}
             />
             <ControlPanel
                 onClick={() => {

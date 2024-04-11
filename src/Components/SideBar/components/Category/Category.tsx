@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { CategoryItem } from '../CategoryItem/CategoryItem';
 import { SideBarType } from "../..";
+import { ICategory } from "../..";
+import { useCategories } from "../..";
+import { SortDirection } from "../..";
 import './Category.scss';
 
 type CategoryProps = {
-    categoryArray: Array<{ title: string, icon: string, elements: string[] }>
+    categoryArray: ICategory[]
     type: SideBarType
     addElements: () => void
     editElements?: () => void
-    deliteElements?: () => void
-    deliteCategory?: () => void
     editCategory?: () => void
 }
-
 
 export const Category = ({
     categoryArray,
     type,
     addElements,
     editElements,
-    deliteElements,
-    deliteCategory,
-    editCategory
+    editCategory,
 }: CategoryProps) => {
+
+    const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Forward);
+
+    const {
+        handleDeleteCategory,
+        deleteElement
+    } = useCategories({ sortDirection });
+
+
     return (
         <div className='categoryWrapper'>
             {categoryArray.map((c, i) => {
@@ -36,8 +43,8 @@ export const Category = ({
                         editCategory={editCategory}
                         addElements={addElements}
                         editElements={editElements}
-                        deliteCategory={deliteCategory}
-                        deliteElements={deliteElements}
+                        deleteCategory={() => handleDeleteCategory(i)}
+                        deleteElement={() => deleteElement(c.title, i)}
                     />
                 );
             })}
