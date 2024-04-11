@@ -13,7 +13,7 @@ type CategoryProps = {
     editElements?: () => void
     editCategory?: () => void
     deleteCategory: (id: string) => void
-
+    deleteElement: (categoryId: string, elementId: string) => void
 }
 
 export const Category = ({
@@ -22,7 +22,8 @@ export const Category = ({
     addElements,
     editElements,
     editCategory,
-    deleteCategory
+    deleteCategory,
+    deleteElement
 }: CategoryProps) => {
 
     return (
@@ -40,7 +41,7 @@ export const Category = ({
                         addElements={addElements}
                         editElements={editElements}
                         deleteCategory={() => deleteCategory(c.id)}
-                        deleteElement={() => { }}
+                        deleteElement={(categoryId, elementId) => deleteElement(c.id, elementId)}
                     />
                 );
             })}

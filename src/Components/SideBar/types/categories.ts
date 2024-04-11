@@ -3,7 +3,12 @@ export interface ICategory {
     id: string
     title: string
     icon: string
-    elements: string[]
+    elements: IElement[]
+}
+
+export interface IElement {
+    id: string
+    name: string
 }
 
 export enum SideBarType {

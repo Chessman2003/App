@@ -7,6 +7,7 @@ import { EditElementsModal } from "../EditElementsModal/EditElementsModal";
 
 import {
     ICategory,
+    IElement,
     SideBarType
 } from "../../types/categories";
 
@@ -17,14 +18,16 @@ import { SortDirection } from "../../types/categories";
 
 type Props = {
     deleteCategory: (id: string) => void
+    deleteElement: (categoryId: string, elementId: string) => void
     categories: ICategory[]
     type: SideBarType
     addCategory: (category: ICategory) => void
-    addElement: (categoryTitle: string, newElement: string) => void
+    addElement: (categoryTitle: string, newElement: IElement) => void
     toggleSortDirection: (category: ICategory, direction: SortDirection) => void
 }
 
 export const SideBar = ({
+    deleteElement,
     deleteCategory,
     categories,
     addCategory,
@@ -71,6 +74,9 @@ export const SideBar = ({
                 editElements={() => { }}
                 deleteCategory={(id) => {
                     deleteCategory(id)
+                }}
+                deleteElement={(categoryId, elementId) => {
+                    deleteElement(categoryId, elementId)
                 }}
             />
             <ControlPanel

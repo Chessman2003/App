@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ICategory, SortDirection } from '../..'
+import { ICategory, SortDirection, IElement } from '../..'
 
 type Options = {
     sortDirection: SortDirection
@@ -17,27 +17,51 @@ export const useCategories = ({ sortDirection }: Options) => {
                 id: '1',
                 title: 'кирпичи',
                 icon: 'https://cdn-icons-png.freepik.com/512/14524/14524465.png?ga=GA1.1.753315375.1711741126&',
-                elements: ['Элемент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
+                elements: [
+                    { id: '1', name: 'Элемент 1' },
+                    { id: '2', name: 'Элемент 2' },
+                    { id: '3', name: 'Элемент 3' },
+                    { id: '4', name: 'Элемент 4' },
+                    { id: '5', name: 'Элемент 5' }
+                ]
             },
             {
                 id: '2',
                 title: 'брёвна',
                 icon: 'https://cdn-icons-png.freepik.com/512/6937/6937220.png?ga=GA1.1.753315375.1711741126&',
-                elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
+                elements: [
+                    { id: '1', name: 'Элемент 1' },
+                    { id: '2', name: 'Элемент 2' },
+                    { id: '3', name: 'Элемент 3' },
+                    { id: '4', name: 'Элемент 4' },
+                    { id: '5', name: 'Элемент 5' }
+                ]
             },
             {
                 id: '3',
                 title: 'кран',
                 icon: 'https://cdn-icons-png.freepik.com/512/4913/4913512.png?ga=GA1.1.753315375.1711741126&',
-                elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
+                elements: [
+                    { id: '1', name: 'Элемент 1' },
+                    { id: '2', name: 'Элемент 2' },
+                    { id: '3', name: 'Элемент 3' },
+                    { id: '4', name: 'Элемент 4' },
+                    { id: '5', name: 'Элемент 5' }
+                ]
             },
             {
                 id: '4',
                 title: 'тачка',
                 icon: 'https://cdn-icons-png.freepik.com/512/4851/4851585.png?ga=GA1.1.753315375.1711741126&',
-                elements: ['Элимент 1', 'Элимент 2', 'Элимент 3', 'Элимент 4', 'Элимент 5']
-
-            },]);
+                elements: [
+                    { id: '1', name: 'Элемент 1' },
+                    { id: '2', name: 'Элемент 2' },
+                    { id: '3', name: 'Элемент 3' },
+                    { id: '4', name: 'Элемент 4' },
+                    { id: '5', name: 'Элемент 5' }
+                ]
+            }
+        ]);
     }
 
     const addCategories = (newCategories: ICategory[]) => {
@@ -51,7 +75,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         });
     }
 
-    const addElement = (categoryTitle: string, newElement: string) => {
+    const addElement = (categoryTitle: string, newElement: IElement) => {
         setCategories(prevState => {
             const updatedCategories = prevState.map(category => {
                 if (category.title === categoryTitle) {
@@ -73,14 +97,13 @@ export const useCategories = ({ sortDirection }: Options) => {
         });
     }
 
-    const deleteElement = (categoryTitle: string, elementIndex: number) => {
+    const deleteElement = (categoryId: string, elementId: string) => {
         setCategories(prevState => {
             const updatedCategories = prevState.map(category => {
-                if (category.title === categoryTitle) {
-                    const updatedElements = category.elements.filter((_, idx) => idx !== elementIndex);
+                if (category.id === categoryId) {
                     return {
                         ...category,
-                        elements: updatedElements
+                        elements: category.elements.filter(element => element.id !== elementId)
                     };
                 }
                 return category;
@@ -88,6 +111,8 @@ export const useCategories = ({ sortDirection }: Options) => {
             return updatedCategories;
         });
     }
+
+
 
     const sortElements = (category: ICategory, direction: SortDirection) => {
         const sortedElements = [...category.elements];

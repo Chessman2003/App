@@ -4,19 +4,19 @@ import { SideBarType } from "../..";
 import { addElem } from "../../../icons/icons";
 import { DeliteIcon } from "../../../icons/icons";
 import { EditIcon } from "../../../icons/icons";
+import { IElement } from "../..";
 
 type Props = {
     type: SideBarType
     id: string
     icon: string
     title: string
-    elements: string[]
+    elements: IElement[]
     addElements: () => void
     editElements?: () => void
-    deleteElement: (categoryTitle: string, elementIndex: number) => void
+    deleteElement: (categoryId: string, elementId: string) => void
     deleteCategory: (id: string) => void
     editCategory?: () => void
-
 }
 
 const classNames = (cls: string, props = {}, additionals: string[] = []) => {
@@ -73,13 +73,13 @@ export const CategoryItem = ({
                     </div>
 
                     <div className="elements">
-                        {elements.map((element, index) => (
-                            <div className='item' key={index}>
-                                {element}
+                        {elements.map((element) => (
+                            <div className='item' key={element.id}>
+                                {element.name}
                                 <button className="editElemBtn" onClick={editElements}>
                                     <img className="editElemImg" src={EditIcon.default} />
                                 </button>
-                                <button className="deliteElemBtn" onClick={() => deleteElement}>
+                                <button className="deliteElemBtn" onClick={() => deleteElement(id, element.id)}>
                                     <img className="deliteElemImg" src={DeliteIcon.default} />
                                 </button>
                             </div>

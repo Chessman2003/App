@@ -8,12 +8,12 @@ import {
 } from "../../../Modal";
 import { ICategory } from "../../types/categories";
 import { useCategories } from "../../lib/hooks/useCategories";
-import { SortDirection } from "../../types/categories";
+import { SortDirection, IElement } from "../../types/categories";
 import './EditElementsModal.scss';
 
 type Props = {
     modalElement: HTMLElement | null,
-    onClose: (elementName?: string, selectedCategory?: string) => void,
+    onClose: (elementName?: IElement, selectedCategory?: string) => void,
     categories: ICategory[],
 }
 
@@ -28,7 +28,10 @@ export const EditElementsModal = ({
     onClose,
     categories
 }: Props) => {
-    const [elementName, setElementName] = useState('');
+    const [elementName, setElementName] = useState<IElement>({
+        name: "",
+        id: ''
+    });
     const [selectedCategory, setSelectedCategory] = useState('');
     const [accessSave, setAccessSave] = useState<boolean>(false);
 
@@ -60,8 +63,8 @@ export const EditElementsModal = ({
                         <input
                             className="editElementsInput"
                             type="text"
-                            value={elementName}
-                            onChange={(e) => setElementName(e.target.value)}
+                            value={elementName.name}
+                            onChange={(e) => setElementName({ name: e.target.value, id: elementName.id })}
                         />
                     </div>
                     <div className="chooseCategory">
