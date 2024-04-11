@@ -12,6 +12,8 @@ type CategoryProps = {
     addElements: () => void
     editElements?: () => void
     editCategory?: () => void
+    deleteCategory: (id: string) => void
+
 }
 
 export const Category = ({
@@ -20,21 +22,15 @@ export const Category = ({
     addElements,
     editElements,
     editCategory,
+    deleteCategory
 }: CategoryProps) => {
-
-    const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Forward);
-
-    const {
-        handleDeleteCategory,
-        deleteElement
-    } = useCategories({ sortDirection });
-
 
     return (
         <div className='categoryWrapper'>
             {categoryArray.map((c, i) => {
                 return (
                     <CategoryItem
+                        id={c.id}
                         key={i}
                         elements={c.elements}
                         type={type}
@@ -43,8 +39,8 @@ export const Category = ({
                         editCategory={editCategory}
                         addElements={addElements}
                         editElements={editElements}
-                        deleteCategory={() => handleDeleteCategory(i)}
-                        deleteElement={() => deleteElement(c.title, i)}
+                        deleteCategory={() => deleteCategory(c.id)}
+                        deleteElement={() => { }}
                     />
                 );
             })}

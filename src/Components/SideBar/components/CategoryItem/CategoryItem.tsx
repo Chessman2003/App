@@ -7,13 +7,14 @@ import { EditIcon } from "../../../icons/icons";
 
 type Props = {
     type: SideBarType
+    id: string
     icon: string
     title: string
     elements: string[]
     addElements: () => void
     editElements?: () => void
     deleteElement: (categoryTitle: string, elementIndex: number) => void
-    deleteCategory: (index: number) => void
+    deleteCategory: (id: string) => void
     editCategory?: () => void
 
 }
@@ -30,6 +31,7 @@ const classNames = (cls: string, props = {}, additionals: string[] = []) => {
 }
 
 export const CategoryItem = ({
+    id,
     elements,
     icon,
     title,
@@ -64,7 +66,7 @@ export const CategoryItem = ({
                             <button className="editCatBtn" onClick={editCategory}>
                                 <img className="editCatImg" src={EditIcon.default} alt="Добавить элемент" />
                             </button>
-                            <button className="deliteCatBtn" onClick={() => deleteCategory}>
+                            <button className="deliteCatBtn" onClick={() => deleteCategory(id)}>
                                 <img className="deliteCatImg" src={DeliteIcon.default} alt="Добавить элемент" />
                             </button>
                         </div>

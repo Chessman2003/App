@@ -16,6 +16,7 @@ import { EditModal } from "../EditCategoryModal/EditCategoryModal";
 import { SortDirection } from "../../types/categories";
 
 type Props = {
+    deleteCategory: (id: string) => void
     categories: ICategory[]
     type: SideBarType
     addCategory: (category: ICategory) => void
@@ -24,6 +25,7 @@ type Props = {
 }
 
 export const SideBar = ({
+    deleteCategory,
     categories,
     addCategory,
     type,
@@ -67,6 +69,9 @@ export const SideBar = ({
                 addElements={() => setShowEditElementModal(true)}
                 editCategory={() => { }}
                 editElements={() => { }}
+                deleteCategory={(id) => {
+                    deleteCategory(id)
+                }}
             />
             <ControlPanel
                 onClick={() => {
@@ -83,7 +88,7 @@ export const SideBar = ({
                     modalElement={modalElement}
                     onClose={(categoryName, droppedImage) => {
                         if (categoryName && droppedImage) {
-                            addCategory({ title: categoryName, icon: droppedImage, elements: [] });
+                            addCategory({ title: categoryName, icon: droppedImage, elements: [], id: '' });
                         }
                         setShowEditModal(false);
                     }}

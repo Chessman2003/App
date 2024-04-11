@@ -49,6 +49,7 @@ export const App = () => {
         categories,
         addCategory,
         addElement,
+        deleteCategory
     } = useCategories({ sortDirection });
 
     useEffect(() => {
@@ -63,6 +64,7 @@ export const App = () => {
                 addCategory={addCategory}
                 toggleSortDirection={() => sortElements(categories, sortDirection)}
                 addElement={addElement}
+                deleteCategory={deleteCategory}
             />
         </div>
     )

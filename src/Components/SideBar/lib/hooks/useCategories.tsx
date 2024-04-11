@@ -104,7 +104,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         addCategory,
         initCategories,
         addElement,
-        handleDeleteCategory,
+        deleteCategory,
         deleteElement
     };
 }
