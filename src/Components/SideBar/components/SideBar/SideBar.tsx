@@ -15,6 +15,7 @@ import { useRootModal } from "../../../Modal";
 import './SideBar.scss';
 import { EditModal } from "../EditCategoryModal/EditCategoryModal";
 import { SortDirection } from "../../types/categories";
+import { EditNewCategoryModal } from "../EditNewCategoryModal/EditNewCategoryModal";
 
 type Props = {
     deleteCategory: (id: string) => void
@@ -24,6 +25,7 @@ type Props = {
     addCategory: (category: ICategory) => void
     addElement: (categoryTitle: string, newElement: IElement) => void
     toggleSortDirection: (category: ICategory, direction: SortDirection) => void
+    editCategory: (category: ICategory) => void
 }
 
 export const SideBar = ({
@@ -34,11 +36,14 @@ export const SideBar = ({
     type,
     toggleSortDirection,
     addElement,
+    editCategory
 }: Props) => {
     const { modalElement } = useRootModal({})
 
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
     const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
+    const [showEditNewCategoryModal, setShowEditNewCategoryModal] = useState<boolean>(false);
+    //const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
 
     let newClassname = 'sideBarWrapper';
     const [currentType, setCurrentType] = useState<SideBarType>(type);
@@ -60,6 +65,7 @@ export const SideBar = ({
         });
     }
 
+
     return (
         <div className={newClassname}>
             <MonipulatorPanel
@@ -70,7 +76,7 @@ export const SideBar = ({
                 type={currentType}
                 categoryArray={categories}
                 addElements={() => setShowEditElementModal(true)}
-                editCategory={() => { }}
+                editCategory={() => setShowEditNewCategoryModal(true)}
                 editElements={() => { }}
                 deleteCategory={(id) => {
                     deleteCategory(id)
@@ -94,14 +100,19 @@ export const SideBar = ({
                     modalElement={modalElement}
                     onClose={(categoryName, droppedImage) => {
                         if (categoryName && droppedImage) {
-                            addCategory({ title: categoryName, icon: droppedImage, elements: [], id: '' });
+                            addCategory({
+                                title: categoryName,
+                                icon: droppedImage,
+                                elements: [],
+                                id: ''
+                            });
                         }
                         setShowEditModal(false);
                     }}
                 />
             }
 
-            {showEditElementModal && (
+            {showEditElementModal &&
                 <EditElementsModal
                     modalElement={modalElement}
                     categories={categories}
@@ -111,6 +122,23 @@ export const SideBar = ({
                         }
                         setShowEditElementModal(false)
                     }} />
+            }
+
+            {showEditNewCategoryModal && (
+                <EditNewCategoryModal
+                    modalElement={modalElement}
+                    onClose={(newCategoryName, newDroppedImage) => {
+                        if (newCategoryName && newDroppedImage) {
+                            editCategory({
+                                title: newCategoryName,
+                                icon: newDroppedImage,
+                                elements: [],
+                                id: ''
+                            })
+                        }
+                        setShowEditNewCategoryModal(false)
+                    }}
+                />
             )}
         </div>
 

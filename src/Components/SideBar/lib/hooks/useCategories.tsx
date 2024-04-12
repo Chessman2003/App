@@ -75,6 +75,20 @@ export const useCategories = ({ sortDirection }: Options) => {
         });
     }
 
+    const editCategory = (editedCategory: ICategory) => {
+        setCategories(prevState => {
+            const updatedCategories = prevState.map(category => {
+                if (category.id === editedCategory.id) {
+                    return editedCategory;
+                } else {
+                    return category;
+                }
+            });
+            return updatedCategories;
+        });
+    };
+
+
     const addElement = (categoryTitle: string, newElement: IElement) => {
         setCategories(prevState => {
             const updatedCategories = prevState.map(category => {
@@ -130,6 +144,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         initCategories,
         addElement,
         deleteCategory,
-        deleteElement
+        deleteElement,
+        editCategory
     };
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import './CategoryItem.scss';
-import { SideBarType } from "../..";
+import { ICategory, SideBarType } from "../..";
 import { addElem } from "../../../icons/icons";
 import { DeliteIcon } from "../../../icons/icons";
 import { EditIcon } from "../../../icons/icons";
@@ -16,7 +16,7 @@ type Props = {
     editElements?: () => void
     deleteElement: (categoryId: string, elementId: string) => void
     deleteCategory: (id: string) => void
-    editCategory?: () => void
+    editCategory: () => void
 }
 
 const classNames = (cls: string, props = {}, additionals: string[] = []) => {

@@ -13,16 +13,6 @@ import './App.scss';
 export const App = () => {
     const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Forward);
 
-    const toggleSortDirection = () => {
-        setSortDirection(prevState => {
-            if (prevState == SortDirection.Forward) {
-                return SortDirection.Back;
-            } else {
-                return SortDirection.Forward
-            }
-        })
-    }
-
     const sortElements = (categories: ICategory[], direction: SortDirection) => {
         const updatedCategories = categories.map(category => {
             const sortedElements = [...category.elements];
@@ -40,7 +30,6 @@ export const App = () => {
             return prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
         });
 
-
         return updatedCategories;
     };
 
@@ -50,7 +39,8 @@ export const App = () => {
         addCategory,
         addElement,
         deleteCategory,
-        deleteElement
+        deleteElement,
+        editCategory
     } = useCategories({ sortDirection });
 
     useEffect(() => {
@@ -67,6 +57,7 @@ export const App = () => {
                 addElement={addElement}
                 deleteCategory={deleteCategory}
                 deleteElement={deleteElement}
+                editCategory={editCategory}
             />
         </div>
     )

@@ -11,7 +11,7 @@ type CategoryProps = {
     type: SideBarType
     addElements: () => void
     editElements?: () => void
-    editCategory?: () => void
+    editCategory: () => void
     deleteCategory: (id: string) => void
     deleteElement: (categoryId: string, elementId: string) => void
 }
