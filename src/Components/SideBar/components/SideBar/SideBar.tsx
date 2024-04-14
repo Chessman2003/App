@@ -4,6 +4,8 @@ import { MonipulatorPanel } from '../MonipulatorPanel/MonipulatorPanel';
 import { ControlPanel } from "../ControlPanel/ControlPanel";
 import { SettingsPanel } from "../SettingsPanel/SettingsPanel";
 import { EditElementsModal } from "../EditElementsModal/EditElementsModal";
+import { v4 as uuidv4 } from 'uuid';
+
 
 import {
     ICategory,
@@ -104,7 +106,7 @@ export const SideBar = ({
                                 title: categoryName,
                                 icon: droppedImage,
                                 elements: [],
-                                id: ''
+                                id: uuidv4()
                             });
                         }
                         setShowEditModal(false);
@@ -118,13 +120,16 @@ export const SideBar = ({
                     categories={categories}
                     onClose={(elementName, selectedCategory) => {
                         if (elementName && selectedCategory) {
-                            addElement(selectedCategory, elementName)
+                            addElement(selectedCategory, {
+                                name: elementName.name,
+                                id: uuidv4()
+                            })
                         }
                         setShowEditElementModal(false)
                     }} />
             }
 
-            {showEditNewCategoryModal && (
+            {showEditNewCategoryModal && modalElement && (
                 <EditNewCategoryModal
                     modalElement={modalElement}
                     onClose={(newCategoryName, newDroppedImage) => {
@@ -133,7 +138,7 @@ export const SideBar = ({
                                 title: newCategoryName,
                                 icon: newDroppedImage,
                                 elements: [],
-                                id: ''
+                                id: modalElement.id
                             })
                         }
                         setShowEditNewCategoryModal(false)
