@@ -18,6 +18,7 @@ import './SideBar.scss';
 import { EditModal } from "../EditCategoryModal/EditCategoryModal";
 import { SortDirection } from "../../types/categories";
 import { EditNewCategoryModal } from "../EditNewCategoryModal/EditNewCategoryModal";
+import { EditNewElementsModal } from "../EditNewElementsModal/EditNewElementsModal";
 
 type Props = {
     deleteCategory: (id: string) => void
@@ -28,6 +29,7 @@ type Props = {
     addElement: (categoryTitle: string, newElement: IElement) => void
     toggleSortDirection: (category: ICategory, direction: SortDirection) => void
     editCategory: (category: ICategory) => void
+    editElement: (element: IElement) => void
 }
 
 export const SideBar = ({
@@ -38,7 +40,8 @@ export const SideBar = ({
     type,
     toggleSortDirection,
     addElement,
-    editCategory
+    editCategory,
+    editElement
 }: Props) => {
     const { modalElement } = useRootModal({})
 
@@ -47,8 +50,10 @@ export const SideBar = ({
     const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
     const [showEditNewCategoryModal, setShowEditNewCategoryModal] = useState<boolean>(false);
 
-    //const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
+    const [showEditNewElementModal, setShowEditNewElementModal] = useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
+    const [selectedElement, setSelectedElement] = useState<IElement | null>(null);
+
 
     let newClassname = 'sideBarWrapper';
     const [currentType, setCurrentType] = useState<SideBarType>(type);
@@ -64,7 +69,19 @@ export const SideBar = ({
             setSelectedCategory(category);
             setShowEditNewCategoryModal(true);
         }
-    }
+    };
+
+    const handleEditElement = (categoryId: string, elementId: string) => {
+        const category = categories.find(c => c.id == categoryId);
+        if (category) {
+            const element = category?.elements.find(e => e.id == elementId);
+            if (element) {
+                setShowEditNewElementModal(true);
+                setSelectedElement(element);
+            }
+        }
+
+    };
 
     const updateCurrentType = () => {
         setShowEditModal(false);
@@ -90,7 +107,7 @@ export const SideBar = ({
                 categoryArray={categories}
                 addElements={() => setShowEditElementModal(true)}
                 editCategory={handleEditCategory}
-                editElements={() => { }}
+                editElement={handleEditElement}
                 deleteCategory={deleteCategory}
                 deleteElement={deleteElement}
             />
@@ -136,7 +153,7 @@ export const SideBar = ({
                     }} />
             }
 
-            {showEditNewCategoryModal && modalElement && (
+            {showEditNewCategoryModal && (
                 <EditNewCategoryModal
                     category={selectedCategory}
                     modalElement={modalElement}
@@ -151,6 +168,23 @@ export const SideBar = ({
                             editCategory(editedCategory);
                         }
                         setShowEditNewCategoryModal(false)
+                    }}
+                />
+            )}
+
+            {showEditNewElementModal && (
+                <EditNewElementsModal
+                    modalElement={modalElement}
+                    element={selectedElement}
+                    onClose={(elementName) => {
+                        if (elementName) {
+                            const editedElement = {
+                                name: elementName,
+                                id: selectedElement?.id || uuidv4()
+                            }
+                            editElement(editedElement)
+                        }
+                        setShowEditNewElementModal(false)
                     }}
                 />
             )}

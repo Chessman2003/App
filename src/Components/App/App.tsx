@@ -39,7 +39,8 @@ export const App = () => {
         addElement,
         deleteCategory,
         deleteElement,
-        editCategory
+        editCategory,
+        editElement
     } = useCategories({ sortDirection });
 
     return (
@@ -53,6 +54,7 @@ export const App = () => {
                 deleteCategory={deleteCategory}
                 deleteElement={deleteElement}
                 editCategory={editCategory}
+                editElement={editElement}
             />
         </div>
     )

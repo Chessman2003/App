@@ -10,7 +10,7 @@ type CategoryProps = {
     categoryArray: ICategory[]
     type: SideBarType
     addElements: () => void
-    editElements?: () => void
+    editElement: (categoryId: string, elementID: string) => void
     editCategory: (idCategory: string) => void
     deleteCategory: (id: string) => void
     deleteElement: (categoryId: string, elementId: string) => void
@@ -20,7 +20,7 @@ export const Category = ({
     categoryArray,
     type,
     addElements,
-    editElements,
+    editElement,
     editCategory,
     deleteCategory,
     deleteElement
@@ -39,7 +39,7 @@ export const Category = ({
                         icon={c.icon}
                         editCategory={editCategory}
                         addElements={addElements}
-                        editElements={editElements}
+                        editElement={editElement}
                         deleteCategory={() => deleteCategory(c.id)}
                         deleteElement={(categoryId, elementId) => deleteElement(c.id, elementId)}
                     />

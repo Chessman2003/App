@@ -13,7 +13,7 @@ type Props = {
     title: string
     elements: IElement[]
     addElements: () => void
-    editElements?: () => void
+    editElement: (categoryId: string, elemnetId: string) => void
     deleteElement: (categoryId: string, elementId: string) => void
     deleteCategory: (id: string) => void
     editCategory: (idCategory: string) => void
@@ -37,7 +37,7 @@ export const CategoryItem = ({
     title,
     type,
     addElements,
-    editElements,
+    editElement,
     deleteElement,
     deleteCategory,
     editCategory
@@ -76,7 +76,7 @@ export const CategoryItem = ({
                         {elements.map((element) => (
                             <div className='item' key={element.id}>
                                 {element.name}
-                                <button className="editElemBtn" onClick={editElements}>
+                                <button className="editElemBtn" onClick={() => editElement(id, element.id)}>
                                     <img className="editElemImg" src={EditIcon.default} />
                                 </button>
                                 <button className="deliteElemBtn" onClick={() => deleteElement(id, element.id)}>

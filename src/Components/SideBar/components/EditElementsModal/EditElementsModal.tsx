@@ -4,11 +4,9 @@ import {
     ModalHeader,
     ModalContent,
     ModalFooter,
-    useRootModal
 } from "../../../Modal";
 import { ICategory } from "../../types/categories";
-import { useCategories } from "../../lib/hooks/useCategories";
-import { SortDirection, IElement } from "../../types/categories";
+import { IElement } from "../../types/categories";
 import './EditElementsModal.scss';
 
 type Props = {
