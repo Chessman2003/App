@@ -16,7 +16,7 @@ type Props = {
     editElements?: () => void
     deleteElement: (categoryId: string, elementId: string) => void
     deleteCategory: (id: string) => void
-    editCategory: () => void
+    editCategory: (idCategory: string) => void
 }
 
 const classNames = (cls: string, props = {}, additionals: string[] = []) => {
@@ -63,7 +63,7 @@ export const CategoryItem = ({
                             <button className="addElementsBtn" onClick={addElements}>
                                 <img className="addElementsImg" src={addElem.default} alt="Добавить элемент" />
                             </button>
-                            <button className="editCatBtn" onClick={editCategory}>
+                            <button className="editCatBtn" onClick={() => { editCategory(id) }}>
                                 <img className="editCatImg" src={EditIcon.default} alt="Добавить элемент" />
                             </button>
                             <button className="deliteCatBtn" onClick={() => deleteCategory(id)}>

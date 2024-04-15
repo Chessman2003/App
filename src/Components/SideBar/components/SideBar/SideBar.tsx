@@ -43,8 +43,10 @@ export const SideBar = ({
     const { modalElement } = useRootModal({})
 
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
+
     const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
     const [showEditNewCategoryModal, setShowEditNewCategoryModal] = useState<boolean>(false);
+
     //const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
 
@@ -56,9 +58,12 @@ export const SideBar = ({
         newClassname += ' Closed';
     }
 
-    const handleEditCategory = (category: ICategory) => {
-        setSelectedCategory(category);
-        setShowEditNewCategoryModal(true);
+    const handleEditCategory = (idCategory: string) => {
+        const category = categories.find(c => c.id == idCategory);
+        if (category) {
+            setSelectedCategory(category);
+            setShowEditNewCategoryModal(true);
+        }
     }
 
     const updateCurrentType = () => {
@@ -84,14 +89,10 @@ export const SideBar = ({
                 type={currentType}
                 categoryArray={categories}
                 addElements={() => setShowEditElementModal(true)}
-                editCategory={() => handleEditCategory}
+                editCategory={handleEditCategory}
                 editElements={() => { }}
-                deleteCategory={(id) => {
-                    deleteCategory(id)
-                }}
-                deleteElement={(categoryId, elementId) => {
-                    deleteElement(categoryId, elementId)
-                }}
+                deleteCategory={deleteCategory}
+                deleteElement={deleteElement}
             />
             <ControlPanel
                 onClick={() => {
@@ -137,14 +138,15 @@ export const SideBar = ({
 
             {showEditNewCategoryModal && modalElement && (
                 <EditNewCategoryModal
+                    category={selectedCategory}
                     modalElement={modalElement}
                     onClose={(newCategoryName, newDroppedImage) => {
                         if (newCategoryName && newDroppedImage) {
                             const editedCategory = {
-                                id: modalElement.id,
+                                id: selectedCategory?.id || uuidv4(),
                                 title: newCategoryName,
                                 icon: newDroppedImage,
-                                elements: [],
+                                elements: selectedCategory?.elements || [],
                             };
                             editCategory(editedCategory);
                         }

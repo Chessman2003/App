@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import { ICategory, SortDirection, IElement } from '../..'
 
@@ -6,63 +7,59 @@ type Options = {
     sortDirection: SortDirection
 }
 
-export const useCategories = ({ sortDirection }: Options) => {
-    const [categories, setCategories] = useState<ICategory[]>([]);
-
-
-
-    const initCategories = () => {
-        setCategories([
-            {
-                id: '1',
-                title: 'кирпичи',
-                icon: 'https://cdn-icons-png.freepik.com/512/14524/14524465.png?ga=GA1.1.753315375.1711741126&',
-                elements: [
-                    { id: '1', name: 'Элемент 1' },
-                    { id: '2', name: 'Элемент 2' },
-                    { id: '3', name: 'Элемент 3' },
-                    { id: '4', name: 'Элемент 4' },
-                    { id: '5', name: 'Элемент 5' }
-                ]
-            },
-            {
-                id: '2',
-                title: 'брёвна',
-                icon: 'https://cdn-icons-png.freepik.com/512/6937/6937220.png?ga=GA1.1.753315375.1711741126&',
-                elements: [
-                    { id: '1', name: 'Элемент 1' },
-                    { id: '2', name: 'Элемент 2' },
-                    { id: '3', name: 'Элемент 3' },
-                    { id: '4', name: 'Элемент 4' },
-                    { id: '5', name: 'Элемент 5' }
-                ]
-            },
-            {
-                id: '3',
-                title: 'кран',
-                icon: 'https://cdn-icons-png.freepik.com/512/4913/4913512.png?ga=GA1.1.753315375.1711741126&',
-                elements: [
-                    { id: '1', name: 'Элемент 1' },
-                    { id: '2', name: 'Элемент 2' },
-                    { id: '3', name: 'Элемент 3' },
-                    { id: '4', name: 'Элемент 4' },
-                    { id: '5', name: 'Элемент 5' }
-                ]
-            },
-            {
-                id: '4',
-                title: 'тачка',
-                icon: 'https://cdn-icons-png.freepik.com/512/4851/4851585.png?ga=GA1.1.753315375.1711741126&',
-                elements: [
-                    { id: '1', name: 'Элемент 1' },
-                    { id: '2', name: 'Элемент 2' },
-                    { id: '3', name: 'Элемент 3' },
-                    { id: '4', name: 'Элемент 4' },
-                    { id: '5', name: 'Элемент 5' }
-                ]
-            }
-        ]);
+const storageData = [
+    {
+        id: uuidv4(),
+        title: 'кирпичи',
+        icon: 'https://cdn-icons-png.freepik.com/512/14524/14524465.png?ga=GA1.1.753315375.1711741126&',
+        elements: [
+            { id: '1', name: 'Элемент 1' },
+            { id: '2', name: 'Элемент 2' },
+            { id: '3', name: 'Элемент 3' },
+            { id: '4', name: 'Элемент 4' },
+            { id: '5', name: 'Элемент 5' }
+        ]
+    },
+    {
+        id: uuidv4(),
+        title: 'брёвна',
+        icon: 'https://cdn-icons-png.freepik.com/512/6937/6937220.png?ga=GA1.1.753315375.1711741126&',
+        elements: [
+            { id: '1', name: 'Элемент 1' },
+            { id: '2', name: 'Элемент 2' },
+            { id: '3', name: 'Элемент 3' },
+            { id: '4', name: 'Элемент 4' },
+            { id: '5', name: 'Элемент 5' }
+        ]
+    },
+    {
+        id: uuidv4(),
+        title: 'кран',
+        icon: 'https://cdn-icons-png.freepik.com/512/4913/4913512.png?ga=GA1.1.753315375.1711741126&',
+        elements: [
+            { id: '1', name: 'Элемент 1' },
+            { id: '2', name: 'Элемент 2' },
+            { id: '3', name: 'Элемент 3' },
+            { id: '4', name: 'Элемент 4' },
+            { id: '5', name: 'Элемент 5' }
+        ]
+    },
+    {
+        id: uuidv4(),
+        title: 'тачка',
+        icon: 'https://cdn-icons-png.freepik.com/512/4851/4851585.png?ga=GA1.1.753315375.1711741126&',
+        elements: [
+            { id: '1', name: 'Элемент 1' },
+            { id: '2', name: 'Элемент 2' },
+            { id: '3', name: 'Элемент 3' },
+            { id: '4', name: 'Элемент 4' },
+            { id: '5', name: 'Элемент 5' }
+        ]
     }
+]
+
+export const useCategories = ({ sortDirection }: Options) => {
+    const [categories, setCategories] = useState<ICategory[]>(storageData);
 
     const addCategories = (newCategories: ICategory[]) => {
         setCategories(newCategories);
@@ -78,17 +75,17 @@ export const useCategories = ({ sortDirection }: Options) => {
     const editCategory = (editedCategory: ICategory) => {
         setCategories(prevState => {
             const updatedCategories = prevState.map(category => {
-                if (category.id === editedCategory.id) {
-                    return {
-                        ...category,
-                        id: category.id,
-                        title: editedCategory.title,
-                        icon: editedCategory.icon
-                    };
-                } else {
+                if (category.id !== editedCategory.id) {
                     return category;
                 }
+
+                const newCategory = { ...category };
+                newCategory.id = editedCategory.id;
+                newCategory.title = editedCategory.title;
+                newCategory.icon = editedCategory.icon;
+                return newCategory;
             });
+
             return updatedCategories;
         });
     };
@@ -146,7 +143,6 @@ export const useCategories = ({ sortDirection }: Options) => {
         categories,
         addCategories,
         addCategory,
-        initCategories,
         addElement,
         deleteCategory,
         deleteElement,

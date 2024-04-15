@@ -34,7 +34,6 @@ export const App = () => {
     };
 
     const {
-        initCategories,
         categories,
         addCategory,
         addElement,
@@ -42,10 +41,6 @@ export const App = () => {
         deleteElement,
         editCategory
     } = useCategories({ sortDirection });
-
-    useEffect(() => {
-        initCategories();
-    }, []);
 
     return (
         <div className="app">

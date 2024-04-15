@@ -7,9 +7,11 @@ import {
 } from "../../../Modal";
 import { SelectImage } from "../SelectImage/SelectImage";
 import './EditNewCategoryModal.scss';
+import { ICategory } from "../../types/categories";
 
 
 type Props = {
+    category: ICategory | null
     modalElement: HTMLElement | null
     onClose: (newCategoryName?: string, newDroppedImage?: string) => void
 }
@@ -21,14 +23,13 @@ const wordNames = {
 
 
 export const EditNewCategoryModal = ({
+    category,
     onClose,
     modalElement
 }: Props) => {
-    const [newCategoryName, setNewCategoryName] = useState<string>('');
-    const [newDroppedImage, setNewDroppedImage] = useState<string>('');
+    const [newCategoryName, setNewCategoryName] = useState<string>(category?.title || '');
+    const [newDroppedImage, setNewDroppedImage] = useState<string>(category?.icon || '');
     const [accessSave, setAccessSave] = useState<boolean>(false);
-
-
 
     useEffect(() => {
         let newAccessSave = true;
