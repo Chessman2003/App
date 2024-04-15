@@ -79,7 +79,12 @@ export const useCategories = ({ sortDirection }: Options) => {
         setCategories(prevState => {
             const updatedCategories = prevState.map(category => {
                 if (category.id === editedCategory.id) {
-                    return editedCategory;
+                    return {
+                        ...category,
+                        id: category.id,
+                        title: editedCategory.title,
+                        icon: editedCategory.icon
+                    };
                 } else {
                     return category;
                 }

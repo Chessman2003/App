@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
     Modal,
     ModalHeader,
@@ -8,14 +7,12 @@ import {
 } from "../../../Modal";
 import { SelectImage } from "../SelectImage/SelectImage";
 import './EditNewCategoryModal.scss';
-import { ICategory } from "../../types/categories";
+
 
 type Props = {
     modalElement: HTMLElement | null
     onClose: (newCategoryName?: string, newDroppedImage?: string) => void
 }
-
-
 const wordNames = {
     addCategories: `Добавление категории`,
     nameCategory: `Название категории`,
@@ -29,8 +26,9 @@ export const EditNewCategoryModal = ({
 }: Props) => {
     const [newCategoryName, setNewCategoryName] = useState<string>('');
     const [newDroppedImage, setNewDroppedImage] = useState<string>('');
-
     const [accessSave, setAccessSave] = useState<boolean>(false);
+
+
 
     useEffect(() => {
         let newAccessSave = true;

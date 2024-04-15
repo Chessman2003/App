@@ -46,6 +46,7 @@ export const SideBar = ({
     const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
     const [showEditNewCategoryModal, setShowEditNewCategoryModal] = useState<boolean>(false);
     //const [showEditElementModal, setShowEditElementModal] = useState<boolean>(false);
+    const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
 
     let newClassname = 'sideBarWrapper';
     const [currentType, setCurrentType] = useState<SideBarType>(type);
@@ -53,6 +54,11 @@ export const SideBar = ({
         newClassname += ' Opened';
     } else {
         newClassname += ' Closed';
+    }
+
+    const handleEditCategory = (category: ICategory) => {
+        setSelectedCategory(category);
+        setShowEditNewCategoryModal(true);
     }
 
     const updateCurrentType = () => {
@@ -78,7 +84,7 @@ export const SideBar = ({
                 type={currentType}
                 categoryArray={categories}
                 addElements={() => setShowEditElementModal(true)}
-                editCategory={() => setShowEditNewCategoryModal(true)}
+                editCategory={() => handleEditCategory}
                 editElements={() => { }}
                 deleteCategory={(id) => {
                     deleteCategory(id)
@@ -134,12 +140,13 @@ export const SideBar = ({
                     modalElement={modalElement}
                     onClose={(newCategoryName, newDroppedImage) => {
                         if (newCategoryName && newDroppedImage) {
-                            editCategory({
+                            const editedCategory = {
+                                id: modalElement.id,
                                 title: newCategoryName,
                                 icon: newDroppedImage,
                                 elements: [],
-                                id: modalElement.id
-                            })
+                            };
+                            editCategory(editedCategory);
                         }
                         setShowEditNewCategoryModal(false)
                     }}
