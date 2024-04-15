@@ -63,7 +63,7 @@ export const CategoryItem = ({
                             <button className="addElementsBtn" onClick={addElements}>
                                 <img className="addElementsImg" src={addElem.default} alt="Добавить элемент" />
                             </button>
-                            <button className="editCatBtn" onClick={() => { editCategory(id) }}>
+                            <button className="editCatBtn" onClick={() => editCategory(id)}>
                                 <img className="editCatImg" src={EditIcon.default} alt="Добавить элемент" />
                             </button>
                             <button className="deliteCatBtn" onClick={() => deleteCategory(id)}>

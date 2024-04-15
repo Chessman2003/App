@@ -16,7 +16,7 @@ type Props = {
     onClose: (newCategoryName?: string, newDroppedImage?: string) => void
 }
 const wordNames = {
-    addCategories: `Добавление категории`,
+    addCategories: `Изменение категории`,
     nameCategory: `Название категории`,
     setIcon: `Иконка`
 }
