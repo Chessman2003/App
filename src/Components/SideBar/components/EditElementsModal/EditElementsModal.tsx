@@ -37,7 +37,7 @@ export const EditElementsModal = ({
 
     useEffect(() => {
         let newAccessSave = true;
-        if ('' + elementName == '') {
+        if ('' + elementName.name.trim() == '') {
             newAccessSave = false;
         }
         if ('' + selectedCategory == '') {
