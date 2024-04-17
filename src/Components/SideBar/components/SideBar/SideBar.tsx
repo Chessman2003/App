@@ -27,7 +27,7 @@ type Props = {
     type: SideBarType
     addCategory: (category: ICategory) => void
     addElement: (categoryTitle: string, newElement: IElement) => void
-    toggleSortDirection: (category: ICategory, direction: SortDirection) => void
+    toggleSortDirection: () => void
     editCategory: (category: ICategory) => void
     editElement: (element: IElement) => void
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import { ICategory, SortDirection, IElement } from '../..'
@@ -60,6 +60,27 @@ const storageData = [
 
 export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>(storageData);
+    const [currentSortDirection, setCurrentSortDirection] = useState(sortDirection);
+
+    const toogleSortDirection = () => {
+        setCurrentSortDirection(prevState => {
+            const newDirection = prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
+            return newDirection;
+        });
+    };
+
+    useEffect(() => {
+        setCategories(prevState => {
+            const updatedCategories = prevState.map((category) => {
+                return {
+                    ...category,
+                    elements: currentSortDirection == SortDirection.Forward ? category.elements : category.elements.slice().reverse()
+                }
+            })
+            return updatedCategories;
+        })
+    }, [currentSortDirection]);
+
 
     const addCategories = (newCategories: ICategory[]) => {
         setCategories(newCategories);
@@ -149,17 +170,6 @@ export const useCategories = ({ sortDirection }: Options) => {
         });
     }
 
-
-
-    const sortElements = (category: ICategory, direction: SortDirection) => {
-        const sortedElements = [...category.elements];
-        if (direction === SortDirection.Forward) {
-            sortedElements.sort();
-        } else if (direction === SortDirection.Back) {
-            sortedElements.sort().reverse();
-        }
-        return { ...category, elements: sortedElements };
-    }
     return {
         categories,
         addCategories,
@@ -168,6 +178,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         deleteCategory,
         deleteElement,
         editCategory,
-        editElement
+        editElement,
+        toogleSortDirection
     };
 }

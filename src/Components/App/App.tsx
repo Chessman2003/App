@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     SideBar,
@@ -11,28 +11,6 @@ import {
 import './App.scss';
 
 export const App = () => {
-    const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Forward);
-
-    const sortElements = (categories: ICategory[], direction: SortDirection) => {
-        const updatedCategories = categories.map(category => {
-            const sortedElements = [...category.elements];
-
-            if (direction === SortDirection.Forward) {
-                sortedElements.sort();
-            } else if (direction === SortDirection.Back) {
-                sortedElements.sort().reverse();
-            }
-
-            return { ...category, elements: sortedElements };
-        });
-
-        setSortDirection(prevState => {
-            return prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
-        });
-
-        return updatedCategories;
-    };
-
     const {
         categories,
         addCategory,
@@ -40,8 +18,9 @@ export const App = () => {
         deleteCategory,
         deleteElement,
         editCategory,
-        editElement
-    } = useCategories({ sortDirection });
+        editElement,
+        toogleSortDirection
+    } = useCategories({ sortDirection: SortDirection.Forward });
 
     return (
         <div className="app">
@@ -49,7 +28,7 @@ export const App = () => {
                 type={SideBarType.Close}
                 categories={categories}
                 addCategory={addCategory}
-                toggleSortDirection={() => sortElements(categories, sortDirection)}
+                toggleSortDirection={toogleSortDirection}
                 addElement={addElement}
                 deleteCategory={deleteCategory}
                 deleteElement={deleteElement}
