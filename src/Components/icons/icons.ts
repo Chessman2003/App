@@ -12,3 +12,5 @@ export * as SortCategories from './sort.png';
 export * as addElem from './addElem.png';
 export * as DeliteIcon from './deliteIcon.png';
 export * as EditIcon from './editIcon.png';
+export * as sortUp from './sortUp.png';
+export * as sortDown from './sortDown.png';

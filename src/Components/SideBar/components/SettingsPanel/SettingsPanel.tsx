@@ -1,6 +1,10 @@
 import React from "react";
 import { SortCategories } from "../../../icons/icons";
 import { SideBarType, SortDirection } from "../..";
+import {
+    sortDown,
+    sortUp
+} from "../../../icons/icons";
 import './SettingsPanel.scss'
 
 type Props = {
@@ -41,7 +45,7 @@ export const SettingsPanel = ({
             opened: !isClosed
         })}>
             <button onClick={handleClick}>
-                <img className="sortCategoriesIcon" src={SortCategories.default} />
+                <img className="sortCategoriesIcon" src={sortDirection == SortDirection.Forward ? sortDown.default : sortUp.default} />
                 {!isClosed &&
                     <p className="sortCategoriesText">{sortDirection == SortDirection.Forward ? `Прямая сортировка элементов в категориях` : `Обратная сортировка элементов в категориях`}</p>}
             </button>

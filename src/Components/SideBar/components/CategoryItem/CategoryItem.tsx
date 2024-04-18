@@ -9,6 +9,7 @@ import {
     IconArrowUp,
 } from "../../../icons/icons";
 import { IElement } from "../..";
+import { CategoryElements } from "../CategoryElements/CategoryElements";
 
 type Props = {
     type: SideBarType
@@ -56,14 +57,6 @@ export const CategoryItem = ({
 
     const isClosed = type == SideBarType.Close;
 
-    const [showElements, setShowElements] = useState<any[]>(elements);
-    useEffect(() => {
-        if (sortDirection == SortDirection.Back) {
-            setShowElements(elements.reverse());
-        } else {
-            setShowElements(elements);
-        }
-    }, [sortDirection]);
 
     return (
         <div className={classNames('categoryItem', {
@@ -95,19 +88,13 @@ export const CategoryItem = ({
                         </div>
                     </div>
                     {isShowElements && (
-                        <div className="elements">
-                            {showElements.map((element) => (
-                                <div className='item' key={element.id}>
-                                    {element.name}
-                                    <button className="editElemBtn" onClick={() => editElement(id, element.id)}>
-                                        <img className="editElemImg" src={EditIcon.default} />
-                                    </button>
-                                    <button className="deliteElemBtn" onClick={() => deleteElement(id, element.id)}>
-                                        <img className="deliteElemImg" src={DeliteIcon.default} />
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                        <CategoryElements
+                            id={id}
+                            elements={elements}
+                            deleteElement={(categoryId, elementId) => deleteElement(id, elementId)}
+                            editElement={(categoryId, elemnetId) => editElement(id, elemnetId)}
+                            sortDirection={sortDirection}
+                        />
                     )}
 
                 </div>}
