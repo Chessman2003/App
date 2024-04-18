@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import './CategoryItem.scss';
-import { ICategory, SideBarType } from "../..";
+import { SideBarType } from "../..";
 import { addElem } from "../../../icons/icons";
 import { DeliteIcon } from "../../../icons/icons";
 import { EditIcon } from "../../../icons/icons";
 import { IElement } from "../..";
+import { IconArrowDown } from "../../../icons/icons";
+import { IconArrowUp } from "../../../icons/icons";
 
 type Props = {
     type: SideBarType
@@ -42,6 +44,11 @@ export const CategoryItem = ({
     deleteCategory,
     editCategory
 }: Props) => {
+    const [isShowElements, setIsShowElements] = useState<boolean>(false);
+
+    const handleShowElements = () => {
+        setIsShowElements(prevState => !prevState)
+    }
 
     const isClosed = type == SideBarType.Close;
 
@@ -59,6 +66,9 @@ export const CategoryItem = ({
                 <div className="categoryOpen">
                     <div className="header">
                         <p className="categoryTittle">{title} ({elements.length})</p>
+                        <button className="showElemButton" onClick={handleShowElements}>
+                            <img className="showElemImg" src={isShowElements ? IconArrowUp.default : IconArrowDown.default} />
+                        </button>
                         <div className="buttons">
                             <button className="addElementsBtn" onClick={addElements}>
                                 <img className="addElementsImg" src={addElem.default} alt="Добавить элемент" />
@@ -71,20 +81,22 @@ export const CategoryItem = ({
                             </button>
                         </div>
                     </div>
+                    {isShowElements && (
+                        <div className="elements">
+                            {elements.map((element) => (
+                                <div className='item' key={element.id}>
+                                    {element.name}
+                                    <button className="editElemBtn" onClick={() => editElement(id, element.id)}>
+                                        <img className="editElemImg" src={EditIcon.default} />
+                                    </button>
+                                    <button className="deliteElemBtn" onClick={() => deleteElement(id, element.id)}>
+                                        <img className="deliteElemImg" src={DeliteIcon.default} />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
 
-                    <div className="elements">
-                        {elements.map((element) => (
-                            <div className='item' key={element.id}>
-                                {element.name}
-                                <button className="editElemBtn" onClick={() => editElement(id, element.id)}>
-                                    <img className="editElemImg" src={EditIcon.default} />
-                                </button>
-                                <button className="deliteElemBtn" onClick={() => deleteElement(id, element.id)}>
-                                    <img className="deliteElemImg" src={DeliteIcon.default} />
-                                </button>
-                            </div>
-                        ))}
-                    </div>
                 </div>}
         </div>
     )

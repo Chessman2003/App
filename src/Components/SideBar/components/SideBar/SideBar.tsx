@@ -16,7 +16,6 @@ import {
 import { useRootModal } from "../../../Modal";
 import './SideBar.scss';
 import { EditModal } from "../EditCategoryModal/EditCategoryModal";
-import { SortDirection } from "../../types/categories";
 import { EditNewCategoryModal } from "../EditNewCategoryModal/EditNewCategoryModal";
 import { EditNewElementsModal } from "../EditNewElementsModal/EditNewElementsModal";
 

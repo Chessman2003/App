@@ -63,7 +63,7 @@ export const useCategories = ({ sortDirection }: Options) => {
     const [currentSortDirection, setCurrentSortDirection] = useState(sortDirection);
 
     const toogleSortDirection = () => {
-        setCurrentSortDirection(prevState => {
+        setCurrentSortDirection((prevState) => {
             const newDirection = prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
             return newDirection;
         });
@@ -74,7 +74,7 @@ export const useCategories = ({ sortDirection }: Options) => {
             const updatedCategories = prevState.map((category) => {
                 return {
                     ...category,
-                    elements: currentSortDirection == SortDirection.Forward ? category.elements : category.elements.slice().reverse()
+                    elements: currentSortDirection == SortDirection.Back ? category.elements.slice().reverse() : category.elements
                 }
             })
             return updatedCategories;
