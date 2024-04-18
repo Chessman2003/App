@@ -19,7 +19,8 @@ export const App = () => {
         deleteElement,
         editCategory,
         editElement,
-        toogleSortDirection
+        changeSortDirection,
+        sortDirection
     } = useCategories({ sortDirection: SortDirection.Forward });
 
     return (
@@ -28,7 +29,8 @@ export const App = () => {
                 type={SideBarType.Close}
                 categories={categories}
                 addCategory={addCategory}
-                toggleSortDirection={toogleSortDirection}
+                changeSortDirection={changeSortDirection}
+                sortDirection={sortDirection}
                 addElement={addElement}
                 deleteCategory={deleteCategory}
                 deleteElement={deleteElement}

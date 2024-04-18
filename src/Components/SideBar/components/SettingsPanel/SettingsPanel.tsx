@@ -1,10 +1,11 @@
 import React from "react";
 import { SortCategories } from "../../../icons/icons";
-import { SideBarType } from "../..";
+import { SideBarType, SortDirection } from "../..";
 import './SettingsPanel.scss'
 
 type Props = {
-    onClick: () => void;
+    sortDirection: SortDirection
+    changeSortDirection: (sortDirection: SortDirection) => void;
     type: SideBarType
 }
 
@@ -20,19 +21,29 @@ const classNames = (cls: string, props = {}, additionals: string[] = []) => {
 }
 
 export const SettingsPanel = ({
-    onClick,
+    changeSortDirection,
+    sortDirection,
     type
 }: Props) => {
     const isClosed = type == SideBarType.Close
+
+    const handleClick = () => {
+        if (sortDirection == SortDirection.Back) {
+            changeSortDirection(SortDirection.Forward);
+        } else {
+            changeSortDirection(SortDirection.Back);
+        }
+    }
+
     return (
         <div className={classNames('settingsPanel', {
             closed: isClosed,
             opened: !isClosed
         })}>
-            <button onClick={onClick}>
+            <button onClick={handleClick}>
                 <img className="sortCategoriesIcon" src={SortCategories.default} />
                 {!isClosed &&
-                    <p className="sortCategoriesText">{`Прямая сортировка элементов в категориях`}</p>}
+                    <p className="sortCategoriesText">{sortDirection == SortDirection.Forward ? `Прямая сортировка элементов в категориях` : `Обратная сортировка элементов в категориях`}</p>}
             </button>
         </div>
     )

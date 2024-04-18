@@ -9,6 +9,7 @@ import './Category.scss';
 type CategoryProps = {
     categoryArray: ICategory[]
     type: SideBarType
+    sortDirection: SortDirection
     addElements: () => void
     editElement: (categoryId: string, elementID: string) => void
     editCategory: (idCategory: string) => void
@@ -19,6 +20,7 @@ type CategoryProps = {
 export const Category = ({
     categoryArray,
     type,
+    sortDirection,
     addElements,
     editElement,
     editCategory,
@@ -37,6 +39,7 @@ export const Category = ({
                         type={type}
                         title={c.title}
                         icon={c.icon}
+                        sortDirection={sortDirection}
                         editCategory={editCategory}
                         addElements={addElements}
                         editElement={editElement}

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './CategoryItem.scss';
-import { SideBarType } from "../..";
-import { addElem } from "../../../icons/icons";
-import { DeliteIcon } from "../../../icons/icons";
-import { EditIcon } from "../../../icons/icons";
+import { SideBarType, SortDirection } from "../..";
+import {
+    addElem,
+    DeliteIcon,
+    EditIcon,
+    IconArrowDown,
+    IconArrowUp,
+} from "../../../icons/icons";
 import { IElement } from "../..";
-import { IconArrowDown } from "../../../icons/icons";
-import { IconArrowUp } from "../../../icons/icons";
 
 type Props = {
     type: SideBarType
@@ -14,6 +16,7 @@ type Props = {
     icon: string
     title: string
     elements: IElement[]
+    sortDirection: SortDirection
     addElements: () => void
     editElement: (categoryId: string, elemnetId: string) => void
     deleteElement: (categoryId: string, elementId: string) => void
@@ -38,6 +41,7 @@ export const CategoryItem = ({
     icon,
     title,
     type,
+    sortDirection,
     addElements,
     editElement,
     deleteElement,
@@ -51,6 +55,15 @@ export const CategoryItem = ({
     }
 
     const isClosed = type == SideBarType.Close;
+
+    const [showElements, setShowElements] = useState<any[]>(elements);
+    useEffect(() => {
+        if (sortDirection == SortDirection.Back) {
+            setShowElements(elements.reverse());
+        } else {
+            setShowElements(elements);
+        }
+    }, [sortDirection]);
 
     return (
         <div className={classNames('categoryItem', {
@@ -83,7 +96,7 @@ export const CategoryItem = ({
                     </div>
                     {isShowElements && (
                         <div className="elements">
-                            {elements.map((element) => (
+                            {showElements.map((element) => (
                                 <div className='item' key={element.id}>
                                     {element.name}
                                     <button className="editElemBtn" onClick={() => editElement(id, element.id)}>

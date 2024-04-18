@@ -10,7 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {
     ICategory,
     IElement,
-    SideBarType
+    SideBarType,
+    SortDirection
 } from "../../types/categories";
 
 import { useRootModal } from "../../../Modal";
@@ -26,7 +27,8 @@ type Props = {
     type: SideBarType
     addCategory: (category: ICategory) => void
     addElement: (categoryTitle: string, newElement: IElement) => void
-    toggleSortDirection: () => void
+    changeSortDirection: (sortDirection: SortDirection) => void
+    sortDirection: SortDirection
     editCategory: (category: ICategory) => void
     editElement: (element: IElement) => void
 }
@@ -37,7 +39,8 @@ export const SideBar = ({
     categories,
     addCategory,
     type,
-    toggleSortDirection,
+    sortDirection,
+    changeSortDirection,
     addElement,
     editCategory,
     editElement
@@ -103,6 +106,7 @@ export const SideBar = ({
             />
             <Category
                 type={currentType}
+                sortDirection={sortDirection}
                 categoryArray={categories}
                 addElements={() => setShowEditElementModal(true)}
                 editCategory={handleEditCategory}
@@ -117,7 +121,8 @@ export const SideBar = ({
                 type={currentType}
             />
             <SettingsPanel
-                onClick={toggleSortDirection}
+                changeSortDirection={changeSortDirection}
+                sortDirection={sortDirection}
                 type={currentType}
             />
             {showEditModal &&

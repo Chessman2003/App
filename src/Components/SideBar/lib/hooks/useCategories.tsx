@@ -62,14 +62,11 @@ export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>(storageData);
     const [currentSortDirection, setCurrentSortDirection] = useState(sortDirection);
 
-    const toogleSortDirection = () => {
-        setCurrentSortDirection((prevState) => {
-            const newDirection = prevState === SortDirection.Forward ? SortDirection.Back : SortDirection.Forward;
-            return newDirection;
-        });
+    const changeSortDirection = (sortDirection: SortDirection) => {
+        setCurrentSortDirection(sortDirection);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         setCategories(prevState => {
             const updatedCategories = prevState.map((category) => {
                 return {
@@ -79,7 +76,7 @@ export const useCategories = ({ sortDirection }: Options) => {
             })
             return updatedCategories;
         })
-    }, [currentSortDirection]);
+    }, [currentSortDirection]);*/
 
 
     const addCategories = (newCategories: ICategory[]) => {
@@ -179,6 +176,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         deleteElement,
         editCategory,
         editElement,
-        toogleSortDirection
+        changeSortDirection,
+        sortDirection: currentSortDirection
     };
 }

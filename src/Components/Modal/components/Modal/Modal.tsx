@@ -23,7 +23,7 @@ export const Modal = ({
         (
             <div className="modalOverlay">
                 <div className="modal">
-                    <button className="modalClose" onClick={onClose}>x</button>
+                    <button className="modalClose" onClick={() => { onClose() }}>x</button>
                     {children}
                 </div>
             </div>
