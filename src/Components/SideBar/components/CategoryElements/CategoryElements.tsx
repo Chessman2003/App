@@ -21,7 +21,7 @@ export const CategoryElements = ({
     deleteElement,
     sortDirection
 }: Props) => {
-    const [showElements, setShowElements] = useState<any[]>(elements);
+    const [showElements, setShowElements] = useState<IElement[]>(elements);
 
     useEffect(() => {
         if (sortDirection == SortDirection.Back) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './CategoryItem.scss';
 import { SideBarType, SortDirection } from "../..";
 import {
