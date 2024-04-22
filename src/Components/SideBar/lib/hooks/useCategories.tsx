@@ -62,7 +62,19 @@ export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>(storageData);
     const [currentSortDirection, setCurrentSortDirection] = useState<SortDirection>(sortDirection);
 
-
+    useEffect(() => {
+        const updatedCategories = categories.map((category) => {
+            if (currentSortDirection == SortDirection.Back) {
+                return {
+                    ...category,
+                    elements: category.elements.reverse()
+                }
+            } else {
+                return category
+            }
+        })
+        setCategories(updatedCategories)
+    }, [categories, currentSortDirection])
 
 
 

@@ -23,13 +23,21 @@ export const CategoryElements = ({
 }: Props) => {
     const [showElements, setShowElements] = useState<IElement[]>(elements);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (sortDirection == SortDirection.Back) {
             setShowElements(elements.reverse());
         } else {
             setShowElements(elements);
         }
-    }, [sortDirection]);
+    }, [sortDirection]);*/
+
+    useEffect(() => {
+        if (sortDirection === SortDirection.Back) {
+            setShowElements([...elements].reverse());
+        } else {
+            setShowElements(elements);
+        }
+    }, [elements, sortDirection]);
 
     return (
         <div className="elements">
