@@ -23,19 +23,17 @@ export const CategoryElements = ({
 }: Props) => {
     const [showElements, setShowElements] = useState<IElement[]>(elements);
 
-    /*useEffect(() => {
-        if (sortDirection == SortDirection.Back) {
-            setShowElements(elements.reverse());
-        } else {
-            setShowElements(elements);
-        }
-    }, [sortDirection]);*/
-
     useEffect(() => {
+        const sortedElements = [...elements].sort((a, b) => {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        });
+
         if (sortDirection === SortDirection.Back) {
-            setShowElements([...elements].reverse());
+            setShowElements(sortedElements.reverse());
         } else {
-            setShowElements(elements);
+            setShowElements(sortedElements);
         }
     }, [elements, sortDirection]);
 
