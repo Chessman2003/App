@@ -1,5 +1,6 @@
 import React, { ReactElement, ReactPortal } from "react";
 import { createPortal } from "react-dom";
+import { IconError } from "../../../icons/icons";
 import './Modal.scss';
 
 type ModalProps = {
@@ -23,7 +24,9 @@ export const Modal = ({
         (
             <div className="modalOverlay">
                 <div className="modal">
-                    <button className="modalClose" onClick={() => { onClose() }}>x</button>
+                    <button className="modalClose" onClick={() => { onClose() }}>
+                        <img className='modalCloseImg' src={IconError.default} />
+                    </button>
                     {children}
                 </div>
             </div>

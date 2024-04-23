@@ -8,5 +8,5 @@ type ModalContentProps = {
 }
 
 export const ModalContent = ({ children }: ModalContentProps) => {
-    return <div className="ModalContent">{children}</div>
+    return <div className="modalContent">{children}</div>
 }
