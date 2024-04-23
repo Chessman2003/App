@@ -32,6 +32,9 @@ export const EditNewElementsModal = ({
         if ('' + elementName.trim() == '') {
             newAccessSave = false;
         }
+        else if ('' + elementName.trim() == element?.name) {
+            newAccessSave = false;
+        }
         setAccessSave(newAccessSave);
     }, [elementName]);
 

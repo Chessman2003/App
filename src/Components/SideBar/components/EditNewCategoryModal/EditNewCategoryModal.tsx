@@ -39,6 +39,12 @@ export const EditNewCategoryModal = ({
         if ('' + newCategoryName == '') {
             newAccessSave = false;
         }
+        if ('' + newCategoryName == category?.title) {
+            newAccessSave = false;
+        }
+        if ('' + newDroppedImage == category?.icon) {
+            newAccessSave = false;
+        }
         setAccessSave(newAccessSave);
     }, [newDroppedImage, newCategoryName]);
 

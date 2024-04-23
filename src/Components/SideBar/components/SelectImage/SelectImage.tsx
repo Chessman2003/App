@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NotFoundPicture } from "../../../icons/icons";
 import './SelectImage.scss';
 
 type Props = {
@@ -34,7 +34,7 @@ export const SelectImage = ({
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
         >
-            {droppedImage && <img className='droppedImage' src={droppedImage} />}
+            {droppedImage ? <img className='droppedImage' src={droppedImage} /> : <img className="notFoundDroppedImage" src={NotFoundPicture.default} />}
         </div>
     );
 }

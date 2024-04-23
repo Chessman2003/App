@@ -14,3 +14,4 @@ export * as DeliteIcon from './deliteIcon.png';
 export * as EditIcon from './editIcon.png';
 export * as sortUp from './sortUp.png';
 export * as sortDown from './sortDown.png';
+export * as NotFoundPicture from './free-icon-picture.png';

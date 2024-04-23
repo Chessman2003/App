@@ -5,10 +5,9 @@ import {
     ModalHeader,
     ModalContent,
     ModalFooter,
-    useRootModal
 } from "../../../Modal";
 import { SelectImage } from "../SelectImage/SelectImage";
-
+import { NotFoundPicture } from "../../../icons/icons";
 import './EditCategoryModal.scss';
 
 type Props = {
@@ -35,7 +34,7 @@ export const EditModal = ({
 
     useEffect(() => {
         let newAccessSave = true;
-        if ('' + droppedImage == '') {
+        if ('' + droppedImage == '' || '' + droppedImage == NotFoundPicture.default) {
             newAccessSave = false;
         }
         if ('' + categoryName == '') {
