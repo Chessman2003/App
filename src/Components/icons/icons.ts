@@ -15,3 +15,6 @@ export * as EditIcon from './editIcon.png';
 export * as sortUp from './sortUp.png';
 export * as sortDown from './sortDown.png';
 export * as NotFoundPicture from './free-icon-picture.png';
+export * as NoCategory from './noCategory.png';
+export * as Burgerbutton from './burgerButton.png';
+export * as BurgerYellow from './burgerButtonYellow.png';

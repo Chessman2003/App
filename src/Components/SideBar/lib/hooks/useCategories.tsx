@@ -10,7 +10,7 @@ type Options = {
 const storageData = [
     {
         id: uuidv4(),
-        title: 'кирпичи',
+        title: 'Кирпичи',
         icon: 'https://cdn-icons-png.freepik.com/512/14524/14524465.png?ga=GA1.1.753315375.1711741126&',
         elements: [
             { id: uuidv4(), name: 'Элемент 1' },
@@ -22,7 +22,7 @@ const storageData = [
     },
     {
         id: uuidv4(),
-        title: 'брёвна',
+        title: 'Брёвна',
         icon: 'https://cdn-icons-png.freepik.com/512/6937/6937220.png?ga=GA1.1.753315375.1711741126&',
         elements: [
             { id: uuidv4(), name: 'Элемент 1' },
@@ -34,7 +34,7 @@ const storageData = [
     },
     {
         id: uuidv4(),
-        title: 'кран',
+        title: 'Кран',
         icon: 'https://cdn-icons-png.freepik.com/512/4913/4913512.png?ga=GA1.1.753315375.1711741126&',
         elements: [
             { id: uuidv4(), name: 'Элемент 1' },
@@ -46,7 +46,7 @@ const storageData = [
     },
     {
         id: uuidv4(),
-        title: 'тачка',
+        title: 'Тачка',
         icon: 'https://cdn-icons-png.freepik.com/512/4851/4851585.png?ga=GA1.1.753315375.1711741126&',
         elements: [
             { id: uuidv4(), name: 'Элемент 1' },
@@ -61,22 +61,6 @@ const storageData = [
 export const useCategories = ({ sortDirection }: Options) => {
     const [categories, setCategories] = useState<ICategory[]>(storageData);
     const [currentSortDirection, setCurrentSortDirection] = useState<SortDirection>(sortDirection);
-
-    /* useEffect(() => {
-         const updatedCategories = categories.map((category) => {
-             if (currentSortDirection == SortDirection.Back) {
-                 return {
-                     ...category,
-                     elements: category.elements.reverse()
-                 }
-             } else {
-                 return category
-             }
-         })
-         setCategories(updatedCategories)
-     }, [categories, currentSortDirection])*/
-
-
 
     const changeSortDirection = (sortDirection: SortDirection) => {
         setCurrentSortDirection(sortDirection);
@@ -145,6 +129,11 @@ export const useCategories = ({ sortDirection }: Options) => {
             return updatedCategories;
         });
     }
+    const allCategoriesDel = (noCategories: boolean) => {
+        if (noCategories) {
+            return <p>dscscd</p>
+        }
+    }
 
 
     const deleteCategory = (id: string) => {
@@ -178,6 +167,7 @@ export const useCategories = ({ sortDirection }: Options) => {
         editCategory,
         editElement,
         changeSortDirection,
+        allCategoriesDel,
         sortDirection: currentSortDirection
     };
 }

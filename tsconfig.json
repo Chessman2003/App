@@ -21,7 +21,8 @@
     },
     "include": [
         "src",
-        "typesForImage/index.d.ts"
+        "typesForImage/index.d.ts",
+        "typesForFonts/fonts.d.ts"
     ],
     "exclude": [
         "node_modules"

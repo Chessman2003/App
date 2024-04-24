@@ -14,15 +14,19 @@
         margin-bottom: 7px;
 
         .monipulatorIcon {
-            width: 70px;
-            height: 70px;
+            width: auto;
+            height: 60px;
+            background: transparent;
+            padding-left: 7px;
         }
 
         p {
             font-size: 22px;
             margin-right: 50%;
+            font-family: cursive;
         }
     }
 
-    border-bottom: 3px solid black;
+
+    border-bottom: 1px solid black;
 }

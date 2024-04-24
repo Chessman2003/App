@@ -8,7 +8,8 @@
 }
 
 .categoryTittle {
-    font-size: 25px;
+    font-size: 15px;
+    font-family: cursive;
 }
 
 .categoryOpen {
@@ -36,6 +37,8 @@
     flex-direction: column;
     gap: 10px;
     font-size: 20px;
+    border-left: 1px solid black;
+    padding-left: 7px;
 }
 
 
@@ -91,16 +94,18 @@
             height: 100%;
         }
     }
+
+    font-family: cursive;
 }
 
 .deliteElemBtn {
     position: absolute;
-    right: 10px;
+    right: 30px;
 }
 
 .editElemBtn {
     position: absolute;
-    right: 40px;
+    right: 60px;
 }
 
 .item:hover {

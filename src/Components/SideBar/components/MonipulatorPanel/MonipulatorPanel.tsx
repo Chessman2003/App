@@ -1,5 +1,5 @@
 import React from "react";
-import { IconOpen } from "../../../icons/icons";
+import { Burgerbutton } from "../../../icons/icons";
 import { SideBarType } from '../..';
 import './MonipulatorPanel.scss';
 
@@ -30,7 +30,7 @@ export const MonipulatorPanel = ({
             opened: !isClosed
         }, ['special'])}>
             <button onClick={onClick}>
-                <img className="monipulatorIcon" src={IconOpen.default} />
+                <img className="monipulatorIcon" src={Burgerbutton.default} />
                 {!isClosed && <p>{`Закрыть`}</p>}
             </button>
         </div>

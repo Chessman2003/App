@@ -51,6 +51,7 @@ export const CategoryItem = ({
 }: Props) => {
     const [isShowElements, setIsShowElements] = useState<boolean>(false);
 
+
     const handleShowElements = () => {
         setIsShowElements(prevState => !prevState)
     }

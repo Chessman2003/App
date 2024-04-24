@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CategoryItem } from '../CategoryItem/CategoryItem';
 import { SideBarType } from "../..";
 import { ICategory } from "../..";
-import { useCategories } from "../..";
 import { SortDirection } from "../..";
+import { NoCategory } from "../../../icons/icons";
 import './Category.scss';
 
 type CategoryProps = {
@@ -17,6 +17,18 @@ type CategoryProps = {
     deleteElement: (categoryId: string, elementId: string) => void
 }
 
+const classNames = (cls: string, props = {}, additionals: string[] = []) => {
+    let propsNames = '';
+    Object.entries(props).forEach(element => {
+        if (element[1] == true) {
+            propsNames += `${element[0]}`
+        }
+    });
+
+    return `${cls} ${propsNames} ${additionals.join(' ')}`;
+}
+
+
 export const Category = ({
     categoryArray,
     type,
@@ -27,9 +39,25 @@ export const Category = ({
     deleteCategory,
     deleteElement
 }: CategoryProps) => {
+    const [noCategories, setNoCategories] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (categoryArray.length === 0) {
+            setNoCategories(true);
+        } else {
+            setNoCategories(false)
+        }
+    }, [categoryArray])
+
+    const isClosed = type == SideBarType.Close;
 
     return (
-        <div className='categoryWrapper'>
+        <div className={classNames('categoryWrapper', {
+            closed: isClosed,
+            opened: !isClosed
+        })}>
+
+
             {categoryArray.map((c, i) => {
                 return (
                     <CategoryItem
@@ -48,6 +76,20 @@ export const Category = ({
                     />
                 );
             })}
+
+            {!isClosed && noCategories && (
+                <div className="noCategoryWrapper">
+                    <p className="noCategoryText">Нет категорий!</p>
+                    <img className="noCategoryImage" src={NoCategory.default} alt="No Categories" />
+                </div>
+            )}
+            {isClosed && noCategories && (
+                <div className="noCategoryWrapperClosed">
+
+                    <img className="noCategoryImage" src={NoCategory.default} alt="No Categories" />
+                </div>
+            )}
         </div>
+
     );
 }

@@ -43,7 +43,7 @@ export const SideBar = ({
     changeSortDirection,
     addElement,
     editCategory,
-    editElement
+    editElement,
 }: Props) => {
     const { modalElement } = useRootModal({})
 

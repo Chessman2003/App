@@ -7,7 +7,7 @@
 .categoryTittle {
     display: flex;
     align-self: center;
-    font-size: 25px;
+    font-size: 23px;
     margin-left: 10px;
 }
 
@@ -31,7 +31,7 @@
     height: 348px;
     gap: 15px;
     overflow-y: auto;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
 
 
     &::-webkit-scrollbar {
@@ -40,5 +40,42 @@
 
     &::-webkit-scrollbar-thumb {
         background-color: gray;
+    }
+
+    &.closed {
+        padding-bottom: 0px;
+    }
+
+
+}
+
+.noCategoryWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: auto;
+    font-size: 29px;
+
+    img {
+        height: 100px;
+        width: auto;
+    }
+}
+
+.noCategoryWrapperClosed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: auto;
+    font-size: 19px;
+
+    img {
+        height: 80px;
+        width: auto;
+        margin-right: 10px;
     }
 }
