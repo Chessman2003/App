@@ -18,3 +18,4 @@ export * as NotFoundPicture from './free-icon-picture.png';
 export * as NoCategory from './noCategory.png';
 export * as Burgerbutton from './burgerButton.png';
 export * as BurgerYellow from './burgerButtonYellow.png';
+export * as NoCamera from './noCamera.png';

@@ -1,12 +1,13 @@
-.categoryHeaderText {
-    font-size: 25px;
-}
-
 .addCategoryContent {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 20px;
     margin-bottom: 11px;
+    justify-items: start;
+    grid-template-areas:
+        'headerLeft header'
+        'footerLeft footer';
 }
 
 .droppedImage {
@@ -14,14 +15,10 @@
     height: 100%;
 }
 
-#previewContainer {
-    height: 100px;
-    width: 100px;
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 8px;
-    margin-left: 123px;
+.categoryHeaderText {
+    font-size: 25px;
 }
+
 
 .categoryTextInput {
     font-size: 20px;
@@ -35,46 +32,26 @@
     background-color: lightgray;
     border: none;
     padding-left: 10px;
+    grid-area: header;
 }
 
-.categoryDrugInput {
-    font-size: 20px;
-    margin-left: 122.5px;
-    right: 20px;
-    height: 90px;
-    width: 90px;
-    background-color: lightgray;
-    border: none;
-    border-radius: 8px;
-}
-
-.addCategoryName {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.addCategoryImage {
-    display: flex;
-    flex-direction: row;
-    justify-content: last baseline;
-    align-items: center;
-    gap: 20px;
-}
 
 .categoryNameTitle {
     font-size: 23px;
+    grid-area: headerLeft;
+}
+
+.categoryIconTitle {
+    font-size: 23px;
+    grid-area: footerLeft;
 }
 
 .saveCategoryBtn {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 115px;
-    height: 35px;
+    width: auto;
+    height: 40px;
     font-size: 20px;
     background-color: grey;
     color: white;
@@ -82,6 +59,7 @@
     border-radius: 8px;
     outline: 0;
     transition: 0.3s linear;
+    padding: 0px 10px 0px 10px;
 
     &:active {
         transform: scale(0.85);

@@ -6,13 +6,17 @@
 #previewContainer {
     height: 100px;
     width: 100px;
-    background-color: transparent;
+    background-color: lightgrey;
     border: 1px solid black;
-    border-radius: 25px;
-    margin-left: 123px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    grid-area: footer;
 }
 
 .notFoundDroppedImage {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 70%;
 }

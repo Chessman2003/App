@@ -39,12 +39,7 @@ export const EditNewCategoryModal = ({
         if ('' + newCategoryName == '') {
             newAccessSave = false;
         }
-        if ('' + newCategoryName == category?.title) {
-            newAccessSave = false;
-        }
-        if ('' + newDroppedImage == category?.icon) {
-            newAccessSave = false;
-        }
+
         setAccessSave(newAccessSave);
     }, [newDroppedImage, newCategoryName]);
 
@@ -58,27 +53,27 @@ export const EditNewCategoryModal = ({
                 <p className="categoryHeaderText">{wordNames.addCategories}</p>
             </ModalHeader>
             <ModalContent>
-                <div className="addCategoryContent">
-                    <div className="addCategoryName">
-                        <p className="categoryNameTitle">{wordNames.nameCategory}</p>
-                        <input
-                            type="text"
-                            className="categoryTextInput"
-                            value={newCategoryName}
-                            onChange={(e) => setNewCategoryName(e.target.value)}
-                        />
-                    </div>
-                    <div className="addCategoryImage">
-                        <p className="categoryNameTitle">{wordNames.setIcon}</p>
-                        <SelectImage
-                            droppedImage={newDroppedImage}
-                            saveDroppedImage={(newDroppedImage) => { setNewDroppedImage(newDroppedImage) }}
-                        />
-                    </div>
+                <div className="addEditCategoryContent">
+
+                    <p className="categoryNameTitle">{wordNames.nameCategory}</p>
+                    <input
+                        type="text"
+                        className="categoryTextInputEdit"
+                        value={newCategoryName}
+                        onChange={(e) => setNewCategoryName(e.target.value)}
+                    />
+
+
+                    <p className="categoryIconTitle">{wordNames.setIcon}</p>
+                    <SelectImage
+                        droppedImage={newDroppedImage}
+                        saveDroppedImage={(newDroppedImage) => { setNewDroppedImage(newDroppedImage) }}
+                    />
+
                 </div>
             </ModalContent>
             <ModalFooter>
-                <button className="saveCategoryBtn" disabled={!accessSave} onClick={handleSave}>{`Изменить категорию`}</button>
+                <button className="saveNewCategoryBtn" disabled={!accessSave} onClick={handleSave}>{`Изменить категорию`}</button>
             </ModalFooter>
         </Modal>
     );

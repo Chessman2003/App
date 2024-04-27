@@ -85,7 +85,6 @@ export const Category = ({
             )}
             {isClosed && noCategories && (
                 <div className="noCategoryWrapperClosed">
-
                     <img className="noCategoryImage" src={NoCategory.default} alt="No Categories" />
                 </div>
             )}

@@ -54,22 +54,22 @@ export const EditModal = ({
             </ModalHeader>
             <ModalContent>
                 <div className="addCategoryContent">
-                    <div className="addCategoryName">
-                        <p className="categoryNameTitle">{wordNames.nameCategory}</p>
-                        <input
-                            type="text"
-                            className="categoryTextInput"
-                            value={categoryName}
-                            onChange={(e) => setCategoryName(e.target.value)}
-                        />
-                    </div>
-                    <div className="addCategoryImage">
-                        <p className="categoryNameTitle">{wordNames.setIcon}</p>
-                        <SelectImage
-                            droppedImage={droppedImage}
-                            saveDroppedImage={(droppedImage) => { setDroppedImage(droppedImage) }}
-                        />
-                    </div>
+
+                    <p className="categoryNameTitle">{wordNames.nameCategory}</p>
+                    <input
+                        type="text"
+                        className="categoryTextInput"
+                        value={categoryName}
+                        onChange={(e) => setCategoryName(e.target.value)}
+                    />
+
+
+                    <p className="categoryIconTitle">{wordNames.setIcon}</p>
+                    <SelectImage
+                        droppedImage={droppedImage}
+                        saveDroppedImage={(droppedImage) => { setDroppedImage(droppedImage) }}
+                    />
+
                 </div>
             </ModalContent>
             <ModalFooter>
